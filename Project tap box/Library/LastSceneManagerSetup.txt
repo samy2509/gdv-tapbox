@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Project tap box.unity
-  isLoaded: 1
-  isActive: 1
