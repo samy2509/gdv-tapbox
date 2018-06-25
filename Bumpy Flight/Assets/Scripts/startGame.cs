@@ -7,7 +7,7 @@ public class startGame : MonoBehaviour {
 
 	public void StartGame() {
 		Debug.Log("Loading Level 1...");
-		// SceneManager.LoadScene("");
+		SceneManager.LoadScene("Level1");
 	}
 
 	public void QuitGame() {

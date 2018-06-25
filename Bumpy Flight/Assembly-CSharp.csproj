@@ -53,8 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Polydactyl\Quick Series\Chick\Demo\DemoController.cs" />
+     <Compile Include="Assets\Prefabs\Polydactyl\Quick Series\Chick\Demo\DemoController.cs" />
      <Compile Include="Assets\Scripts\startGame.cs" />
+     <Compile Include="Assets\Scripts\steuerung.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>/Users/kevinschipper/Documents/GitHub/gdv-tapbox/Bumpy Flight/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
