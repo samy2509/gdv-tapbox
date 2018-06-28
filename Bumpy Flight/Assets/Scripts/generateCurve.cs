@@ -7,8 +7,7 @@ public class generateCurve : MonoBehaviour {
 	private float 	depth 			= 1.0f;				// Vertikale Tiefe des Bands
 	private int 	moves			= 0;				// Anzahl der aktuellen Bewegungen
 	private int		rounding		= 5;				// Grad der Abrundung in Kurven
-	private float	previousAngle	= 0f;				// Vorher angewendeter Winkel
-	private float	deviation		= 10f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
+	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
 	private float	levelBound		= 5f;				// Levelbegrenzung im oberen Bereich
 
 	private Mesh 			mesh;
@@ -55,7 +54,7 @@ public class generateCurve : MonoBehaviour {
 
 		for( int i = 0; i <= step; i++ ) {
 			turtle.transform.Rotate(0f, 0f, angle / rounding);
-			Move( length / angle / rounding );
+			Move( step * length );
 		}
 	}
 
@@ -66,50 +65,62 @@ public class generateCurve : MonoBehaviour {
 	 */
 	public void Move( float length ) {
 		Vector3 normal;
+		bool transformed = false;
 
-		vertList.Add( new Vector3(  turtle.transform.position.x,
-									turtle.transform.position.y,
-									turtle.transform.position.z));
-		vertList.Add( new Vector3(  turtle.transform.position.x,
-									turtle.transform.position.y,
-									turtle.transform.position.z - depth));
+		for (int i = 0; i < 10; i++) {
+			vertList.Add( new Vector3(  turtle.transform.position.x,
+										turtle.transform.position.y,
+										turtle.transform.position.z));
+			vertList.Add( new Vector3(  turtle.transform.position.x,
+										turtle.transform.position.y,
+										turtle.transform.position.z + i));
+
+			if (transformed) {
+				turtle.transform.Translate( -length, 0f, 0f);
+				transformed = false;
+			} else {
+				turtle.transform.Translate( length, 0f, 0f);
+				transformed = true;
+			}
+		
+			vertList.Add( new Vector3(  turtle.transform.position.x,
+										turtle.transform.position.y,
+										turtle.transform.position.z ));
+			vertList.Add( new Vector3(  turtle.transform.position.x,
+										turtle.transform.position.y,
+										turtle.transform.position.z + i));
+
+			triList.Add( moves+3 );
+			triList.Add( moves+1 );
+			triList.Add( moves );
+
+			Vector3 s = vertList[moves+1] - vertList[moves+3];
+			Vector3 t = vertList[moves] - vertList[moves+3];
+
+			normal = Vector3.Cross( s, t ).normalized;
+
+			normalsList.Add( normal );
+			normalsList.Add( normal );
+
+			triList.Add( moves+3 );
+			triList.Add( moves );
+			triList.Add( moves+2 );
+
+			Vector3 u = vertList[moves+2] - vertList[moves];
+			Vector3 v = vertList[moves+3] - vertList[moves];
+
+			normal = Vector3.Cross( u, v ).normalized;
+
+			normalsList.Add( normal );
+			normalsList.Add( normal );
+
+			moves += 4;
+		}
 
 		turtle.transform.Translate( length, 0f, 0f);
-
-		vertList.Add( new Vector3(  turtle.transform.position.x,
-									turtle.transform.position.y,
-									turtle.transform.position.z));
-		vertList.Add( new Vector3(  turtle.transform.position.x,
-									turtle.transform.position.y,
-									turtle.transform.position.z - depth));
-
-		triList.Add( moves+3 );
-		triList.Add( moves+1 );
-		triList.Add( moves );
-
-		Vector3 s = vertList[moves+1] - vertList[moves+3];
-		Vector3 t = vertList[moves] - vertList[moves+3];
-
-		normal = Vector3.Cross( s, t ).normalized;
-
-		normalsList.Add( normal );
-		normalsList.Add( normal );
-
-		triList.Add( moves );
-		triList.Add( moves+2 );
-		triList.Add( moves+3 );
-
-		Vector3 u = vertList[moves+2] - vertList[moves];
-		Vector3 v = vertList[moves+3] - vertList[moves];
-
-		normal = Vector3.Cross( u, v ).normalized;
-
-		normalsList.Add( normal );
-		normalsList.Add( normal );
-
-		moves += 4;
 	}
 
+	// Generiert einen zufälligen Winkel und gibt diesen zurück
 	public float GenerateAngle() {
 		float newAngle 	= 0;
 		float rand 		= Random.value;
@@ -126,8 +137,6 @@ public class generateCurve : MonoBehaviour {
 				
 			newAngle = -newAngle;
 		}
-
-		previousAngle = newAngle;
 
 		return newAngle;
 	}
