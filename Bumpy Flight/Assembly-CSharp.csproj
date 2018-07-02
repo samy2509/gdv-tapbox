@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Prefabs\Polydactyl\Quick Series\Chick\Demo\DemoController.cs" />
      <Compile Include="Assets\Scripts\generateCurve.cs" />
+     <Compile Include="Assets\Scripts\Movement.cs" />
      <Compile Include="Assets\Scripts\startGame.cs" />
      <Compile Include="Assets\Scripts\steuerung.cs" />
  <Reference Include="UnityEditor.StandardEvents">

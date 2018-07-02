@@ -65,59 +65,48 @@ public class generateCurve : MonoBehaviour {
 	 */
 	public void Move( float length ) {
 		Vector3 normal;
-		bool transformed = false;
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			vertList.Add( new Vector3(  turtle.transform.position.x,
-										turtle.transform.position.y,
-										turtle.transform.position.z));
-			vertList.Add( new Vector3(  turtle.transform.position.x,
-										turtle.transform.position.y,
-										turtle.transform.position.z + i));
+										turtle.transform.position.y + Random.Range(0f, 0.1f),
+										turtle.transform.position.z + (float)i ));
+		}
 
-			if (transformed) {
-				turtle.transform.Translate( -length, 0f, 0f);
-				transformed = false;
-			} else {
-				turtle.transform.Translate( length, 0f, 0f);
-				transformed = true;
-			}
-		
-			vertList.Add( new Vector3(  turtle.transform.position.x,
-										turtle.transform.position.y,
-										turtle.transform.position.z ));
-			vertList.Add( new Vector3(  turtle.transform.position.x,
-										turtle.transform.position.y,
-										turtle.transform.position.z + i));
+		turtle.transform.Translate( length, 0f, 0f);
 
-			triList.Add( moves+3 );
-			triList.Add( moves+1 );
+		for (float i = 0f; i < 5f; i++) {
+			vertList.Add( new Vector3(  turtle.transform.position.x,
+										turtle.transform.position.y + Random.Range(0f, 0.1f),
+										turtle.transform.position.z + (float)i ));
+		}
+
+		for (int i = 0; i < 5; i++) {
+			triList.Add( moves + 5 );
 			triList.Add( moves );
+			triList.Add( moves + 1 );
 
-			Vector3 s = vertList[moves+1] - vertList[moves+3];
-			Vector3 t = vertList[moves] - vertList[moves+3];
+			Vector3 s = vertList[moves] - vertList[moves + 5];
+			Vector3 t = vertList[moves + 1] - vertList[moves + 5];
 
 			normal = Vector3.Cross( s, t ).normalized;
 
 			normalsList.Add( normal );
 			normalsList.Add( normal );
 
-			triList.Add( moves+3 );
-			triList.Add( moves );
-			triList.Add( moves+2 );
+			triList.Add( moves + 5 );
+			triList.Add( moves + 1 );
+			triList.Add( moves + 6 );
 
-			Vector3 u = vertList[moves+2] - vertList[moves];
-			Vector3 v = vertList[moves+3] - vertList[moves];
+			Vector3 u = vertList[moves + 5] - vertList[moves + 1];
+			Vector3 v = vertList[moves + 6] - vertList[moves + 1];
 
 			normal = Vector3.Cross( u, v ).normalized;
 
 			normalsList.Add( normal );
 			normalsList.Add( normal );
 
-			moves += 4;
+			moves++;
 		}
-
-		turtle.transform.Translate( length, 0f, 0f);
 	}
 
 	// Generiert einen zufälligen Winkel und gibt diesen zurück
