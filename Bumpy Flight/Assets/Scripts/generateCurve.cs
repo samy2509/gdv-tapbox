@@ -35,6 +35,7 @@ public class generateCurve : MonoBehaviour {
 		mesh.vertices 	= vertList.ToArray();
 		mesh.normals 	= normalsList.ToArray();
 		mesh.triangles 	= triList.ToArray();
+		calcFlatNormals( mesh );
 	}
 
 	/*
@@ -66,10 +67,12 @@ public class generateCurve : MonoBehaviour {
 	public void Move( float length ) {
 		Vector3 normal;
 
-		for (int i = 0; i < 5; i++) {
-			vertList.Add( new Vector3(  turtle.transform.position.x,
-										turtle.transform.position.y + Random.Range(0f, 0.1f),
-										turtle.transform.position.z + (float)i ));
+		if(moves == 0) {
+			for (int i = 0; i < 5; i++) {
+				vertList.Add( new Vector3(  turtle.transform.position.x,
+											turtle.transform.position.y + Random.Range(0f, 0.1f),
+											turtle.transform.position.z + (float)i ));
+			}
 		}
 
 		turtle.transform.Translate( length, 0f, 0f);
@@ -80,33 +83,59 @@ public class generateCurve : MonoBehaviour {
 										turtle.transform.position.z + (float)i ));
 		}
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			triList.Add( moves + 5 );
 			triList.Add( moves );
 			triList.Add( moves + 1 );
 
-			Vector3 s = vertList[moves] - vertList[moves + 5];
-			Vector3 t = vertList[moves + 1] - vertList[moves + 5];
+			// Vector3 s = vertList[moves + 5] - vertList[moves];
+			// Vector3 t = vertList[moves + 1] - vertList[moves];
 
-			normal = Vector3.Cross( s, t ).normalized;
+			// normal = Vector3.Cross( s, t ).normalized;
 
-			normalsList.Add( normal );
-			normalsList.Add( normal );
+			// normalsList.Add( normal );
+			// normalsList.Add( normal );
 
 			triList.Add( moves + 5 );
 			triList.Add( moves + 1 );
 			triList.Add( moves + 6 );
 
-			Vector3 u = vertList[moves + 5] - vertList[moves + 1];
-			Vector3 v = vertList[moves + 6] - vertList[moves + 1];
+			// Vector3 u = vertList[moves + 5] - vertList[moves + 1];
+			// Vector3 v = vertList[moves + 6] - vertList[moves + 1];
 
-			normal = Vector3.Cross( u, v ).normalized;
+			// normal = Vector3.Cross( u, v ).normalized;
 
-			normalsList.Add( normal );
-			normalsList.Add( normal );
+			// normalsList.Add( normal );
+			// normalsList.Add( normal );
 
 			moves++;
 		}
+	}
+
+	public void calcFlatNormals( Mesh mesh ) {
+		Vector3[] vertList = mesh.vertices;
+		Vector3[] normals = mesh.normals;
+
+		for(int i = 0; i < normals.Length; i+=4) {
+			Vector3 u = vertList[i + 1] - vertList[i];
+			Vector3 v = vertList[i + 5] - vertList[i];
+
+			Vector3 normal = Vector3.Cross( u, v ).normalized;
+
+			normals[i] = normal;
+			normals[i + 1] = normal;
+			normals[i + 5] = normal;
+
+			u = vertList[i + 6] - vertList[i + 1];
+			v = vertList[i + 5] - vertList[i + 1];
+
+			normal = Vector3.Cross( u, v ).normalized;
+
+			normals[i + 5] = normal;
+			normals[i + 6] = normal;
+		}
+
+		mesh.normals = normals;
 	}
 
 	// Generiert einen zufälligen Winkel und gibt diesen zurück
