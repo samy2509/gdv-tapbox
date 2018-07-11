@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class generateCurve : MonoBehaviour {
 	private float 	length 			= 1.0f;				// Länge eines Elements
+	private int 	totalDepth 		= 17;				// Vertikale Tiefe des gesamten Bands
 	private float 	depth 			= 1.0f;				// Vertikale Tiefe des Bands
 	private int 	moves			= 0;				// Anzahl der aktuellen Bewegungen
 	private int		rounding		= 5;				// Grad der Abrundung in Kurven
 	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
 	private float	levelBound		= 5f;				// Levelbegrenzung im oberen Bereich
+	private float	randomnes		= .3f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
 
+	private MeshFilter 		meshFilter;
 	private Mesh 			mesh;
 	private GameObject 		turtle;
 	private List<Vector3> 	vertList;
 	private List<int> 		triList;
 	private List<Vector3>	normalsList;
+	private Vector3[]		verts;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +28,9 @@ public class generateCurve : MonoBehaviour {
 		normalsList = new List<Vector3>();
 		turtle 		= new GameObject( "Turtle" );
 
-		GetComponent<MeshFilter>().mesh = mesh;
+		meshFilter 	= GetComponent<MeshFilter>();
+
+		meshFilter.mesh = mesh;
 	}
 	
 	// Update is called once per frame
@@ -35,7 +41,11 @@ public class generateCurve : MonoBehaviour {
 		mesh.vertices 	= vertList.ToArray();
 		mesh.normals 	= normalsList.ToArray();
 		mesh.triangles 	= triList.ToArray();
-		calcFlatNormals( mesh );
+
+		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
+
+		CalcFlatNormals( mesh );
 	}
 
 	/*
@@ -65,74 +75,73 @@ public class generateCurve : MonoBehaviour {
 	*	@length:	Länge, um die nach vorne bewegt werden soll
 	 */
 	public void Move( float length ) {
-		Vector3 normal;
-
 		if(moves == 0) {
-			for (int i = 0; i < 5; i++) {
-				vertList.Add( new Vector3(  turtle.transform.position.x,
-											turtle.transform.position.y + Random.Range(0f, 0.1f),
-											turtle.transform.position.z + (float)i ));
+			for (int i = 0; i < totalDepth; i++) {
+				if(i != 0) {
+					vertList.Add( new Vector3(  turtle.transform.position.x,
+												turtle.transform.position.y + Random.Range(0f, randomnes),
+												turtle.transform.position.z + (float)i ));
+				} else {
+					vertList.Add( new Vector3(  turtle.transform.position.x,
+												turtle.transform.position.y - 10,
+												turtle.transform.position.z ));
+
+					vertList.Add( new Vector3(  turtle.transform.position.x,
+												turtle.transform.position.y + Random.Range(0f, randomnes),
+												turtle.transform.position.z ));
+				}
 			}
 		}
 
 		turtle.transform.Translate( length, 0f, 0f);
 
-		for (float i = 0f; i < 5f; i++) {
-			vertList.Add( new Vector3(  turtle.transform.position.x,
-										turtle.transform.position.y + Random.Range(0f, 0.1f),
-										turtle.transform.position.z + (float)i ));
+		for (int i = 0; i < totalDepth; i++) {
+			if(i != 0) {
+				vertList.Add( new Vector3(  turtle.transform.position.x,
+											turtle.transform.position.y + Random.Range(0f, randomnes),
+											turtle.transform.position.z + (float)i ));
+			} else {
+				vertList.Add( new Vector3(  turtle.transform.position.x,
+											turtle.transform.position.y - 10,
+											turtle.transform.position.z ));
+
+				vertList.Add( new Vector3(  turtle.transform.position.x,
+											turtle.transform.position.y + Random.Range(0f, randomnes),
+											turtle.transform.position.z ));
+			}
 		}
 
-		for (int i = 0; i < 4; i++) {
-			triList.Add( moves + 5 );
+		for (int i = 0; i < totalDepth+2 / 2; i++) {
+			triList.Add( moves + totalDepth + 1 );
 			triList.Add( moves );
 			triList.Add( moves + 1 );
 
-			// Vector3 s = vertList[moves + 5] - vertList[moves];
-			// Vector3 t = vertList[moves + 1] - vertList[moves];
-
-			// normal = Vector3.Cross( s, t ).normalized;
-
-			// normalsList.Add( normal );
-			// normalsList.Add( normal );
-
-			triList.Add( moves + 5 );
-			triList.Add( moves + 1 );
-			triList.Add( moves + 6 );
-
-			// Vector3 u = vertList[moves + 5] - vertList[moves + 1];
-			// Vector3 v = vertList[moves + 6] - vertList[moves + 1];
-
-			// normal = Vector3.Cross( u, v ).normalized;
-
-			// normalsList.Add( normal );
-			// normalsList.Add( normal );
+			triList.Add( moves + totalDepth );
+			triList.Add( moves );
+			triList.Add( moves + totalDepth + 1);
 
 			moves++;
 		}
+		mesh.RecalculateNormals (); 
+		mesh.MarkDynamic ();
 	}
 
-	public void calcFlatNormals( Mesh mesh ) {
-		Vector3[] vertList = mesh.vertices;
-		Vector3[] normals = mesh.normals;
+	/*
+	*	Berechnet die Normalen für Flat-Shading
+	*
+	*	@mesh:	Mesh für welches die Normalen berechnet werden sollen
+	*/
+	public void CalcFlatNormals( Mesh mesh ) {
+		Vector3[] vertArray = mesh.vertices;
+		Vector3[] normals = new Vector3[vertArray.Length];
 
-		for(int i = 0; i < normals.Length; i+=4) {
-			Vector3 u = vertList[i + 1] - vertList[i];
-			Vector3 v = vertList[i + 5] - vertList[i];
+		for(int i = 0; i < vertArray.Length; i++) {
+			Vector3 u = vertList[triList[i+1]] - vertList[triList[i]];
+			Vector3 v = vertList[triList[i+2]] - vertList[triList[i]];
 
 			Vector3 normal = Vector3.Cross( u, v ).normalized;
 
 			normals[i] = normal;
-			normals[i + 1] = normal;
-			normals[i + 5] = normal;
-
-			u = vertList[i + 6] - vertList[i + 1];
-			v = vertList[i + 5] - vertList[i + 1];
-
-			normal = Vector3.Cross( u, v ).normalized;
-
-			normals[i + 5] = normal;
-			normals[i + 6] = normal;
 		}
 
 		mesh.normals = normals;
