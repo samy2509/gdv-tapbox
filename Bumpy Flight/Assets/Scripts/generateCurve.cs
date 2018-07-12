@@ -10,7 +10,7 @@ public class generateCurve : MonoBehaviour {
 	private int		rounding		= 5;				// Grad der Abrundung in Kurven
 	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
 	private float	levelBound		= 5f;				// Levelbegrenzung im oberen Bereich
-	private float	randomnes		= .3f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
+	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
 
 	private MeshFilter 		meshFilter;
 	private Mesh 			mesh;
@@ -44,8 +44,6 @@ public class generateCurve : MonoBehaviour {
 
 		mesh.RecalculateNormals();
 		mesh.RecalculateBounds();
-
-		CalcFlatNormals( mesh );
 	}
 
 	/*
@@ -59,8 +57,15 @@ public class generateCurve : MonoBehaviour {
 
 		if( negative ) {
 			step = -angle / rounding;
+
+			if(step < .7) {
+				step = 1;
+			}
 		} else {
 			step = angle / rounding;
+			if(step > -.7) {
+				step = 1;
+			}
 		}
 
 		for( int i = 0; i <= step; i++ ) {
@@ -135,7 +140,7 @@ public class generateCurve : MonoBehaviour {
 		Vector3[] vertArray = mesh.vertices;
 		Vector3[] normals = new Vector3[vertArray.Length];
 
-		for(int i = 0; i < vertArray.Length; i++) {
+		for(int i = 0; i < vertList.Count; i++) {
 			Vector3 u = vertList[triList[i+1]] - vertList[triList[i]];
 			Vector3 v = vertList[triList[i+2]] - vertList[triList[i]];
 
