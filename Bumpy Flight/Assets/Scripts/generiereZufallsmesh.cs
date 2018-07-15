@@ -31,17 +31,103 @@ public class generiereZufallsmesh : MonoBehaviour
     private void Generiere()
     {
         GetComponent<MeshFilter>().mesh = mesh;
-        meshGroesse                     = (laenge + 1) * (breite + 1);
+        meshGroesse                     = 5 * (laenge + 1) * (breite + 1);
         verts                           = new Vector3[meshGroesse];
         uvCoords                        = new Vector2[meshGroesse];
 
         int i = 0;
+
+        //x-y-Ebene - Wand hinten
         for (int y = 0; y <= breite; y++)
         {
             for (int x = 0; x <= laenge; x++)
             {
-                verts[i]    = new Vector3(x, y, Random.Range(0.0f, 1.0f));
+                float zPos;
+
+                if (x == 0 || x == laenge || y == 0 || y == breite){
+                    zPos = 0;
+                } else {
+                    zPos = Random.Range(0.0f, 1.0f);
+                }
+                verts[i]    = new Vector3(x, y, zPos);
                 uvCoords[i] = new Vector2((float)x / laenge, (float)y / breite);
+
+                i++;
+            }
+        }
+
+        //y-z-Ebene1 - Wand links
+        for (int y = 0; y <= breite; y++)
+        {
+            for (int z = -laenge; z <= 0; z++)
+            {
+                float xPos;
+
+                if (z == 0 || z == laenge || y == 0 || y == breite)
+                {
+                    xPos = 0;
+                } else {
+                    xPos = Random.Range(0.0f, 1.0f);
+                }
+                verts[i] = new Vector3(xPos, y, z);
+                uvCoords[i] = new Vector2((float)z / laenge, (float)y / breite);
+
+                i++;
+            }
+        }
+
+        //y-z-Ebene2 - Wand rechts
+        for (int y = 0; y <= breite; y++)
+        {
+            for (int z = 0; z >= -laenge; z--)
+            {
+                float xPos;
+
+                if (z == 0 || z == laenge || y == 0 || y == breite){
+                    xPos = 0;
+                } else {
+                    xPos = Random.Range(0.0f, 1.0f);
+                }
+                verts[i] = new Vector3(xPos + laenge, y, z);
+                uvCoords[i] = new Vector2((float)z / laenge, (float)y / breite);
+
+                i++;
+            }
+        }
+
+        //x-z-Ebene1 - Boden
+        for (int z = -breite; z <= 0; z++)
+        {
+            for (int x = 0; x <= laenge; x++)
+            {
+                float yPos;
+
+                if (z == 0 || z == laenge || x == 0 || x == breite){
+                    yPos = 0;
+                } else {
+                    yPos = Random.Range(0.0f, 0.5f);
+                }
+                verts[i] = new Vector3(x, yPos, z);
+                uvCoords[i] = new Vector2((float)x / laenge, (float)z / breite);
+
+                i++;
+            }
+        }
+
+        //x-z-Ebene2 - Decke
+        for (int z = -breite; z <= 0; z++)
+        {
+            for (int x = laenge; x >= 0; x--)
+            {
+                float yPos;
+
+                if (z == 0 || z == breite || x == 0 || x == laenge){
+                    yPos = 0;
+                } else {
+                    yPos = Random.Range(0.0f, 0.5f);
+                }
+                verts[i] = new Vector3(x, yPos + breite, z);
+                uvCoords[i] = new Vector2((float)x / laenge, (float)z / breite);
 
                 i++;
             }
@@ -50,7 +136,7 @@ public class generiereZufallsmesh : MonoBehaviour
         mesh.uv         = uvCoords;
 
 
-        tris    = new int[laenge * breite * 6]; 
+        tris    = new int[5 * laenge * breite * 6]; 
         // Rechteck Test
         // tris[0]              = 0;
         // tris[1] = tris[4]    = laenge + 1;
@@ -59,25 +145,30 @@ public class generiereZufallsmesh : MonoBehaviour
 
         int tri     = 0;
         int vert    = 0;
-        // Zeile
-        for (int y = 0; y < breite; y++)
-        {
-            // Spalte
-            for (int x = 0; x < laenge; x++)
-            {
-                tris[tri]                       = vert;
-                tris[tri + 1] = tris[tri + 4]   = vert + laenge + 1;
-                tris[tri + 2] = tris[tri + 3]   = vert + 1;
-                tris[tri + 5]                   = vert + laenge + 2;
 
-                tri += 6;
+        for (int anzahl = 0; anzahl < 5; anzahl++)
+        {
+            // Zeile
+            for (int y = 0; y < breite; y++)
+            {
+                // Spalte
+                for (int x = 0; x < laenge; x++)
+                {
+                    tris[tri]                       = vert;
+                    tris[tri + 1] = tris[tri + 4]   = vert + laenge + 1;
+                    tris[tri + 2] = tris[tri + 3]   = vert + 1;
+                    tris[tri + 5]                   = vert + laenge + 2;
+
+                    tri += 6;
+                    vert++;
+                }
                 vert++;
             }
-            vert++;
+            vert += laenge + 1;
         }
+
         mesh.triangles = tris;
         mesh.RecalculateNormals();
 
     }
-
 }
