@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 1684234957}
   - component: {fileID: 1684234960}
   - component: {fileID: 1684234959}
+  - component: {fileID: 1684234961}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -375,3 +376,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1684234956}
   m_Mesh: {fileID: 0}
+--- !u!114 &1684234961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1684234956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d845ab0efd04d268de34f8d429bf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baum: {fileID: 1162134079859708, guid: 388e3b70ef04941e4baa189769d5058c, type: 2}
+  stein: {fileID: 1098192631608874, guid: ef26f10e7613c4d5e8d6d71b2f9e6d28, type: 2}
+  hindernis: {fileID: 1241126200553400, guid: bac8ad0aff4434e39a34c358c3fde564, type: 2}

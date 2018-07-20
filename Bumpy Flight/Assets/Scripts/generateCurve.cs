@@ -19,16 +19,18 @@ public class generateCurve : MonoBehaviour {
 	private List<int> 		triList;
 	private List<Vector3>	normalsList;
 	private Vector3[]		verts;
+	private ObjectRandomSpawn objectSpawner;
 
 	// Use this for initialization
 	void Start () {
-		mesh 		= new Mesh();
-		vertList 	= new List<Vector3>();
-		triList 	= new List<int>();
-		normalsList = new List<Vector3>();
-		turtle 		= new GameObject( "Turtle" );
+		mesh 			= new Mesh();
+		vertList 		= new List<Vector3>();
+		triList 		= new List<int>();
+		normalsList 	= new List<Vector3>();
+		turtle 			= new GameObject( "Turtle" );
+		objectSpawner	= GetComponent<ObjectRandomSpawn>();
 
-		meshFilter 	= GetComponent<MeshFilter>();
+		meshFilter = GetComponent<MeshFilter>();
 
 		meshFilter.mesh = mesh;
 	}
@@ -129,6 +131,9 @@ public class generateCurve : MonoBehaviour {
 		}
 		mesh.RecalculateNormals (); 
 		mesh.MarkDynamic ();
+
+		// Zufällige Umgebungsobjekte platzieren
+		objectSpawner.SpawnObjects( turtle.transform.position, totalDepth );
 	}
 
 	/*
