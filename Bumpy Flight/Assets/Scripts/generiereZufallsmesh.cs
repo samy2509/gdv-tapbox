@@ -18,8 +18,8 @@ public class generiereZufallsmesh : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        laenge  = Random.Range(10, 20);
-        breite  = Random.Range(5, 10);
+        laenge  = Random.Range(30, 50);
+        breite  = 7;
         mesh    = new Mesh();
 
         Generiere();
@@ -47,7 +47,7 @@ public class generiereZufallsmesh : MonoBehaviour
                 if (x == 0 || x == laenge || y == 0 || y == breite){
                     zPos = 0;
                 } else {
-                    zPos = Random.Range(0.0f, 1.0f);
+                    zPos = Random.Range(-1.0f, 0.0f);
                 }
                 verts[i]    = new Vector3(x, y, zPos);
                 uvCoords[i] = new Vector2((float)x / laenge, (float)y / breite);
@@ -63,7 +63,7 @@ public class generiereZufallsmesh : MonoBehaviour
             {
                 float xPos;
 
-                if (z == 0 || z == laenge || y == 0 || y == breite)
+                if (z == 0 || z == laenge || z == -laenge || y == 0 || y == breite || y == -breite)
                 {
                     xPos = 0;
                 } else {
@@ -83,10 +83,10 @@ public class generiereZufallsmesh : MonoBehaviour
             {
                 float xPos;
 
-                if (z == 0 || z == laenge || y == 0 || y == breite){
+                if (z == 0 || z == laenge || z == -laenge || y == 0 || y == breite || y == -breite){
                     xPos = 0;
                 } else {
-                    xPos = Random.Range(0.0f, 1.0f);
+                    xPos = Random.Range(-1.0f, 0.0f);
                 }
                 verts[i] = new Vector3(xPos + laenge, y, z);
                 uvCoords[i] = new Vector2((float)z / laenge, (float)y / breite);
@@ -102,10 +102,10 @@ public class generiereZufallsmesh : MonoBehaviour
             {
                 float yPos;
 
-                if (z == 0 || z == laenge || x == 0 || x == breite){
+                if (z == 0 || z == breite || z == -breite || x == 0 || x == laenge || x == -laenge){
                     yPos = 0;
                 } else {
-                    yPos = Random.Range(0.0f, 0.5f);
+                    yPos = Random.Range(0.0f, 0.3f);
                 }
                 verts[i] = new Vector3(x, yPos, z);
                 uvCoords[i] = new Vector2((float)x / laenge, (float)z / breite);
@@ -121,10 +121,10 @@ public class generiereZufallsmesh : MonoBehaviour
             {
                 float yPos;
 
-                if (z == 0 || z == breite || x == 0 || x == laenge){
+                if (z == 0 || z == breite || z == -breite || x == 0 || x == laenge || x == -laenge){
                     yPos = 0;
                 } else {
-                    yPos = Random.Range(0.0f, 0.5f);
+                    yPos = Random.Range(-1.5f, 0.0f);
                 }
                 verts[i] = new Vector3(x, yPos + breite, z);
                 uvCoords[i] = new Vector2((float)x / laenge, (float)z / breite);
