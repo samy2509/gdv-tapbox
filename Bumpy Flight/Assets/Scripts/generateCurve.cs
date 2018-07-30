@@ -134,6 +134,9 @@ public class generateCurve : MonoBehaviour {
 
 		// Zufällige Umgebungsobjekte platzieren
 		objectSpawner.SpawnObjects( turtle.transform.position, totalDepth );
+
+		// Gegner platzieren
+		objectSpawner.SpawnEnemy( turtle.transform.position );
 	}
 
 	/*

@@ -387,6 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d845ab0efd04d268de34f8d429bf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baum: {fileID: 1162134079859708, guid: 388e3b70ef04941e4baa189769d5058c, type: 2}
-  stein: {fileID: 1098192631608874, guid: ef26f10e7613c4d5e8d6d71b2f9e6d28, type: 2}
+  baum: {fileID: 194376, guid: ba9def5c9b1455b46adb78286fe04642, type: 2}
+  baum2: {fileID: 149022, guid: 50ff8a60be8b4a54da7e9239eb7f0d78, type: 2}
+  stein: {fileID: 162106, guid: 58698119dddbaf1429602ed6cd6004e3, type: 2}
   hindernis: {fileID: 1241126200553400, guid: bac8ad0aff4434e39a34c358c3fde564, type: 2}
+  gegner: {fileID: 1773965927217320, guid: 22b75230bfdffa94f9efa811f07bfdb5, type: 2}

@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject baum;
+	public GameObject baum2;
+
 	public GameObject stein;
 	public GameObject hindernis;
+	public GameObject gegner;
 
 	private List<GameObject> trees;
 	private List<GameObject> stones;
 	private List<GameObject> barriers;
+	private List<GameObject> enemies;
 	
-	private float depth;
-	private float lastPos;
+	private float depth 			= 1f;	// Tiefe, in der die Hintergrundobjekte platziert werden
+	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
+	private float lastPos			= 0f;	// letzte Position eine platzierten Hintergurndobjektes
 
 	// Use this for initialization
 	void Start () {
-		trees 		= new List<GameObject>();
-		stones 		= new List<GameObject>();
-		barriers 	= new List<GameObject>();
-		depth 		= 1f;
-		lastPos 	= 0f;
+		trees 			= new List<GameObject>();
+		stones 			= new List<GameObject>();
+		barriers 		= new List<GameObject>();
+		enemies 		= new List<GameObject>();
 	}
 
 	/*
@@ -54,20 +58,62 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	}
 
 	/*
+	*	Platziert Gegner an zufälligen Orten
+	*
+	*	@pos:	Die Position, an der der Gegner platziert werden soll
+	*/
+	public void SpawnEnemy( Vector3 pos ) {
+		int indexE = 0;
+		float lastEnemyX;
+		float rand = Random.Range(0, 20);
+
+		if(enemies.Count != 0) {
+			indexE = enemies.Count - 1;
+			lastEnemyX = enemies[indexE].transform.position.x;
+		} else {
+			lastEnemyX = 0;
+		}
+		
+		Vector3 newPos = new Vector3(
+				pos.x,
+				pos.y + .3f,
+				pos.z + 7
+			);
+
+		if(lastEnemyX + distanceEnemy < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) {
+			GameObject gegnerInst = Instantiate( gegner, newPos, Quaternion.identity ) as GameObject;
+			gegnerInst.transform.Rotate( 0f, -90f, 0f );
+			enemies.Add( gegnerInst.gameObject );
+
+			gegnerInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+		}
+	}
+
+	/*
 	*	Platziert Bäume an zufälligen Orten
 	*
 	*	@pos:		Die Position, an der der Baum platziert werden soll
 	*	@distance:	Der minimale Abstand der Bäume
 	*/
 	private void SpawnTree( Vector3 pos, float distance ) {
-		if(LastObjectDistance() + distance <= pos.x) {
+		if(LastObjectDistance() + 1.5f + distance <= pos.x) {
+			int rand = Random.Range(0, 10);
+			GameObject cBaum = baum;
 			Vector3 newPos = new Vector3(
 				pos.x,
-				pos.y + 2,
-				pos.z + depth - Random.Range(1f, 5f)
+				pos.y + .3f,
+				pos.z - 1 + depth - Random.Range(1f, 5f)
 			);
 
-			GameObject baumInst = Instantiate( baum, newPos, Quaternion.identity ) as GameObject;
+			if(rand != 3) {
+				cBaum = baum;
+			} else {
+				cBaum = baum2;
+			}
+
+			GameObject baumInst = Instantiate( cBaum, newPos, Quaternion.identity ) as GameObject;
+			baumInst.transform.localScale = new Vector3(3f, 3f, 3f);
+			baumInst.transform.Rotate(0f, Random.Range(0, 180), 0f);
 			trees.Add( baumInst.gameObject );
 
 			baumInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
@@ -110,11 +156,13 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		if(LastObjectDistance() + distance <= pos.x) {
 			Vector3 newPos = new Vector3(
 				pos.x,
-				pos.y + .5f,
-				pos.z + depth - Random.Range(1f, 5f)
+				pos.y + .2f,
+				pos.z  - 1 + depth - Random.Range(1f, 5f)
 			);
 
 			GameObject steinInst = Instantiate( stein, newPos, Quaternion.identity ) as GameObject;
+			steinInst.transform.localScale = new Vector3(3f, 3f, 3f);
+			steinInst.transform.Rotate(0f, Random.Range(0, 180), Random.Range(0, 20));
 			stones.Add( steinInst.gameObject );
 
 			steinInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
