@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class generateCurve : MonoBehaviour {
 	private float 	length 			= 1.0f;				// Länge eines Elements
-	private int 	totalDepth 		= 17;				// Vertikale Tiefe des gesamten Bands
+	private int 	totalDepth 		= 26;				// Vertikale Tiefe des gesamten Bands
 	private float 	depth 			= 1.0f;				// Vertikale Tiefe des Bands
 	private int 	moves			= 0;				// Anzahl der aktuellen Bewegungen
 	private int		rounding		= 5;				// Grad der Abrundung in Kurven
 	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
-	private float	levelBound		= 5f;				// Levelbegrenzung im oberen Bereich
+	private float	levelBound		= 4f;				// Levelbegrenzung im oberen Bereich
 	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
 
 	private MeshFilter 		meshFilter;

@@ -5,17 +5,20 @@ using UnityEngine;
 public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject baum;
 	public GameObject baum2;
+	public GameObject baum3;
 
 	public GameObject stein;
+	public GameObject busch;
 	public GameObject hindernis;
 	public GameObject gegner;
 
 	private List<GameObject> trees;
 	private List<GameObject> stones;
+	private List<GameObject> bushes;
 	private List<GameObject> barriers;
 	private List<GameObject> enemies;
 	
-	private float depth 			= 1f;	// Tiefe, in der die Hintergrundobjekte platziert werden
+	private float depth 			= 6f;	// Tiefe, in der die Hintergrundobjekte platziert werden
 	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
 	private float lastPos			= 0f;	// letzte Position eine platzierten Hintergurndobjektes
 
@@ -23,6 +26,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	void Start () {
 		trees 			= new List<GameObject>();
 		stones 			= new List<GameObject>();
+		bushes 			= new List<GameObject>();
 		barriers 		= new List<GameObject>();
 		enemies 		= new List<GameObject>();
 	}
@@ -77,7 +81,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		Vector3 newPos = new Vector3(
 				pos.x,
 				pos.y + .3f,
-				pos.z + 7
+				pos.z + depth/2 - 2f
 			);
 
 		if(lastEnemyX + distanceEnemy < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) {
@@ -98,25 +102,45 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	private void SpawnTree( Vector3 pos, float distance ) {
 		if(LastObjectDistance() + 1.5f + distance <= pos.x) {
 			int rand = Random.Range(0, 10);
+			float randScale = Random.Range(2.5f, 3.5f);
 			GameObject cBaum = baum;
 			Vector3 newPos = new Vector3(
 				pos.x,
 				pos.y + .3f,
-				pos.z - 1 + depth - Random.Range(1f, 5f)
+				pos.z - 1 + depth - Random.Range(1f, 10f)
 			);
 
 			if(rand != 3) {
-				cBaum = baum;
+				if(rand > 3) {
+					cBaum = baum;
+				} else {
+					cBaum = baum3;
+				}
 			} else {
 				cBaum = baum2;
 			}
 
 			GameObject baumInst = Instantiate( cBaum, newPos, Quaternion.identity ) as GameObject;
-			baumInst.transform.localScale = new Vector3(3f, 3f, 3f);
+			baumInst.transform.localScale = new Vector3(randScale, randScale, randScale);
 			baumInst.transform.Rotate(0f, Random.Range(0, 180), 0f);
 			trees.Add( baumInst.gameObject );
 
 			baumInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+
+			if(rand == 1) {
+				newPos = new Vector3(
+					pos.x,
+					pos.y + .3f,
+					pos.z + 1
+				);
+
+				GameObject baumVGInst = Instantiate( cBaum, newPos, Quaternion.identity ) as GameObject;
+				baumVGInst.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+				baumVGInst.transform.Rotate(0f, Random.Range(0, 180), 0f);
+				trees.Add( baumVGInst.gameObject );
+
+				baumVGInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+			}
 		}
 	}
 
@@ -132,12 +156,13 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		if(lastPos + distance <= pos.x && rand == 3) {
 			Vector3 newPos = new Vector3(
 				pos.x,
-				pos.y + .5f,
-				pos.z + depth/2 - Random.Range(1f, 5f)
+				pos.y + .4f,
+				pos.z + depth/2 - Random.Range(1f, 3f)
 			);
 
 			GameObject hindernisInst = Instantiate( hindernis, newPos, Quaternion.identity ) as GameObject;
-			hindernisInst.transform.eulerAngles = new Vector3(90f, 0f, 0f);
+			hindernisInst.transform.eulerAngles = new Vector3(-150f, 90f, Random.Range(-90f, -80f));
+			hindernisInst.transform.localScale = new Vector3(3f, 3f, 3f);
 			barriers.Add( hindernisInst.gameObject );
 
 			hindernisInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
@@ -153,19 +178,36 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@distance:	Der minimale Abstand der Steine
 	*/
 	private void SpawnStone( Vector3 pos, float distance ) {
+		float randScale = Random.Range(2f, 10f);
+		int rand = Random.Range(0, 2);
 		if(LastObjectDistance() + distance <= pos.x) {
-			Vector3 newPos = new Vector3(
-				pos.x,
-				pos.y + .2f,
-				pos.z  - 1 + depth - Random.Range(1f, 5f)
-			);
+			if(rand == 0) {
+				Vector3 newPos = new Vector3(
+					pos.x,
+					pos.y + .2f,
+					pos.z  - 1 + depth - Random.Range(1f, 5f)
+				);
 
-			GameObject steinInst = Instantiate( stein, newPos, Quaternion.identity ) as GameObject;
-			steinInst.transform.localScale = new Vector3(3f, 3f, 3f);
-			steinInst.transform.Rotate(0f, Random.Range(0, 180), Random.Range(0, 20));
-			stones.Add( steinInst.gameObject );
+				GameObject steinInst = Instantiate( stein, newPos, Quaternion.identity ) as GameObject;
+				steinInst.transform.localScale = new Vector3(randScale, randScale, randScale);
+				steinInst.transform.Rotate(0f, Random.Range(0, 180), Random.Range(0, 20));
+				stones.Add( steinInst.gameObject );
 
-			steinInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+				steinInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+			} else {
+				Vector3 newPos = new Vector3(
+					pos.x,
+					pos.y + .2f,
+					pos.z  - 1 + depth - Random.Range(1f, 5f)
+				);
+
+				GameObject buschInst = Instantiate( busch, newPos, Quaternion.identity ) as GameObject;
+				buschInst.transform.localScale = new Vector3(randScale - 1, randScale - 1, randScale - 1);
+				buschInst.transform.Rotate(0f, Random.Range(0, 180), 0f);
+				stones.Add( buschInst.gameObject );
+
+				buschInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+			}
 		}
 	}
 
