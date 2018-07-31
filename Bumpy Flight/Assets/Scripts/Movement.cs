@@ -19,11 +19,6 @@ public class Movement : MonoBehaviour {
             moveDi = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDi = transform.TransformDirection(moveDi);
             moveDi *= mSpeed;
-
-            if (Input.GetButtonDown("Jump")) {
-                moveDi.y = jumpForce;
-            }
-            
         }
         //fallen
         moveDi.y -= gravity * Time.deltaTime;

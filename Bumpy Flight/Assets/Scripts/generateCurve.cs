@@ -9,7 +9,7 @@ public class generateCurve : MonoBehaviour {
 	private int 	moves			= 0;				// Anzahl der aktuellen Bewegungen
 	private int		rounding		= 5;				// Grad der Abrundung in Kurven
 	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
-	private float	levelBound		= 4f;				// Levelbegrenzung im oberen Bereich
+	private float	levelBound		= 2f;				// Levelbegrenzung im oberen Bereich
 	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
 
 	private MeshFilter 		meshFilter;
@@ -20,6 +20,7 @@ public class generateCurve : MonoBehaviour {
 	private List<Vector3>	normalsList;
 	private Vector3[]		verts;
 	private ObjectRandomSpawn objectSpawner;
+	private MeshCollider meshc;
 
 	// Use this for initialization
 	void Start () {
@@ -33,6 +34,10 @@ public class generateCurve : MonoBehaviour {
 		meshFilter = GetComponent<MeshFilter>();
 
 		meshFilter.mesh = mesh;
+		mesh.name = "Boden";
+
+		meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+		meshc.sharedMesh = mesh;
 	}
 	
 	// Update is called once per frame
@@ -46,6 +51,10 @@ public class generateCurve : MonoBehaviour {
 
 		mesh.RecalculateNormals();
 		mesh.RecalculateBounds();
+
+		DestroyImmediate(meshc);
+		meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+		meshc.sharedMesh = mesh;
 	}
 
 	/*
@@ -129,6 +138,9 @@ public class generateCurve : MonoBehaviour {
 
 			moves++;
 		}
+
+		//RemoveOldVerts( turtle.transform.position.x );
+
 		mesh.RecalculateNormals (); 
 		mesh.MarkDynamic ();
 
@@ -163,21 +175,27 @@ public class generateCurve : MonoBehaviour {
 	// Generiert einen zufälligen Winkel und gibt diesen zurück
 	public float GenerateAngle() {
 		float newAngle 	= 0;
-		float rand 		= Random.value;
+		float rand		= Random.Range(-deviation, deviation);
 
-		if( rand < 0.5f ) {
-			newAngle = deviation * -rand * 2;
-		} else {
-			newAngle = deviation * rand;
-		}
+		newAngle = rand;
 
 		if( (turtle.transform.eulerAngles.z + newAngle > 30 && turtle.transform.eulerAngles.z + newAngle < 330)
 			|| (turtle.transform.position.y > levelBound && newAngle > 0)
 			|| (turtle.transform.position.y < 2 && newAngle < 0) ) {
 				
-			newAngle = -newAngle;
+			newAngle = 0;
 		}
 
 		return newAngle;
+	}
+
+	public void RemoveOldVerts( float currentXPos ) {
+		while( true ) {
+			if(vertList[0].x < currentXPos - 100) {
+				vertList.RemoveAt(0);
+			} else {
+				return;
+			}
+		}
 	}
 }

@@ -11,6 +11,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject busch;
 	public GameObject hindernis;
 	public GameObject gegner;
+	public GameObject enemiesObject;
 
 	private List<GameObject> trees;
 	private List<GameObject> stones;
@@ -29,6 +30,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		bushes 			= new List<GameObject>();
 		barriers 		= new List<GameObject>();
 		enemies 		= new List<GameObject>();
+
+		enemiesObject	= new GameObject("Gegner");
 	}
 
 	/*
@@ -80,16 +83,25 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		
 		Vector3 newPos = new Vector3(
 				pos.x,
-				pos.y + .3f,
+				pos.y + 1.3f,
 				pos.z + depth/2 - 2f
 			);
 
 		if(lastEnemyX + distanceEnemy < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) {
 			GameObject gegnerInst = Instantiate( gegner, newPos, Quaternion.identity ) as GameObject;
+			BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
+			CharacterController cc = gegnerInst.AddComponent<CharacterController>();
+
 			gegnerInst.transform.Rotate( 0f, -90f, 0f );
+			bc.size = new Vector3(2f, 2.3f, 4f);
+			bc.center = new Vector3(0f, 1.15f, 0f);
+			gegnerInst.AddComponent<Movement>();
+			cc.radius = 1.35f;
+			cc.center = new Vector3(0f, 1.35f, 0f);
+
 			enemies.Add( gegnerInst.gameObject );
 
-			gegnerInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+			gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform);
 		}
 	}
 
