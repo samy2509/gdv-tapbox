@@ -19,7 +19,7 @@ public class generiereZufallsmesh : MonoBehaviour
     private void Awake()
     {
         laenge  = Random.Range(30, 50);
-        breite  = 7;
+        breite  = 8;
         mesh    = new Mesh();
 
         Generiere();
