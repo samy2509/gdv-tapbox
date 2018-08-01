@@ -13,16 +13,10 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Update () {
-        CharacterController controller = gameObject.GetComponent<CharacterController>();
-        if (controller.isGrounded) {
-            //Bewegung nach rechts, links
-            moveDi = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDi = transform.TransformDirection(moveDi);
-            moveDi *= mSpeed;
-        }
+        
         //fallen
         moveDi.y -= gravity * Time.deltaTime;
-        controller.Move(moveDi * Time.deltaTime);
+
     }
 
 }
