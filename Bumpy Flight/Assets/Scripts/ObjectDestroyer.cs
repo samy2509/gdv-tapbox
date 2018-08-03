@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Script muss Prefabs zugeordnet werden
+//Script ist Prefabs zugeordnet
 
 public class ObjectDestroyer : MonoBehaviour
 {
 
-    private float timer = 10.0f;
-    //private float wait = 10.0f;
-
-    void Update()
+    void Start()
     {
+        // Startet Destroyer nach 0.5 Sekunden, Destroyer prüft dann alle 3 Sekunden
+        InvokeRepeating("destroyer", 0.5f, 3.0f);
+    }
 
-        timer -= Time.deltaTime;
-
-        if (timer < 0.01f && Initialisierung.playingGame == true)
+    void destroyer ()
+    {
+        // ggf. Distanz (50.0f) anpassen, falls Objekte zu früh/spät zerstört werden
+        if (Camera.main.gameObject.transform.position.x > gameObject.transform.position.x + 50.0f)
         {
             Destroy(gameObject);
-            // while (wait > 0.01f)
-            // {
-            //     wait -= Time.deltaTime;
-            // }
-            // wait = 10.0f;
         }
     }
 }

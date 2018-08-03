@@ -19,6 +19,7 @@ public class generateCurve : MonoBehaviour {
 	private List<int> 		triList;
 	private List<Vector3>	normalsList;
 	private Vector3[]		verts;
+	public  Vector3			posGetter;
 	private ObjectRandomSpawn objectSpawner;
 	private MeshCollider meshc;
 
@@ -149,6 +150,9 @@ public class generateCurve : MonoBehaviour {
 
 		// Gegner platzieren
 		objectSpawner.SpawnEnemy( turtle.transform.position );
+
+		// Position anderen Skripten zur Verfügung stellen
+		posGetter = turtle.transform.position;
 	}
 
 	/*

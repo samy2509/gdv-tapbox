@@ -8,21 +8,25 @@ using UnityEngine;
 
 public class generiereZufallsmesh : MonoBehaviour
 {
-    public  int         laenge, breite  = 0;            // Laenge und Breite des Zufallsmeshes
-    private Mesh        mesh;                           // Mesh
-    private int         meshGroesse     = 0;            // Meshgroesse
-    private Vector3[]   verts;                          // Vertices
-    private Vector2[]   uvCoords;                       // UV Koordinaten
-    private int[]       tris;                           // Dreiecke (Triangles)
+    public  int             laenge, breite  = 0;            // Laenge und Breite des Zufallsmeshes
+    private Mesh            mesh;                           // Mesh
+    private int             meshGroesse     = 0;            // Meshgroesse
+    private Vector3[]       verts;                          // Vertices
+    private Vector2[]       uvCoords;                       // UV Koordinaten
+    private int[]           tris;                           // Dreiecke (Triangles)
+    private MeshCollider    meshc;
     
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        laenge  = Random.Range(30, 50);
-        breite  = 8;
+        laenge  = Random.Range(100, 150);
+        breite  = 16;
         mesh    = new Mesh();
 
         Generiere();
+
+        meshc               = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+        meshc.sharedMesh    = mesh;
     }
 
     /*
@@ -105,7 +109,7 @@ public class generiereZufallsmesh : MonoBehaviour
                 if (z == 0 || z == breite || z == -breite || x == 0 || x == laenge || x == -laenge){
                     yPos = 0;
                 } else {
-                    yPos = Random.Range(0.0f, 0.3f);
+                    yPos = Random.Range(0.0f, 0.4f);
                 }
                 verts[i] = new Vector3(x, yPos, z);
                 uvCoords[i] = new Vector2((float)x / laenge, (float)z / breite);
@@ -124,7 +128,7 @@ public class generiereZufallsmesh : MonoBehaviour
                 if (z == 0 || z == breite || z == -breite || x == 0 || x == laenge || x == -laenge){
                     yPos = 0;
                 } else {
-                    yPos = Random.Range(-1.5f, 0.0f);
+                    yPos = Random.Range(-3f, 0.0f);
                 }
                 verts[i] = new Vector3(x, yPos + breite, z);
                 uvCoords[i] = new Vector2((float)x / laenge, (float)z / breite);
