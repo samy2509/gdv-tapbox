@@ -16,7 +16,7 @@ public class ObjectDestroyer : MonoBehaviour
     void destroyer ()
     {
         // ggf. Distanz (50.0f) anpassen, falls Objekte zu früh/spät zerstört werden
-        if (Camera.main.gameObject.transform.position.x > gameObject.transform.position.x + 50.0f)
+        if ( Camera.main.gameObject.transform.position.x > gameObject.transform.position.x + 50.0f && gameObject != null )
         {
             Destroy(gameObject);
         }

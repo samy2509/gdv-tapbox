@@ -11,17 +11,19 @@ public class generateCurve : MonoBehaviour {
 	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
 	private float	levelBound		= 2f;				// Levelbegrenzung im oberen Bereich
 	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
+	private int		fovCamera		= 30;				// Bereich, den die Kamera "sieht"
 
-	private MeshFilter 		meshFilter;
-	private Mesh 			mesh;
-	private GameObject 		turtle;
-	private List<Vector3> 	vertList;
-	private List<int> 		triList;
-	private List<Vector3>	normalsList;
-	private Vector3[]		verts;
-	public  Vector3			posGetter;
-	private ObjectRandomSpawn objectSpawner;
-	private MeshCollider meshc;
+	private MeshFilter 			meshFilter;
+	private Mesh 				mesh;
+	private GameObject 			turtle;
+	private List<Vector3> 		vertList;
+	private List<int> 			triList;
+	private List<Vector3>		normalsList;
+	private Vector3[]			verts;
+	public  Vector3				posGetter;
+	private ObjectRandomSpawn 	objectSpawner;
+	private MeshCollider 		meshc;
+	private Camera 				mainCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -30,9 +32,11 @@ public class generateCurve : MonoBehaviour {
 		triList 		= new List<int>();
 		normalsList 	= new List<Vector3>();
 		turtle 			= new GameObject( "Turtle" );
+
 		objectSpawner	= GetComponent<ObjectRandomSpawn>();
 
-		meshFilter = GetComponent<MeshFilter>();
+		meshFilter 		= GetComponent<MeshFilter>();
+		mainCamera		= Camera.main;
 
 		meshFilter.mesh = mesh;
 		mesh.name = "Boden";
@@ -43,6 +47,17 @@ public class generateCurve : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if( moves == 0 ) {
+			for( int i = 0; i < fovCamera ; i++ ) {
+				StepForward();
+			}
+		} else if( mainCamera.transform.position.x + fovCamera > turtle.transform.position.x ) {
+			StepForward();
+		}
+	}
+
+	// Generiert einen neuen Abschnitt des Levels
+	public void StepForward() {
 		Move( length );
 		Turn( GenerateAngle() );
 
@@ -140,7 +155,7 @@ public class generateCurve : MonoBehaviour {
 			moves++;
 		}
 
-		//RemoveOldVerts( turtle.transform.position.x );
+		RemoveOldVerts( turtle.transform.position.x );
 
 		mesh.RecalculateNormals (); 
 		mesh.MarkDynamic ();
@@ -193,13 +208,30 @@ public class generateCurve : MonoBehaviour {
 		return newAngle;
 	}
 
+	/*
+	*	Entfernt Vertices vom Mesh, die im nicht mehr sichtbaren Bereich sind
+	*
+	*	@currentXPos:	Position von der aus der Abstand berechnet werden soll
+	*/
 	public void RemoveOldVerts( float currentXPos ) {
-		while( true ) {
-			if(vertList[0].x < currentXPos - 100) {
-				vertList.RemoveAt(0);
-			} else {
-				return;
+		// if ( moves > fovCamera * 4  ) {
+			while ( true ) {
+				if( vertList[0].x < currentXPos - fovCamera * 3f ) {
+					for ( int i = 0; i < 6; i++ ) {
+						triList.RemoveAt(0);
+					}
+
+					for ( int j = 0; j < triList.Count; j++ ) {
+						triList[j] = triList[j] - 1;
+					}
+
+					vertList.RemoveAt(0);
+
+					moves--;
+				} else {
+					return;
+				}
 			}
-		}
+		// }
 	}
 }

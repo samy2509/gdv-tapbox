@@ -84,7 +84,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		Vector3 newPos = new Vector3(
 				pos.x,
 				pos.y + 1.3f,
-				pos.z + depth/2 - 2f
+				pos.z + depth/2 - 4.2f
 			);
 
 		if(lastEnemyX + distanceEnemy < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) {
@@ -94,8 +94,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
             CharacterController cc = gegnerInst.AddComponent<CharacterController>();
 
 			gegnerInst.transform.Rotate( 0f, -90f, 0f );
-			bc.size = new Vector3(2f, 2.3f, 4f);
-			bc.center = new Vector3(0f, 1.15f, 0f);
+			bc.size = new Vector3(1.73f, 2.21f, 3.6f);
+			bc.center = new Vector3(-8f, 1.1f, 0f);
 			gegnerInst.AddComponent<Movement>();
             gegnerInst.AddComponent<eenemy>();
             cc.radius = 1.35f;
