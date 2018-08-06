@@ -11,7 +11,7 @@ public class generateCurve : MonoBehaviour {
 	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
 	private float	levelBound		= 2f;				// Levelbegrenzung im oberen Bereich
 	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
-	private int		fovCamera		= 30;				// Bereich, den die Kamera "sieht"
+	private int		fovCamera		= 24;				// Bereich, den die Kamera "sieht"
 
 	private MeshFilter 			meshFilter;
 	private Mesh 				mesh;
@@ -46,11 +46,22 @@ public class generateCurve : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if( moves == 0 ) {
 			for( int i = 0; i < fovCamera ; i++ ) {
-				StepForward();
+				Move( length );
 			}
+
+			mesh.vertices 	= vertList.ToArray();
+			mesh.normals 	= normalsList.ToArray();
+			mesh.triangles 	= triList.ToArray();
+
+			mesh.RecalculateNormals();
+			mesh.RecalculateBounds();
+
+			DestroyImmediate(meshc);
+			meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+			meshc.sharedMesh = mesh;
 		} else if( mainCamera.transform.position.x + fovCamera > turtle.transform.position.x ) {
 			StepForward();
 		}
@@ -60,6 +71,7 @@ public class generateCurve : MonoBehaviour {
 	public void StepForward() {
 		Move( length );
 		Turn( GenerateAngle() );
+		RemoveOldVerts( turtle.transform.position.x );
 
 		mesh.vertices 	= vertList.ToArray();
 		mesh.normals 	= normalsList.ToArray();
@@ -155,16 +167,14 @@ public class generateCurve : MonoBehaviour {
 			moves++;
 		}
 
-		RemoveOldVerts( turtle.transform.position.x );
-
 		mesh.RecalculateNormals (); 
 		mesh.MarkDynamic ();
 
 		// Zufällige Umgebungsobjekte platzieren
-		objectSpawner.SpawnObjects( turtle.transform.position, totalDepth );
+		objectSpawner.SpawnObjects( turtle.transform.position, totalDepth, fovCamera );
 
 		// Gegner platzieren
-		objectSpawner.SpawnEnemy( turtle.transform.position );
+		// objectSpawner.SpawnEnemy( turtle.transform.position );
 
 		// Position anderen Skripten zur Verfügung stellen
 		posGetter = turtle.transform.position;
@@ -214,24 +224,20 @@ public class generateCurve : MonoBehaviour {
 	*	@currentXPos:	Position von der aus der Abstand berechnet werden soll
 	*/
 	public void RemoveOldVerts( float currentXPos ) {
-		// if ( moves > fovCamera * 4  ) {
-			while ( true ) {
-				if( vertList[0].x < currentXPos - fovCamera * 3f ) {
-					for ( int i = 0; i < 6; i++ ) {
-						triList.RemoveAt(0);
-					}
+		while ( true ) {
+			if( vertList[0].x < currentXPos - fovCamera - 25f ) {
+				triList.RemoveRange(0, 6);
 
-					for ( int j = 0; j < triList.Count; j++ ) {
-						triList[j] = triList[j] - 1;
-					}
-
-					vertList.RemoveAt(0);
-
-					moves--;
-				} else {
-					return;
+				for ( int j = 0; j < triList.Count; j++ ) {
+					triList[j] = triList[j] - 1;
 				}
+
+				vertList.RemoveAt(0);
+
+				moves--;
+			} else {
+				return;
 			}
-		// }
+		}
 	}
 }

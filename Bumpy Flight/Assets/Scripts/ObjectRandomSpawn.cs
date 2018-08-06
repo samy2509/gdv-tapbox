@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectRandomSpawn : MonoBehaviour {
-	public GameObject baum;
-	public GameObject baum2;
-	public GameObject baum3;
+	public GameObject baum;				// Baum 1 für Spawn
+	public GameObject baum2;			// Baum 2 für Spawn
+	public GameObject baum3;			// Baum 3 für Spawn
 
-	public GameObject stein;
-	public GameObject busch;
-	public GameObject hindernis;
-	public GameObject gegner;
-	public GameObject enemiesObject;
+	public GameObject stein;			// Stein für Spawn
+	public GameObject busch;			// Busch für Spawn
+	public GameObject hindernis;		// Hindernis für Spawn
+	public GameObject gegner;			// Gegner für Spawn
+	private GameObject enemiesObject;	// Gruppierung für Gegner
 
-	private List<GameObject> trees;
-	private List<GameObject> stones;
-	private List<GameObject> bushes;
-	private List<GameObject> barriers;
-	private List<GameObject> enemies;
+	private List<GameObject> trees;		// Liste mit allen Bäumen
+	private List<GameObject> stones;	// Liste mit allen Steinen
+	private List<GameObject> bushes;	// Liste mit allen Büschen
+	private List<GameObject> barriers;	// Liste mit allen Hindernissen
+	private List<GameObject> enemies;	// Liste mit allen Gegnern
 	
 	private float depth 			= 6f;	// Tiefe, in der die Hintergrundobjekte platziert werden
 	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
 	private float lastPos			= 0f;	// letzte Position eine platzierten Hintergurndobjektes
+	private float fov				= 30f;	// Field of View der Kamera
 
 	// Use this for initialization
 	void Start () {
@@ -39,9 +40,13 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*
 	*	@pos:	Die Position, an der des Objekt platziert werden soll
 	*	@depth:	Die Tiefe der Levelkurve (z-Richtung)
+	*	@fov:	Field of View der Kamera
 	*/
-	public void SpawnObjects( Vector3 pos, float depth ) {
+	public void SpawnObjects( Vector3 pos, float depth, float fov ) {
 		int rand = Random.Range(0, 5);
+		this.fov = fov;
+
+		Destroyer();
 
 		if(depth != this.depth)
 			this.depth = depth;
@@ -50,13 +55,13 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			case 0:
 				break;
 			case 1:
-				SpawnTree(pos, 1f);
+				SpawnTree(pos, 2f);
 				break;
 			case 2:
-				SpawnTree(pos, 1f);
+				SpawnTree(pos, 4f);
 				break;
 			case 3:
-				SpawnStone(pos, 3f);
+				SpawnStone(pos, 7f);
 				break;
 			case 4:
 				SpawnBarrier(pos, 20f);
@@ -238,5 +243,59 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		}
 
 		return max;
+	}
+
+	// Entfernt alle Hindernisse, die nicht mehr innerhalb des FOV sind
+	public void Destroyer() {
+		bool modified = true;
+		GameObject buffer;
+
+		while (modified) {
+			modified = false;
+			if ( trees.Count > 0  && Camera.main.transform.position.x > trees[0].transform.position.x + fov ) {
+				buffer = trees[0];
+				trees.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
+			
+			if( bushes.Count > 0 && Camera.main.transform.position.x > bushes[0].transform.position.x + fov ) {
+				buffer = bushes[0];
+				bushes.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
+			
+			if( stones.Count > 0 && Camera.main.transform.position.x > stones[0].transform.position.x + fov ) {
+				buffer = stones[0];
+				stones.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
+
+			if( barriers.Count > 0 && Camera.main.transform.position.x > barriers[0].transform.position.x + fov ) {
+				buffer = barriers[0];
+				barriers.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
+
+			if( enemies.Count > 0 && Camera.main.transform.position.x > enemies[0].transform.position.x + fov ) {
+				buffer = enemies[0];
+				enemies.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
+		}
 	}
 }

@@ -10,13 +10,13 @@ public class ObjectDestroyer : MonoBehaviour
     void Start()
     {
         // Startet Destroyer nach 0.5 Sekunden, Destroyer prüft dann alle 3 Sekunden
-        InvokeRepeating("destroyer", 0.5f, 3.0f);
+        //InvokeRepeating("destroyer", 0.5f, 3.0f);
     }
 
-    void destroyer ()
+    void destroyer ( List<GameObject> objects )
     {
         // ggf. Distanz (50.0f) anpassen, falls Objekte zu früh/spät zerstört werden
-        if ( Camera.main.gameObject.transform.position.x > gameObject.transform.position.x + 50.0f && gameObject != null )
+        if ( Camera.main.gameObject.transform.position.x > gameObject.transform.position.x + 30.0f && gameObject != null )
         {
             Destroy(gameObject);
         }

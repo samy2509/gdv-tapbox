@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 3311390}
   - component: {fileID: 2383090}
   - component: {fileID: 6416394}
-  - component: {fileID: 114946825941721462}
   m_Layer: 0
   m_Name: Tree_01_summer_pal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &433556
 Transform:
@@ -99,14 +98,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194376}
   m_IsPrefabParent: 1
---- !u!114 &114946825941721462
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a48807a32a56a4978a57df45dd0e9d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

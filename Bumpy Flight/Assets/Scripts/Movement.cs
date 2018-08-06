@@ -22,9 +22,9 @@ public class Movement : MonoBehaviour {
 
 	void Update () {
         if( gameObject != null ) {
-            if( rotate != direction ) {
-                TurnAround();
-            } else {
+            // if( rotate != direction ) {
+            //     TurnAround();
+            // } else {
                 moveDi = new Vector3(0, 0, mSpeed/gravity*4);
                 moveDi = transform.TransformDirection(moveDi);
                 moveDi *= mSpeed;
@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour {
                 //fallen
                 moveDi.y -= gravity * Time.deltaTime;
                 controller.Move(moveDi * Time.deltaTime);
-            }
+            // }
         }
     }
 
