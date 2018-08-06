@@ -94,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2297115, y: 5.197943, z: 2.1201515}
-  m_LocalScale: {x: 0.06275875, y: 0.06275884, z: 0.06275884}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 400004}
   m_RootOrder: 3
@@ -250,7 +250,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.41911763, g: 0.8317444, b: 1, a: 1}
   m_Intensity: 3
-  m_Range: 4.4537983
+  m_Range: 3.24
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -404,7 +404,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 13.13
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -625,7 +625,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -678,7 +678,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -731,8 +731,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 1
+      scalar: 3.1415927
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -784,8 +784,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 1
+      scalar: 3.1415927
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -880,7 +880,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1524
+    maxNumParticles: 1375
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -943,7 +943,7 @@ ParticleSystem:
     angle: 30.39
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0.15
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -968,7 +968,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 2.9
+      value: 7.59
       mode: 0
       spread: 0
       speed:
@@ -1087,7 +1087,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 114.87
+      scalar: 113.37
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4886,8 +4886,8 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0
-  m_MaxParticleSize: 8.75
+  m_MinParticleSize: 0.015
+  m_MaxParticleSize: 8
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

@@ -27,7 +27,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 400002}
-  - component: {fileID: 114373164924186832}
   m_Layer: 0
   m_Name: PowerUpContainerBlue
   m_TagString: Untagged
@@ -342,7 +341,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.36764705, g: 0.45050701, b: 1, a: 1}
+  m_Color: {r: 0.19339621, g: 0.29860517, b: 1, a: 1}
   m_Intensity: 2.26
   m_Range: 3.24
   m_SpotAngle: 30
@@ -5030,14 +5029,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100002}
   m_IsPrefabParent: 1
---- !u!114 &114373164924186832
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a48807a32a56a4978a57df45dd0e9d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

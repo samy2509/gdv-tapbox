@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2953148, y: 5.199972, z: 2.059185}
-  m_LocalScale: {x: 0.2693291, y: 0.26932922, z: 0.26932922}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 400006}
   m_RootOrder: 4
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2845268, y: 5.2011666, z: 2.0695}
-  m_LocalScale: {x: 0.35012782, y: 0.35012794, z: 0.35012794}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 400006}
   m_RootOrder: 3
@@ -181,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2234321, y: 5.2014055, z: 2.1341927}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 2.1, y: 0.9, z: 0.9}
   m_Children: []
   m_Father: {fileID: 400006}
   m_RootOrder: 2
@@ -279,9 +279,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 0.69472617, b: 0.36764705, a: 1}
-  m_Intensity: 3
-  m_Range: 4.4537983
+  m_Color: {r: 0, g: 1, b: 0.37159586, a: 1}
+  m_Intensity: 0.95
+  m_Range: 3.24
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -762,7 +762,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -815,7 +815,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5275,7 +5275,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5328,7 +5328,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:

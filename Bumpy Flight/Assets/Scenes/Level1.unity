@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -990,7 +990,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1248129705}
   - component: {fileID: 1248129704}
-  - component: {fileID: 1248129706}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1030,19 +1029,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1248129706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1248129703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43ddaa51348c747b9a5b6cbed4bcb052, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectables:
-  - {fileID: 100002, guid: 0b96cfde923514d4f94409c375d99959, type: 2}
 --- !u!1 &1362213549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0703d554272e3406c8b33c8af2c0f237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posGetter: {x: 0, y: 0, z: 0}
 --- !u!4 &1684234958
 Transform:
   m_ObjectHideFlags: 0
@@ -1301,6 +1286,9 @@ MonoBehaviour:
   busch: {fileID: 159004, guid: 7d04d2bdc8109d54a9246dc8c9dc4473, type: 2}
   hindernis: {fileID: 149022, guid: 50ff8a60be8b4a54da7e9239eb7f0d78, type: 2}
   gegner: {fileID: 1773965927217320, guid: 22b75230bfdffa94f9efa811f07bfdb5, type: 2}
+  leben: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 2}
+  schutzschild: {fileID: 100006, guid: 3ac3af0756bb3654690122060f9cef08, type: 2}
+  blitzschlag: {fileID: 100006, guid: 339ec13e94b70ca469275f6f7e29bac3, type: 2}
 --- !u!1 &1818271942
 GameObject:
   m_ObjectHideFlags: 0

@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2271976, y: 5.1982217, z: 2.1225548}
-  m_LocalScale: {x: 0.081586376, y: 0.08158649, z: 0.08158649}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 400006}
@@ -279,9 +279,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 4.4537983
+  m_Color: {r: 0, g: 0.1576705, b: 1, a: 1}
+  m_Intensity: 1.26
+  m_Range: 3.24
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -762,7 +762,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -815,7 +815,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5117,7 +5117,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.36
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5275,7 +5275,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5328,7 +5328,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5503,7 +5503,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 3.35
+      value: 0.425
       mode: 0
       spread: 0
       speed:
@@ -9421,7 +9421,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0
+  m_MinParticleSize: 0.05
   m_MaxParticleSize: 8.75
   m_CameraVelocityScale: 0
   m_VelocityScale: 0

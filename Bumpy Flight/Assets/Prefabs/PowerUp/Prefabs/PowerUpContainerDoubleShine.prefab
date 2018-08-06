@@ -279,9 +279,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 4.4537983
+  m_Color: {r: 0, g: 0.31226087, b: 1, a: 1}
+  m_Intensity: 1.29
+  m_Range: 3.24
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -5275,7 +5275,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5328,7 +5328,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -9477,7 +9477,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0
+  m_MinParticleSize: 0.08
   m_MaxParticleSize: 8.75
   m_CameraVelocityScale: 0
   m_VelocityScale: 0

@@ -13,11 +13,17 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject gegner;			// Gegner für Spawn
 	private GameObject enemiesObject;	// Gruppierung für Gegner
 
-	private List<GameObject> trees;		// Liste mit allen Bäumen
-	private List<GameObject> stones;	// Liste mit allen Steinen
-	private List<GameObject> bushes;	// Liste mit allen Büschen
-	private List<GameObject> barriers;	// Liste mit allen Hindernissen
-	private List<GameObject> enemies;	// Liste mit allen Gegnern
+	public GameObject leben;				// Collectable für Spawn
+	public GameObject schutzschild;			// Collectable für Spawn
+	public GameObject blitzschlag;			// Collectable für Spawn
+	private GameObject collectablesObject;	// Gruppierung für Collectables
+
+	private List<GameObject> trees;			// Liste mit allen Bäumen
+	private List<GameObject> stones;		// Liste mit allen Steinen
+	private List<GameObject> bushes;		// Liste mit allen Büschen
+	private List<GameObject> barriers;		// Liste mit allen Hindernissen
+	private List<GameObject> enemies;		// Liste mit allen Gegnern
+	private List<GameObject> collectables;	// Liste mit allen Gegnern
 	
 	private float depth 			= 6f;	// Tiefe, in der die Hintergrundobjekte platziert werden
 	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
@@ -31,8 +37,10 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		bushes 			= new List<GameObject>();
 		barriers 		= new List<GameObject>();
 		enemies 		= new List<GameObject>();
+		collectables	= new List<GameObject>();
 
-		enemiesObject	= new GameObject("Gegner");
+		enemiesObject		= new GameObject("Gegner");
+		collectablesObject	= new GameObject("Collectables");
 	}
 
 	/*
@@ -111,6 +119,59 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform);
 		}
 	}
+
+    /*
+	*	Platziert Collectables an zufälligen Orten
+	*
+	*	@pos:	Die Position, an der Collectable platziert werden soll
+	*/
+    public void SpawnCollectable(Vector3 pos)
+    {
+		float lastCollectX;
+		int indexC 				= 0;
+		float rand 				= Random.Range(0, 20);
+		float distanceCollect 	= Random.Range(200f, 350f);		// Minimaler Abstand der Collectables
+
+		if(collectables.Count != 0) {
+			indexC = collectables.Count - 1;
+			lastCollectX = collectables[indexC].transform.position.x;
+		} else {
+			lastCollectX = 0;
+		}
+
+        Vector3 newPos = new Vector3(
+                pos.x,
+                pos.y + Random.Range(-2.0f, 2.5f),
+                pos.z + depth / 2 - 6.37f
+            );
+
+        if (lastCollectX + distanceCollect < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x)
+        {
+            GameObject collectInst = null;
+			int randCollect = Random.Range(0, 3);
+            switch (randCollect)
+            {
+                case 0:
+                    collectInst = Instantiate(leben, newPos, Quaternion.identity) as GameObject;
+                    break;
+                case 1:
+                    collectInst = Instantiate(schutzschild, newPos, Quaternion.identity) as GameObject;
+                    break;
+                case 2:
+                    collectInst = Instantiate(blitzschlag, newPos, Quaternion.identity) as GameObject;
+                    break;
+            }
+            
+            BoxCollider bc = collectInst.AddComponent<BoxCollider>();
+            bc.isTrigger = true;
+            bc.size = new Vector3(1.0f, 1.0f, 1.0f);
+            bc.center = new Vector3(-1.22f, 5.22f, 2.14f);
+
+            collectables.Add(collectInst.gameObject);
+
+            collectInst.transform.SetParent(GameObject.Find("Collectables").transform);
+        }
+    }
 
 	/*
 	*	Platziert Bäume an zufälligen Orten
@@ -291,6 +352,15 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			if( enemies.Count > 0 && Camera.main.transform.position.x > enemies[0].transform.position.x + fov ) {
 				buffer = enemies[0];
 				enemies.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
+
+			if( collectables.Count > 0 && Camera.main.transform.position.x > collectables[0].transform.position.x + fov ) {
+				buffer = collectables[0];
+				collectables.RemoveAt(0);
 				Destroy(buffer);
 
 				if(!modified)
