@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     public float mSpeed = 10.0f;
-    private float gravity = 14.0f;
-    private float jumpForce = 14.0f;
+    private float gravity = 44.0f;
+    private float jumpForce = 24.0f;
     private Vector3 moveDi = Vector3.zero;
 
     void Start () {

@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 456104}
   - component: {fileID: 3343776}
   - component: {fileID: 2380064}
-  - component: {fileID: 6489432}
   m_Layer: 0
   m_Name: Stone_2_moss_pal
   m_TagString: Untagged
@@ -72,20 +71,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162106}
-  m_Mesh: {fileID: 4300000, guid: 4947b4e8d743f3b428ff28c521382295, type: 3}
---- !u!64 &6489432
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 162106}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 4947b4e8d743f3b428ff28c521382295, type: 3}
 --- !u!1001 &100100000
 Prefab:

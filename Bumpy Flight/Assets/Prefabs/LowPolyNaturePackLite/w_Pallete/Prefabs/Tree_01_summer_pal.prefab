@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 433556}
   - component: {fileID: 3311390}
   - component: {fileID: 2383090}
-  - component: {fileID: 6416394}
   m_Layer: 0
   m_Name: Tree_01_summer_pal
   m_TagString: Untagged
@@ -72,20 +71,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194376}
-  m_Mesh: {fileID: 4300000, guid: 9d57ef8af42d61d46a00fd5346984182, type: 3}
---- !u!64 &6416394
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194376}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 9d57ef8af42d61d46a00fd5346984182, type: 3}
 --- !u!1001 &100100000
 Prefab:

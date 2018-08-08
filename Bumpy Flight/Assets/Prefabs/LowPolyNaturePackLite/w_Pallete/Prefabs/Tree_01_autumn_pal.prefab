@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 408746}
   - component: {fileID: 3323784}
   - component: {fileID: 2332188}
-  - component: {fileID: 6414800}
   m_Layer: 0
   m_Name: Tree_01_autumn_pal
   m_TagString: Untagged
@@ -72,20 +71,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113380}
-  m_Mesh: {fileID: 4300000, guid: 5fa5bfcc69969344899c048bcd600646, type: 3}
---- !u!64 &6414800
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113380}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 5fa5bfcc69969344899c048bcd600646, type: 3}
 --- !u!1001 &100100000
 Prefab:

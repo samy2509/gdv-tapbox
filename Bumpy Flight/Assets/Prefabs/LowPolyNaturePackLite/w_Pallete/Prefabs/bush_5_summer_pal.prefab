@@ -10,7 +10,6 @@ GameObject:
   - component: {fileID: 404408}
   - component: {fileID: 3304504}
   - component: {fileID: 2385506}
-  - component: {fileID: 6429132}
   m_Layer: 0
   m_Name: bush_5_summer_pal
   m_TagString: Untagged
@@ -72,20 +71,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159004}
-  m_Mesh: {fileID: 4300000, guid: dd5d81a19368857458c45ead3a5b1d78, type: 3}
---- !u!64 &6429132
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159004}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: dd5d81a19368857458c45ead3a5b1d78, type: 3}
 --- !u!1001 &100100000
 Prefab:

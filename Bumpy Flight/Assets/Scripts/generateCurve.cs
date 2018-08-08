@@ -12,6 +12,7 @@ public class generateCurve : MonoBehaviour {
 	private float	levelBound		= 2f;				// Levelbegrenzung im oberen Bereich
 	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
 	private int		fovCamera		= 24;				// Bereich, den die Kamera "sieht"
+	private int		pathWidth		= 8;				// Breite des Weges
 
 	private MeshFilter 			meshFilter;
 	private Mesh 				mesh;
@@ -121,9 +122,15 @@ public class generateCurve : MonoBehaviour {
 		if(moves == 0) {
 			for (int i = 0; i < totalDepth; i++) {
 				if(i != 0) {
-					vertList.Add( new Vector3(  turtle.transform.position.x,
-												turtle.transform.position.y + Random.Range(0f, randomnes),
-												turtle.transform.position.z + (float)i ));
+					if( i <= 4 || i > 4 + pathWidth ) {
+						vertList.Add( new Vector3(  turtle.transform.position.x,
+													turtle.transform.position.y + Random.Range(0f, randomnes),
+													turtle.transform.position.z + (float)i ));
+					} else {
+						vertList.Add( new Vector3(  turtle.transform.position.x,
+													turtle.transform.position.y + randomnes,
+													turtle.transform.position.z + (float)i ));
+					}
 				} else {
 					vertList.Add( new Vector3(  turtle.transform.position.x,
 												turtle.transform.position.y - 10,
@@ -140,9 +147,15 @@ public class generateCurve : MonoBehaviour {
 
 		for (int i = 0; i < totalDepth; i++) {
 			if(i != 0) {
-				vertList.Add( new Vector3(  turtle.transform.position.x,
-											turtle.transform.position.y + Random.Range(0f, randomnes),
-											turtle.transform.position.z + (float)i ));
+				if( i <= 4 || i > 4 + pathWidth ) {
+					vertList.Add( new Vector3(  turtle.transform.position.x,
+												turtle.transform.position.y + Random.Range(0f, randomnes),
+												turtle.transform.position.z + (float)i ));
+				} else {
+					vertList.Add( new Vector3(  turtle.transform.position.x,
+												turtle.transform.position.y + randomnes,
+												turtle.transform.position.z + (float)i ));
+				}
 			} else {
 				vertList.Add( new Vector3(  turtle.transform.position.x,
 											turtle.transform.position.y - 10,

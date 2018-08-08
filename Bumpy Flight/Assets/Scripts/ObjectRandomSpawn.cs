@@ -11,6 +11,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject busch;			// Busch für Spawn
 	public GameObject hindernis;		// Hindernis für Spawn
 	public GameObject gegner;			// Gegner für Spawn
+	public GameObject gegner2;			// Schwerer Gegner für Spawn
 	private GameObject enemiesObject;	// Gruppierung für Gegner
 
 	public GameObject leben;				// Collectable für Spawn
@@ -28,7 +29,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	private float depth 			= 6f;	// Tiefe, in der die Hintergrundobjekte platziert werden
 	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
 	private float lastPos			= 0f;	// letzte Position eine platzierten Hintergurndobjektes
-	private float fov				= 30f;	// Field of View der Kamera
+	private float  fov				= 30f;	// Field of View der Kamera
 
 	// Use this for initialization
 	void Start () {
@@ -83,9 +84,12 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@pos:	Die Position, an der der Gegner platziert werden soll
 	*/
 	public void SpawnEnemy( Vector3 pos ) {
+		GameObject geg = gegner;
 		int indexE = 0;
 		float lastEnemyX;
-		float rand = Random.Range(0, 20);
+		float offsetGegner2 = 6f;
+		float rand = Random.Range(0, 10);
+		int randEnemy = Random.Range(0, 5);
 
 		if(enemies.Count != 0) {
 			indexE = enemies.Count - 1;
@@ -94,25 +98,37 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			lastEnemyX = 0;
 		}
 		
+		if(randEnemy <= 2) {
+			offsetGegner2 = 0;
+		}
+
+		if( randEnemy > 2 ) {
+			geg = gegner2;
+		}
+
 		Vector3 newPos = new Vector3(
 				pos.x,
-				pos.y + 1.3f,
+				pos.y + 1.3f + offsetGegner2,
 				pos.z + depth/2 - 4.2f
 			);
 
 		if(lastEnemyX + distanceEnemy < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) {
-			GameObject gegnerInst = Instantiate( gegner, newPos, Quaternion.identity ) as GameObject;
-			BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
-            bc.isTrigger = true;
-            CharacterController cc = gegnerInst.AddComponent<CharacterController>();
-
-			gegnerInst.transform.Rotate( 0f, -90f, 0f );
-			bc.size = new Vector3(1.73f, 2.21f, 3.6f);
-			bc.center = new Vector3(-8f, 1.1f, 0f);
+			GameObject gegnerInst = Instantiate( geg, newPos, Quaternion.identity ) as GameObject;
 			gegnerInst.AddComponent<Movement>();
             gegnerInst.AddComponent<eenemy>();
-            cc.radius = 1.35f;
-			cc.center = new Vector3(0f, 1.35f, 0f);
+
+			if( randEnemy <= 2 ) {
+				CharacterController cc = gegnerInst.AddComponent<CharacterController>();
+				BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
+
+				gegnerInst.transform.Rotate( 0f, -90f, 0f );
+				bc.size = new Vector3(1.73f, 2.21f, 3.6f);
+				bc.center = new Vector3(0f, 1.1f, 0f);
+				cc.radius = 1.35f;
+				cc.center = new Vector3(0f, 1.35f, 0f);
+			} else {
+				gegnerInst.transform.Rotate( 0f, -90f, 0f );
+			}
 
 			enemies.Add( gegnerInst.gameObject );
 
@@ -236,14 +252,16 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		if(lastPos + distance <= pos.x && rand == 3) {
 			Vector3 newPos = new Vector3(
 				pos.x,
-				pos.y + .4f,
-				pos.z + depth/2 - Random.Range(1f, 3f)
+				pos.y + .6f,
+				pos.z + depth/2 - Random.Range(1f, 3f) -1
 			);
 
 			GameObject hindernisInst = Instantiate( hindernis, newPos, Quaternion.identity ) as GameObject;
-			hindernisInst.transform.eulerAngles = new Vector3(-150f, 90f, Random.Range(-90f, -80f));
+			hindernisInst.transform.eulerAngles = new Vector3(-150f, Random.Range(70f, 100f), -90f);
 			hindernisInst.transform.localScale = new Vector3(3f, 3f, 3f);
 			barriers.Add( hindernisInst.gameObject );
+			Rigidbody rb = hindernisInst.AddComponent<Rigidbody>();
+			rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
 
 			hindernisInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
 

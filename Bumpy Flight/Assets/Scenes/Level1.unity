@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -828,7 +828,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1146340610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25, y: -2.8423948, z: -4.014637}
+  m_LocalPosition: {x: 30.8, y: -2.8423948, z: -4.014637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1488348388}
@@ -1286,6 +1286,7 @@ MonoBehaviour:
   busch: {fileID: 159004, guid: 7d04d2bdc8109d54a9246dc8c9dc4473, type: 2}
   hindernis: {fileID: 149022, guid: 50ff8a60be8b4a54da7e9239eb7f0d78, type: 2}
   gegner: {fileID: 1773965927217320, guid: 22b75230bfdffa94f9efa811f07bfdb5, type: 2}
+  gegner2: {fileID: 1666285662329460, guid: 7a009fb3ed36edb4ba88da0f26d4a934, type: 2}
   leben: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 2}
   schutzschild: {fileID: 100006, guid: 3ac3af0756bb3654690122060f9cef08, type: 2}
   blitzschlag: {fileID: 100006, guid: 339ec13e94b70ca469275f6f7e29bac3, type: 2}

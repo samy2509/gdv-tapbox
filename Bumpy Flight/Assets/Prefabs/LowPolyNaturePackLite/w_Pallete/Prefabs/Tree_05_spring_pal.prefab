@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3385224}
   - component: {fileID: 2300404}
   - component: {fileID: 6420482}
+  - component: {fileID: 136242794446365468}
   m_Layer: 0
   m_Name: Tree_05_spring_pal
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -81,7 +82,7 @@ MeshCollider:
   m_GameObject: {fileID: 149022}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -98,3 +99,16 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149022}
   m_IsPrefabParent: 1
+--- !u!136 &136242794446365468
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.18
+  m_Height: 2.6298735
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1857764, z: 0.050722584}
