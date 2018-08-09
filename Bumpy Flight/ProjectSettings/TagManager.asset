@@ -6,6 +6,7 @@ TagManager:
   tags:
   - player
   - Barrier
+  - Boss
   layers:
   - Default
   - TransparentFX

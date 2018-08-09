@@ -5,18 +5,18 @@ using UnityEngine;
 public class generateCurve : MonoBehaviour {
 	private float 	length 			= 1.0f;				// Länge eines Elements
 	private int 	totalDepth 		= 26;				// Vertikale Tiefe des gesamten Bands
-	private float 	depth 			= 1.0f;				// Vertikale Tiefe des Bands
 	private int 	moves			= 0;				// Anzahl der aktuellen Bewegungen
 	private int		rounding		= 5;				// Grad der Abrundung in Kurven
 	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
 	private float	levelBound		= 2f;				// Levelbegrenzung im oberen Bereich
 	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
-	private int		fovCamera		= 24;				// Bereich, den die Kamera "sieht"
+	private int		fovCamera		= 26;				// Bereich, den die Kamera "sieht"
 	private int		pathWidth		= 8;				// Breite des Weges
+	private int[]   bossSpawns 		= { 300, 500 };		// Bereiche, an denen Bosse spawnen sollen
 
 	private MeshFilter 			meshFilter;
 	private Mesh 				mesh;
-	private GameObject 			turtle;
+	public GameObject 			turtle;
 	private List<Vector3> 		vertList;
 	private List<int> 			triList;
 	private List<Vector3>		normalsList;
@@ -190,6 +190,11 @@ public class generateCurve : MonoBehaviour {
 
 		// Gegner platzieren
 		objectSpawner.SpawnCollectable( turtle.transform.position );
+
+		// Boss platzieren
+		if(turtle.transform.position.x > bossSpawns[0] - 1 && turtle.transform.position.x < bossSpawns[0]) {
+			objectSpawner.SpawnBoss( turtle.transform.position );
+		}
 	}
 
 	/*

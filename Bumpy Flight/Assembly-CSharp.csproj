@@ -67,8 +67,10 @@
      <Compile Include="Assets\Scripts\generateCurve.cs" />
      <Compile Include="Assets\Scripts\generiereZufallsmesh.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
+     <Compile Include="Assets\Scripts\items.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Movement.cs" />
+     <Compile Include="Assets\Scripts\MovementDuck.cs" />
      <Compile Include="Assets\Scripts\ObjectCollision.cs" />
      <Compile Include="Assets\Scripts\ObjectRandomSpawn.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
@@ -77,10 +79,10 @@
      <Compile Include="Assets\Scripts\steuerung.cs" />
      <None Include="Assets\Shader\ToonShader.shader" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>/Users/kevinschipper/Desktop/Graph-Dat/Projekt/Bumpy Flight/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>/Users/kevinschipper/Documents/GitHub/gdv-tapbox/Bumpy Flight/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/Users/kevinschipper/Desktop/Graph-Dat/Projekt/Bumpy Flight/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/Users/kevinschipper/Documents/GitHub/gdv-tapbox/Bumpy Flight/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

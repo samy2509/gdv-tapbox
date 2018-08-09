@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 95648573193982758}
   - component: {fileID: 54840786915042720}
   - component: {fileID: 136674598487039532}
+  - component: {fileID: 136227957837413746}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Untagged
@@ -395,7 +396,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &136674598487039532
+--- !u!136 &136227957837413746
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -404,8 +405,21 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: b14dae477768f4693ac47a70269f0af6, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.09
+  m_Radius: 1.079793
   m_Height: 3.2
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.08, z: 0}
+--- !u!136 &136674598487039532
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1666285662329460}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.0895
+  m_Height: 3.3
   m_Direction: 2
   m_Center: {x: 0, y: 1.07, z: 0}
 --- !u!137 &137952755306719416

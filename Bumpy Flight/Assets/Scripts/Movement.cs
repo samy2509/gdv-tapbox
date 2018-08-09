@@ -5,19 +5,17 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
     public float mSpeed                     = 10f;           // Geschwindigkeit, in der sich das Objekt bewegt
     private float gravity                   = 44.0f;        // Anziehungskraft, die auf das Objekt wirkt
-    private float jumpForce                 = 14.0f;        // Stärke mit der das Objekt vom Boden abspringt
     private float bounceSpeed               = -.1f;         // Geschwindigkeit zum Hüpfen
     private Vector3 moveDi                  = Vector3.zero;
 
+    private generateCurve curve;
     private CharacterController controller;
-    private Vector3             zStart;
     private float               lastTurn;
-    private int                 rotate;
 
     void Start () {
         controller  = gameObject.GetComponent<CharacterController>();
-        mSpeed      = 7.0f;
-        zStart      = gameObject.transform.position;
+        curve		= GameObject.Find("LevelGenerator").GetComponent<generateCurve>();
+        mSpeed      = 6.0f;
         lastTurn    = 0;
 	}
 
@@ -26,7 +24,7 @@ public class Movement : MonoBehaviour {
             TurnAround();
         }
 
-        if( gameObject != null ) {
+        if( gameObject != null && gameObject.transform.position.x + 5f < curve.turtle.transform.position.x ) {
             moveDi = new Vector3(0, 0, mSpeed/gravity*4);
             moveDi = transform.TransformDirection(moveDi);
             moveDi *= mSpeed;
@@ -40,8 +38,8 @@ public class Movement : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter( Collision col ){
-        if (col.gameObject.tag == "Barrier") {
+    void OnTriggerEnter( Collider col ){
+        if (col.gameObject.tag == "Barrier" && gameObject.tag != "Boss") {
             TurnAround();
         }
     }
@@ -55,6 +53,6 @@ public class Movement : MonoBehaviour {
             lastTurn = transform.position.x;
         }
 
-        bounceSpeed = bounceSpeed * -1f;
+        bounceSpeed = -bounceSpeed;
     }
 }

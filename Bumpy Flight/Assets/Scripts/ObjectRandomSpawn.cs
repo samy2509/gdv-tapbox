@@ -12,12 +12,12 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject hindernis;		// Hindernis für Spawn
 	public GameObject gegner;			// Gegner für Spawn
 	public GameObject gegner2;			// Schwerer Gegner für Spawn
-	private GameObject enemiesObject;	// Gruppierung für Gegner
+	public GameObject gegner3;			// Weiterer Schwerer Gegner für Spawn
+	public GameObject boss;				// Endgegner für Spawn
 
 	public GameObject leben;				// Collectable für Spawn
 	public GameObject schutzschild;			// Collectable für Spawn
 	public GameObject blitzschlag;			// Collectable für Spawn
-	private GameObject collectablesObject;	// Gruppierung für Collectables
 
 	private List<GameObject> trees;			// Liste mit allen Bäumen
 	private List<GameObject> stones;		// Liste mit allen Steinen
@@ -31,6 +31,13 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	private float lastPos			= 0f;	// letzte Position eine platzierten Hintergurndobjektes
 	private float  fov				= 30f;	// Field of View der Kamera
 
+	// Abschnitte für Gegnersteigerung
+	public int[] levels = {
+		200,
+		350,
+		500
+	};
+
 	// Use this for initialization
 	void Start () {
 		trees 			= new List<GameObject>();
@@ -40,8 +47,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		enemies 		= new List<GameObject>();
 		collectables	= new List<GameObject>();
 
-		enemiesObject		= new GameObject("Gegner");
-		collectablesObject	= new GameObject("Collectables");
+		new GameObject("Gegner");
+		new GameObject("Collectables");
 	}
 
 	/*
@@ -73,7 +80,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 				SpawnStone(pos, 7f);
 				break;
 			case 4:
-				SpawnBarrier(pos, 20f);
+				SpawnBarrier(pos, 10f);
 				break;
 		}
 	}
@@ -87,9 +94,20 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		GameObject geg = gegner;
 		int indexE = 0;
 		float lastEnemyX;
-		float offsetGegner2 = 6f;
+		float offsetGegner2 = 4f;
 		float rand = Random.Range(0, 10);
-		int randEnemy = Random.Range(0, 5);
+		int minRange  = 0;
+		int randRange = 2;
+
+		if (pos.x > levels[2] && minRange != 3) {
+			minRange = 3;
+		} else if(pos.x > levels[1] && randRange != 7) {
+			randRange = 7;
+		} else if (pos.x > levels[0] && randRange != 4) {
+			randRange = 4;
+		}
+
+		int randEnemy = Random.Range(minRange, randRange);
 
 		if(enemies.Count != 0) {
 			indexE = enemies.Count - 1;
@@ -98,12 +116,14 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			lastEnemyX = 0;
 		}
 		
-		if(randEnemy <= 2) {
+		if(randEnemy <= 2 || randEnemy >= 4) {
 			offsetGegner2 = 0;
 		}
 
-		if( randEnemy > 2 ) {
+		if( randEnemy > 2 && randEnemy < 4 ) {
 			geg = gegner2;
+		} else if ( randEnemy >= 4 ) {
+			geg = gegner3;
 		}
 
 		Vector3 newPos = new Vector3(
@@ -112,20 +132,38 @@ public class ObjectRandomSpawn : MonoBehaviour {
 				pos.z + depth/2 - 4.2f
 			);
 
-		if(lastEnemyX + distanceEnemy < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) {
+		if( ((lastEnemyX + distanceEnemy < pos.x && rand == 1f) || lastEnemyX - pos.x > 30) && barriers.Count > 0 && (barriers[barriers.Count - 1].transform.position.x > pos.x + 8 || barriers[barriers.Count - 1].transform.position.x < pos.x - 8 ) ) {
 			GameObject gegnerInst = Instantiate( geg, newPos, Quaternion.identity ) as GameObject;
-			gegnerInst.AddComponent<Movement>();
+			if( randEnemy >= 4 ) {
+				gegnerInst.AddComponent<MovementDuck>();
+			} else {
+				gegnerInst.AddComponent<Movement>();
+			}
+			
             gegnerInst.AddComponent<eenemy>();
 
 			if( randEnemy <= 2 ) {
 				CharacterController cc = gegnerInst.AddComponent<CharacterController>();
 				BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
 
+				gegnerInst.transform.Rotate( 0f, -90f, 0.11f );
+				bc.size = new Vector3(1.73f, 2.27f, 3.27f);
+				bc.center = new Vector3(0f, 1.13f, 0f);
+				bc.isTrigger = true;
+				cc.radius = 1.04f;
+				cc.height = 1.91f;
+				cc.center = new Vector3(0f, 1.04f, 0f);
+			} else if ( randEnemy >= 4) {
+				CharacterController cc = gegnerInst.AddComponent<CharacterController>();
+				BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
+
 				gegnerInst.transform.Rotate( 0f, -90f, 0f );
-				bc.size = new Vector3(1.73f, 2.21f, 3.6f);
-				bc.center = new Vector3(0f, 1.1f, 0f);
-				cc.radius = 1.35f;
-				cc.center = new Vector3(0f, 1.35f, 0f);
+				bc.size = new Vector3(1.73f, 1.65f, 1.47f);
+				bc.center = new Vector3(-1.31f, 0.83f, -0.07f);
+				bc.isTrigger = true;
+				cc.radius = 0.7f;
+				cc.height = 1.03f;
+				cc.center = new Vector3(0f, 0.71f, -0.07f);
 			} else {
 				gegnerInst.transform.Rotate( 0f, -90f, 0f );
 			}
@@ -134,6 +172,75 @@ public class ObjectRandomSpawn : MonoBehaviour {
 
 			gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform);
 		}
+	}
+
+	/*
+	*	Platziert Endgegner an Orten
+	*
+	*	@pos:	Die Position, an der der Gegner platziert werden soll
+	*/
+	public void SpawnBoss( Vector3 pos ) {
+		GameObject geg = boss;
+		int minRange  = 0;
+		int randRange = 2;
+
+		if (pos.x > levels[2] && minRange != 3) {
+			minRange = 3;
+		} else if(pos.x > levels[1] && randRange != 7) {
+			randRange = 7;
+		} else if (pos.x > levels[0] && randRange != 4) {
+			randRange = 4;
+		}
+
+		int randEnemy = Random.Range(0, 2);
+
+
+		if ( randEnemy == 2 ) {
+			geg = boss;
+		}
+
+		Vector3 newPos = new Vector3(
+				pos.x,
+				pos.y + 1.3f,
+				pos.z + depth/2 - 4.2f
+			);
+
+		
+		GameObject gegnerInst = Instantiate( geg, newPos, Quaternion.identity ) as GameObject;
+		gegnerInst.AddComponent<Movement>();
+		gegnerInst.AddComponent<eenemy>();
+
+		if( randEnemy <= 1 ) {
+			CharacterController cc = gegnerInst.AddComponent<CharacterController>();
+			BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
+
+			gegnerInst.transform.Rotate( 0f, -90f, 0.11f );
+			bc.size = new Vector3(1.73f, 2.27f, 3.27f);
+			bc.center = new Vector3(0f, 1.13f, 0f);
+			bc.isTrigger = true;
+			cc.radius = 1.04f;
+			cc.height = 1.91f;
+			cc.center = new Vector3(0f, 1.04f, 0f);
+		} else if ( randEnemy >= 2) {
+			CharacterController cc = gegnerInst.AddComponent<CharacterController>();
+			BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
+
+			gegnerInst.transform.Rotate( 0f, -90f, 0f );
+			bc.size = new Vector3(1.73f, 1.65f, 1.47f);
+			bc.center = new Vector3(-1.31f, 0.83f, -0.07f);
+			bc.isTrigger = true;
+			cc.radius = 0.7f;
+			cc.height = 1.03f;
+			cc.center = new Vector3(0f, 0.71f, -0.07f);
+		} else {
+			gegnerInst.transform.Rotate( 0f, -90f, 0f );
+		}
+
+		gegnerInst.tag = "Boss";
+
+		enemies.Add( gegnerInst.gameObject );
+
+		gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform, false);
 	}
 
     /*
@@ -249,7 +356,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	private void SpawnBarrier( Vector3 pos, float distance ) {
 		int rand = Random.Range(0, 7);
 
-		if(lastPos + distance <= pos.x && rand == 3) {
+		if((lastPos + distance <= pos.x && rand == 3) || lastPos - pos.x > 50) {
 			Vector3 newPos = new Vector3(
 				pos.x,
 				pos.y + .6f,
