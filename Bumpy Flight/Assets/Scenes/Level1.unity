@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1293,6 +1293,7 @@ MonoBehaviour:
   leben: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 2}
   schutzschild: {fileID: 100006, guid: 3ac3af0756bb3654690122060f9cef08, type: 2}
   blitzschlag: {fileID: 100006, guid: 339ec13e94b70ca469275f6f7e29bac3, type: 2}
+  eingang: {fileID: 1694956011178906, guid: b1765ba308ad6490b85b36c06e47d8fe, type: 2}
   levels: 320000003c00000090010000
 --- !u!1 &1818271942
 GameObject:

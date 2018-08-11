@@ -15,16 +15,18 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject gegner3;			// Weiterer Schwerer Gegner für Spawn
 	public GameObject boss;				// Endgegner für Spawn
 
-	public GameObject leben;				// Collectable für Spawn
-	public GameObject schutzschild;			// Collectable für Spawn
-	public GameObject blitzschlag;			// Collectable für Spawn
+	public GameObject leben;			// Collectable für Spawn
+	public GameObject schutzschild;		// Collectable für Spawn
+	public GameObject blitzschlag;		// Collectable für Spawn
+	public GameObject eingang;			// Hoehleneingang für Spawn
 
 	private List<GameObject> trees;			// Liste mit allen Bäumen
 	private List<GameObject> stones;		// Liste mit allen Steinen
 	private List<GameObject> bushes;		// Liste mit allen Büschen
 	private List<GameObject> barriers;		// Liste mit allen Hindernissen
 	private List<GameObject> enemies;		// Liste mit allen Gegnern
-	private List<GameObject> collectables;	// Liste mit allen Gegnern
+	private List<GameObject> collectables;	// Liste mit allen Collectables
+	private List<GameObject> caves;			// Liste mit allen Hoehleneingaengen
 	
 	private float depth 			= 6f;	// Tiefe, in der die Hintergrundobjekte platziert werden
 	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
@@ -46,9 +48,11 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		barriers 		= new List<GameObject>();
 		enemies 		= new List<GameObject>();
 		collectables	= new List<GameObject>();
+		caves			= new List<GameObject>();
 
 		new GameObject("Gegner");
 		new GameObject("Collectables");
+		new GameObject("Caves");
 	}
 
 	/*
@@ -253,20 +257,23 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		float lastCollectX;
 		int indexC 				= 0;
 		float rand 				= Random.Range(0, 20);
-		float distanceCollect 	= Random.Range(200f, 350f);		// Minimaler Abstand der Collectables
+		float distanceCollect 	= Random.Range(200f, 350f);     // Minimaler Abstand der Collectables
 
-		if(collectables.Count != 0) {
-			indexC = collectables.Count - 1;
-			lastCollectX = collectables[indexC].transform.position.x;
-		} else {
-			lastCollectX = 0;
-		}
+        if (collectables.Count != 0)
+        {
+            indexC = collectables.Count - 1;
+            lastCollectX = collectables[indexC].transform.position.x;
+        }
+        else
+        {
+            lastCollectX = 0;
+        }
 
         Vector3 newPos = new Vector3(
                 pos.x,
                 pos.y + Random.Range(-2.0f, 2.5f),
                 pos.z + depth / 2 - 6.37f
-            );
+        );
 
         if (lastCollectX + distanceCollect < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x)
         {
@@ -293,6 +300,44 @@ public class ObjectRandomSpawn : MonoBehaviour {
             collectables.Add(collectInst.gameObject);
 
             collectInst.transform.SetParent(GameObject.Find("Collectables").transform);
+        }
+    }
+
+    /*
+	*	Platziert Höhleneingänge an zufälligen Orten
+	*
+	*	@pos:	Die Position, an der Höhleneingang platziert werden soll
+	*/
+    public void SpawnCave(Vector3 pos)
+    {
+        GameObject cave = eingang;
+
+        float lastCaveX;
+        int indexC 			= 0;
+        float rand 			= Random.Range(0, 20);
+        float distanceCave 	= 200f;
+
+        if (caves.Count != 0)
+        {
+            indexC = caves.Count - 1;
+            lastCaveX = caves[indexC].transform.position.x;
+        }
+        else
+        {
+            lastCaveX = 0;
+        }
+
+        Vector3 newPos = new Vector3(
+                pos.x,
+                pos.y + 0.8f,
+                pos.z
+        );
+
+        if (lastCaveX + distanceCave < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x)
+        {
+            GameObject caveInst = Instantiate(cave, newPos, Quaternion.identity) as GameObject;
+            caves.Add(caveInst.gameObject);
+            caveInst.transform.SetParent(GameObject.Find("Caves").transform);
         }
     }
 
@@ -486,6 +531,15 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			if( collectables.Count > 0 && Camera.main.transform.position.x > collectables[0].transform.position.x + fov ) {
 				buffer = collectables[0];
 				collectables.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
+
+			if( caves.Count > 0 && Camera.main.transform.position.x > caves[0].transform.position.x + fov ) {
+				buffer = caves[0];
+				caves.RemoveAt(0);
 				Destroy(buffer);
 
 				if(!modified)

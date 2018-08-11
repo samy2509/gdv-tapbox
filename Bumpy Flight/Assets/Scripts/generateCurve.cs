@@ -188,8 +188,11 @@ public class generateCurve : MonoBehaviour {
 		// Gegner platzieren
 		objectSpawner.SpawnEnemy( turtle.transform.position );
 
-		// Gegner platzieren
+		// Collectables platzieren
 		objectSpawner.SpawnCollectable( turtle.transform.position );
+
+		// Collectables platzieren
+		objectSpawner.SpawnCave( turtle.transform.position );
 
 		// Boss platzieren
 		if(turtle.transform.position.x > bossSpawns[0] - 1 && turtle.transform.position.x < bossSpawns[0]) {
