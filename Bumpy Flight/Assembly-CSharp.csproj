@@ -75,6 +75,8 @@
      <Compile Include="Assets\Scripts\ObjectCollision.cs" />
      <Compile Include="Assets\Scripts\ObjectRandomSpawn.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Raetsel.cs" />
+     <Compile Include="Assets\Scripts\RaetselCollisions.cs" />
      <Compile Include="Assets\Scripts\respawn.cs" />
      <Compile Include="Assets\Scripts\startGame.cs" />
      <Compile Include="Assets\Scripts\steuerung.cs" />
