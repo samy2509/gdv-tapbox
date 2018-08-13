@@ -147,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4086854172784210}
   m_Layer: 0
-  m_Name: "Ho\u0308hleneingang"
+  m_Name: "H\xF6hleneingang"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

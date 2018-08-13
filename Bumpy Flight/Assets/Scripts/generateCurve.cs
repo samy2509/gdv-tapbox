@@ -24,6 +24,7 @@ public class generateCurve : MonoBehaviour {
 	private ObjectRandomSpawn 	objectSpawner;
 	private MeshCollider 		meshc;
 	private Camera 				mainCamera;
+	private UIController		uicontroller;
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +35,7 @@ public class generateCurve : MonoBehaviour {
 		turtle 			= new GameObject( "Turtle" );
 
 		objectSpawner	= GetComponent<ObjectRandomSpawn>();
+		uicontroller	= GameObject.Find("LevelManager").GetComponent<UIController>();
 
 		meshFilter 		= GetComponent<MeshFilter>();
 		mainCamera		= Camera.main;
@@ -83,6 +85,8 @@ public class generateCurve : MonoBehaviour {
 		DestroyImmediate(meshc);
 		meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
 		meshc.sharedMesh = mesh;
+
+		uicontroller.AddToScore(1);
 	}
 
 	/*

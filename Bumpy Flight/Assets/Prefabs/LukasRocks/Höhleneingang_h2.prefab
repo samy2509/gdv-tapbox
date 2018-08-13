@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4843474348677726}
   m_Layer: 0
-  m_Name: "Ho\u0308hleneingang_h2"
+  m_Name: "H\xF6hleneingang_h2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
