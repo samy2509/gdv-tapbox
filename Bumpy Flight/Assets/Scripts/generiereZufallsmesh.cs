@@ -19,7 +19,7 @@ public class generiereZufallsmesh : MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
-        laenge  = Random.Range(100, 150);
+        laenge  = Random.Range(70, 80);
         breite  = 16;
         mesh    = new Mesh();
 

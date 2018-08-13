@@ -8,6 +8,7 @@ TagManager:
   - Barrier
   - Boss
   - player2
+  - rock3
   layers:
   - Default
   - TransparentFX

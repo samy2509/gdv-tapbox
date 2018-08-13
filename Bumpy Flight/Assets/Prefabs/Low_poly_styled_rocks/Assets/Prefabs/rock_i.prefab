@@ -10,7 +10,7 @@ GameObject:
   - component: {fileID: 449506}
   - component: {fileID: 3306150}
   - component: {fileID: 2367824}
-  - component: {fileID: 6570428}
+  - component: {fileID: 64555651020158000}
   m_Layer: 0
   m_Name: rock_i
   m_TagString: Untagged
@@ -73,18 +73,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196428}
   m_Mesh: {fileID: 4300000, guid: 6ad2835734317d446b4fdcf875dbd656, type: 3}
---- !u!65 &6570428
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196428}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.90391994, y: 2.240516, z: 1.05618}
-  m_Center: {x: 0.011047006, y: 0.9202579, z: 0.002620995}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -104,3 +92,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196428}
   m_IsPrefabParent: 1
+--- !u!64 &64555651020158000
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 6ad2835734317d446b4fdcf875dbd656, type: 3}

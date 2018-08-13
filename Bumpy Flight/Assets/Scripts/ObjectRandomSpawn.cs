@@ -283,12 +283,15 @@ public class ObjectRandomSpawn : MonoBehaviour {
             {
                 case 0:
                     collectInst = Instantiate(leben, newPos, Quaternion.identity) as GameObject;
+					collectInst.tag = "leben";
                     break;
                 case 1:
                     collectInst = Instantiate(schutzschild, newPos, Quaternion.identity) as GameObject;
+					collectInst.tag = "schutzschild";
                     break;
                 case 2:
                     collectInst = Instantiate(blitzschlag, newPos, Quaternion.identity) as GameObject;
+					collectInst.tag = "blitzschlag";
                     break;
             }
             
