@@ -26,7 +26,6 @@ public class Health : MonoBehaviour {
             if (currentHealth == 0)
             {
                 //GameOver neustart der scene
-                RestartScene();
             }
         }
         

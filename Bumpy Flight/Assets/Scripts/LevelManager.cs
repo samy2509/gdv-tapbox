@@ -24,8 +24,15 @@ public class LevelManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
-            Time.timeScale = 0.0f;
-            pauseUI.SetActive(true);
+            if(pauseUI.activeSelf) {
+                Cursor.visible = false;
+				Time.timeScale = 1f;
+		        pauseUI.SetActive(false);
+			} else {
+                Cursor.visible = true;
+				Time.timeScale = 0.0f;
+            	pauseUI.SetActive(true);
+			}
         }
 	}
 

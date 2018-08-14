@@ -60,6 +60,7 @@
      <Compile Include="Assets\Prefabs\PowerUp\Scripts\ScaleParticles.cs" />
      <Compile Include="Assets\Prefabs\PowerUp\Scripts\TakeablePowerUp.cs" />
      <Compile Include="Assets\Prefabs\PowerUp\Scripts\Utility\Singleton.cs" />
+     <Compile Include="Assets\Scripts\AnimateMenu.cs" />
      <Compile Include="Assets\Scripts\betreteLevel.cs" />
      <Compile Include="Assets\Scripts\checkpoint.cs" />
      <Compile Include="Assets\Scripts\DamageCollider.cs" />

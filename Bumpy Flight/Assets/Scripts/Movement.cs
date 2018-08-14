@@ -8,15 +8,19 @@ public class Movement : MonoBehaviour {
     private float bounceSpeed               = -.1f;         // Geschwindigkeit zum Hüpfen
     private Vector3 moveDi                  = Vector3.zero;
 
-    private generateCurve curve;
+    private generateCurve       curve;
     private CharacterController controller;
     private float               lastTurn;
+    private UIController		uicontroller;
+    private int                 health;                     // Die Leben des Gegners
 
     void Start () {
-        controller  = gameObject.GetComponent<CharacterController>();
-        curve		= GameObject.Find("LevelGenerator").GetComponent<generateCurve>();
-        mSpeed      = 6.0f;
-        lastTurn    = 0;
+        controller      = gameObject.GetComponent<CharacterController>();
+        curve		    = GameObject.Find("LevelGenerator").GetComponent<generateCurve>();
+        uicontroller    = GameObject.Find("LevelManager").GetComponent<UIController>();
+        mSpeed          = 6.0f;
+        lastTurn        = 0;
+        health          = 100;
 	}
 
 	void Update () {
@@ -42,8 +46,21 @@ public class Movement : MonoBehaviour {
         if (col.gameObject.tag == "Barrier" && gameObject.tag != "Boss") {
             TurnAround();
         }
+
+        if (col.gameObject.tag == "Egg" && gameObject.tag != "Boss") {
+            DestroyImmediate(this);
+            uicontroller.AddToScore(10);
+        } else if (col.gameObject.tag == "Egg") {
+            health -= 25;
+
+            if( health == 0 ) {
+                DestroyImmediate(this);
+                uicontroller.AddToScore(100);
+            }
+        }
     }
 
+    // Lässt den Gegner eine 180-Grad-Wende durchführen
     public void TurnAround() {
         if( (transform.rotation.y != -90f || transform.rotation.y != 90f) ) {
             for(int i = 0; i < 45; i++) {

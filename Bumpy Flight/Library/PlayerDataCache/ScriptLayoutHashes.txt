@@ -4,7 +4,9 @@ PlayerPath?
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
 Assets/Scenes/Level1.unity
+Assets/Scenes/Nebenlevel.unity
 SceneListEnd?
+f1f49949d4b2fad8ac4ad38fc42655fa Assembly-CSharp.dll:.UIController
 88eaeebfd80f63f2b41953d496ac7359 Assembly-CSharp.dll:.PlayerMovement
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 cf455f7a806648c6ed4c7d3e3f8a0e03 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -124,7 +126,9 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 17047acd40dec53ff38ff4570c76575c Assembly-CSharp.dll:.items
-184668ca9dbb27dfa1619553e35a849a Assembly-CSharp.dll:.LevelManager
+b4093a6b8413a45d01fe345f9808ac52 Assembly-CSharp.dll:.Raetsel
+a98f3c8979377c13e8e808f6a388f3f5 Assembly-CSharp.dll:.RaetselCollisions
+0d940671561bd8af9d1be2e4359bb9fc Assembly-CSharp.dll:.LevelManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ObjectCollision
 6c072b39b3c68413bc432aaada417754 Assembly-CSharp.dll:.checkpoint
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -156,7 +160,7 @@ e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 19e3fa71d5466a2e6927a3878fca5fa3 Assembly-CSharp.dll:.generiereZufallsmesh
-8708a5dd76708a0bd85dc3447251c11e Assembly-CSharp.dll:.ObjectRandomSpawn
+9fe3239a085d0245b49c9cb82712d434 Assembly-CSharp.dll:.ObjectRandomSpawn
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -166,6 +170,8 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 88eaeebfd80f63f2b41953d496ac7359 Assembly-CSharp.dll:.Movement
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.startGame
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.betreteLevel
 fefa11f34bac0ad929b90aa36b4480ac Assembly-CSharp.dll:.Health
 88eaeebfd80f63f2b41953d496ac7359 Assembly-CSharp.dll:.MovementDuck
 6c072b39b3c68413bc432aaada417754 Assembly-CSharp.dll:.respawn
+b6c4f8667848c032948f9d1d8aceccb9 Assembly-CSharp.dll:.AnimateMenu
