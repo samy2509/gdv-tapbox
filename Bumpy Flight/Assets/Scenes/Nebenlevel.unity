@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe258b450d087426788595186acd8610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  riddle: 000000000000000000000000
   rocks:
   - {fileID: 157690, guid: d93ec03b51f37fd4d905a60a08a4fbbc, type: 2}
   - {fileID: 103450, guid: 4436f5b141ae4074082424c09570acb3, type: 2}
@@ -521,6 +522,11 @@ MonoBehaviour:
   - {fileID: 1555793781530122, guid: 006d6d10b5b15450cae09052fc176250, type: 2}
   - {fileID: 1497011931202052, guid: 7ffbc92018a814edd92ed2964c3d730a, type: 2}
   - {fileID: 1076929741229944, guid: 702b817848e2e4cf4b26e3293cc6d93c, type: 2}
+  orderList: 
+  sperre: 0
+  set1: 0
+  set2: 0
+  set3: 0
 --- !u!1 &1849228658
 GameObject:
   m_ObjectHideFlags: 0
