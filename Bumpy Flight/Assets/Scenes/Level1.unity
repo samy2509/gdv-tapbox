@@ -356,6 +356,58 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1355842258669200, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358654601700696, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1733101036388192, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1345035277150928, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525748977822148, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803509913354296, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967332176871484, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038868783031724, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118751545330278, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1088113125919646, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358498356870486, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772277773706126, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172366923805630, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
   m_IsPrefabParent: 0
@@ -822,7 +874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -49.8, y: -23.50005}
+  m_AnchoredPosition: {x: -49.80005, y: -23.5}
   m_SizeDelta: {x: 132, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204650113
@@ -3124,7 +3176,7 @@ GameObject:
   - component: {fileID: 1146340614}
   - component: {fileID: 1146340615}
   - component: {fileID: 1146340616}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: player
   m_Icon: {fileID: 0}
@@ -3180,13 +3232,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.6
-  m_Radius: 0.7
+  m_Height: 1.65
+  m_Radius: 0.75
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: -0.01, y: 0.8, z: -0.07}
+  m_Center: {x: -0.01, y: 0.854, z: -0.07}
 --- !u!114 &1146340615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4152,7 +4204,7 @@ GameObject:
   - component: {fileID: 1684234960}
   - component: {fileID: 1684234959}
   - component: {fileID: 1684234961}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LevelGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

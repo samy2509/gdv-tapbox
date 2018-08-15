@@ -13,7 +13,6 @@ public class AnimateMenu : MonoBehaviour {
 	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
 	private int		fovCamera		= 26;				// Bereich, den die Kamera "sieht"
 	private int		pathWidth		= 8;				// Breite des Weges
-	private int[]   bossSpawns 		= { 300, 500 };		// Bereiche, an denen Bosse spawnen sollen
 
 	private generateCurve curve;
 	private bool generated;
@@ -24,7 +23,6 @@ public class AnimateMenu : MonoBehaviour {
 	private List<int> 			triList;
 	private List<Vector3>		normalsList;
 	private Vector3[]			verts;
-	private Camera 				mainCamera;
 	private MeshCollider 		meshc;
 	private ObjectRandomSpawn 	objectSpawner;
 
@@ -39,7 +37,6 @@ public class AnimateMenu : MonoBehaviour {
 
 		objectSpawner	= GetComponent<ObjectRandomSpawn>();
 		meshFilter 		= GetComponent<MeshFilter>();
-		mainCamera		= Camera.main;
 
 		meshFilter.mesh = mesh;
 		mesh.name = "Boden";

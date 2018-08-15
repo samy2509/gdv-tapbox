@@ -89,6 +89,11 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		}
 	}
 
+	// Entfern einen Gegner von der Liste
+	public void DeleteEnemy( GameObject enemy ) {
+		enemies.Remove(enemy);
+	}
+
 	/*
 	*	Platziert Gegner an zufälligen Orten
 	*
