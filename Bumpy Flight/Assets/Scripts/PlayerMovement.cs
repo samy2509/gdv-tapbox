@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour {
     private float               jumpForce       = 24.0f;
     private float               velocity        = 0;
     private bool                inputJump;
+    private bool                isEgging        = false;
+    public                      GameObject      EggPrefab;
+    public                      Transform       SpawnPoint;
+    public float                eggSpeed        = 500 ;
 
     void Start () {
         controller      = gameObject.GetComponent<CharacterController>();
@@ -26,9 +30,10 @@ public class PlayerMovement : MonoBehaviour {
         Ray ray = new Ray(transform.position, -(transform.up));
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, 10, LayerMask.GetMask("Floor"))) {  
+        if (Physics.Raycast(ray, out hit, 10, LayerMask.GetMask("Floor"))) {
             transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         }
+        
     }
     void InputCheck() {
         velocity = Input.GetAxis("Horizontal") * mSpeed;
@@ -36,9 +41,22 @@ public class PlayerMovement : MonoBehaviour {
         {
             inputJump = true;
         }
+        else if (Input.GetButtonDown("Fire1") && !isEgging) {
+            isEgging = true;
+        }
         else {
             inputJump = false;
+        } 
+    }
+    void FixedUpdate()
+    {
+        if (isEgging)
+        {
+            GameObject egg = (GameObject)Instantiate(EggPrefab, SpawnPoint.position, Quaternion.identity);
+            egg.GetComponent<Rigidbody>().AddForce(Vector3.right * eggSpeed);
+            isEgging = false;
         }
+
     }
     void Move() {
         if (controller.isGrounded) {
@@ -49,9 +67,8 @@ public class PlayerMovement : MonoBehaviour {
         moveDirection.x = velocity;
         moveDirection.y -= gravity * Time.deltaTime; 
         controller.Move(moveDirection * Time.deltaTime);       
+
+      
     }
 
-   /* void SetAnimation() {
-    }Später für animatin beim springen 
-    */
 }
