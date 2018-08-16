@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - player
+  - Barrier
+  - Boss
+  - player2
+  - rock3
+  - ei
+  - Ei
+  - Egg
   layers:
   - Default
   - TransparentFX
@@ -14,8 +22,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - Floor
+  - Player
   - 
   - 
   - 
