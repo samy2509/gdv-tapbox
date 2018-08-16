@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour {
                 Cursor.visible = false;
 				Time.timeScale = 1f;
 		        pauseUI.SetActive(false);
-			} else {
+			} else if(!restartScreen.activeSelf) {
                 Cursor.visible = true;
 				Time.timeScale = 0.0f;
             	pauseUI.SetActive(true);
@@ -51,6 +51,7 @@ public class LevelManager : MonoBehaviour {
         else {
             //wenn nein -> spielende
             ui.SetActive(false);
+            Cursor.visible = true;
             int val = uicontroller.score;
             restartScore.text = val.ToString();
             restartScreen.SetActive(true);

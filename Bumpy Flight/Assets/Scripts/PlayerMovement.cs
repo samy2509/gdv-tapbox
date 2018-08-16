@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     public                      GameObject      EggPrefab;
     public                      Transform       SpawnPoint;
     public float                eggSpeed        = 500 ;
+    public GameObject           pauseUI;
 
     void Start () {
         controller      = gameObject.GetComponent<CharacterController>();
@@ -22,8 +23,10 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
-        InputCheck();
-        Move();
+        if(!pauseUI.activeSelf) {
+            InputCheck();
+            Move();
+        }
         //SetAnimation();
 
         // Rotation an Boden anpassen
@@ -41,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             inputJump = true;
         }
-        else if (Input.GetButtonDown("Fire1") && !isEgging) {
+        else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && !isEgging) {
             isEgging = true;
         }
         else {

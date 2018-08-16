@@ -7,7 +7,7 @@ Assets/Scenes/Level1.unity
 Assets/Scenes/Nebenlevel.unity
 SceneListEnd?
 f1f49949d4b2fad8ac4ad38fc42655fa Assembly-CSharp.dll:.UIController
-88eaeebfd80f63f2b41953d496ac7359 Assembly-CSharp.dll:.PlayerMovement
+28201f2a467e8d402976f9385d5e5cd7 Assembly-CSharp.dll:.PlayerMovement
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 cf455f7a806648c6ed4c7d3e3f8a0e03 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 13bdb7c23815c33a33b37b0ba8dd39be UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -131,6 +131,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 0d940671561bd8af9d1be2e4359bb9fc Assembly-CSharp.dll:.LevelManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ObjectCollision
 6c072b39b3c68413bc432aaada417754 Assembly-CSharp.dll:.checkpoint
+998c570f84856acafa7bd7b04e94e163 Assembly-CSharp.dll:.Flying
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
