@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\DamageCollider.cs" />
      <Compile Include="Assets\Scripts\eenemy.cs" />
      <Compile Include="Assets\Scripts\FollowCam.cs" />
+     <Compile Include="Assets\Scripts\FollowCamCave.cs" />
      <Compile Include="Assets\Scripts\generateCurve.cs" />
      <Compile Include="Assets\Scripts\generiereZufallsmesh.cs" />
      <Compile Include="Assets\Scripts\Health.cs" />
