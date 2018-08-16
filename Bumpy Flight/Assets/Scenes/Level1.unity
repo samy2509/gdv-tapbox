@@ -3285,7 +3285,7 @@ MonoBehaviour:
   mSpeed: 10
   EggPrefab: {fileID: 1978935274429480, guid: 534559e95d9711c46bf0760fd847ccc1, type: 2}
   SpawnPoint: {fileID: 1228423467}
-  eggSpeed: 500
+  eggSpeed: 700
 --- !u!95 &1146340616
 Animator:
   serializedVersion: 3
