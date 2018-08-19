@@ -60,37 +60,37 @@
      <Compile Include="Assets\Prefabs\PowerUp\Scripts\ScaleParticles.cs" />
      <Compile Include="Assets\Prefabs\PowerUp\Scripts\TakeablePowerUp.cs" />
      <Compile Include="Assets\Prefabs\PowerUp\Scripts\Utility\Singleton.cs" />
-     <Compile Include="Assets\Scripts\AnimateMenu.cs" />
-     <Compile Include="Assets\Scripts\betreteLevel.cs" />
-     <Compile Include="Assets\Scripts\checkpoint.cs" />
-     <Compile Include="Assets\Scripts\ChickAnim.cs" />
-     <Compile Include="Assets\Scripts\DamageCollider.cs" />
-     <Compile Include="Assets\Scripts\eenemy.cs" />
-     <Compile Include="Assets\Scripts\FollowCam.cs" />
-     <Compile Include="Assets\Scripts\FollowCamCave.cs" />
-     <Compile Include="Assets\Scripts\generateCurve.cs" />
-     <Compile Include="Assets\Scripts\generiereZufallsmesh.cs" />
-     <Compile Include="Assets\Scripts\Health.cs" />
-     <Compile Include="Assets\Scripts\items.cs" />
-     <Compile Include="Assets\Scripts\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\Movement.cs" />
-     <Compile Include="Assets\Scripts\MovementDuck.cs" />
-     <Compile Include="Assets\Scripts\ObjectCollision.cs" />
-     <Compile Include="Assets\Scripts\ObjectRandomSpawn.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\Raetsel.cs" />
-     <Compile Include="Assets\Scripts\RaetselCollisions.cs" />
-     <Compile Include="Assets\Scripts\respawn.cs" />
-     <Compile Include="Assets\Scripts\startGame.cs" />
-     <Compile Include="Assets\Scripts\steuerung.cs" />
-     <Compile Include="Assets\Scripts\UIController.cs" />
-     <Compile Include="Assets\Scripts\UIPoints.cs" />
+     <Compile Include="Assets\Scripts\Camera\FollowCam.cs" />
+     <Compile Include="Assets\Scripts\Camera\FollowCamCave.cs" />
+     <Compile Include="Assets\Scripts\Game Logic\checkpoint.cs" />
+     <Compile Include="Assets\Scripts\Game Logic\eenemy.cs" />
+     <Compile Include="Assets\Scripts\Game Logic\Health.cs" />
+     <Compile Include="Assets\Scripts\Game Logic\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Game Logic\respawn.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\AnimateMenu.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\startGame.cs" />
+     <Compile Include="Assets\Scripts\Miscellaneous\ChickAnim.cs" />
+     <Compile Include="Assets\Scripts\Miscellaneous\DamageCollider.cs" />
+     <Compile Include="Assets\Scripts\Miscellaneous\items.cs" />
+     <Compile Include="Assets\Scripts\Miscellaneous\ObjectCollision.cs" />
+     <Compile Include="Assets\Scripts\Movement &amp; AI\Movement.cs" />
+     <Compile Include="Assets\Scripts\Movement &amp; AI\MovementDuck.cs" />
+     <Compile Include="Assets\Scripts\Movement &amp; AI\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Movement &amp; AI\steuerung.cs" />
+     <Compile Include="Assets\Scripts\Raetsel\betreteLevel.cs" />
+     <Compile Include="Assets\Scripts\Raetsel\Raetsel.cs" />
+     <Compile Include="Assets\Scripts\Raetsel\RaetselCollisions.cs" />
+     <Compile Include="Assets\Scripts\UI\UIController.cs" />
+     <Compile Include="Assets\Scripts\UI\UIPoints.cs" />
+     <Compile Include="Assets\Scripts\Word Generator\generateCurve.cs" />
+     <Compile Include="Assets\Scripts\Word Generator\generiereZufallsmesh.cs" />
+     <Compile Include="Assets\Scripts\Word Generator\ObjectRandomSpawn.cs" />
      <None Include="Assets\Shader\ToonShader.shader" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>/Users/lucasmehler/Desktop/Bumpy Flight/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>/Users/kevinschipper/Desktop/Graph-Dat/Projekt/Bumpy Flight/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/Users/lucasmehler/Desktop/Bumpy Flight/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/Users/kevinschipper/Desktop/Graph-Dat/Projekt/Bumpy Flight/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -287,17 +287,14 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
- <Reference Include="Vuforia.UnityExtensions">
- <HintPath>/Applications/Unity/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>/Users/lucasmehler/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>/Users/kevinschipper/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
- <HintPath>/Users/lucasmehler/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>/Users/kevinschipper/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
- <HintPath>/Users/lucasmehler/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+ <HintPath>/Users/kevinschipper/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>

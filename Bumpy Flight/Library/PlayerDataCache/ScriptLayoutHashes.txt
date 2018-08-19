@@ -130,8 +130,9 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RaetselCollisions
 0d940671561bd8af9d1be2e4359bb9fc Assembly-CSharp.dll:.LevelManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ObjectCollision
+0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.FollowCamCave
 6c072b39b3c68413bc432aaada417754 Assembly-CSharp.dll:.checkpoint
-998c570f84856acafa7bd7b04e94e163 Assembly-CSharp.dll:.Flying
+998c570f84856acafa7bd7b04e94e163 Assembly-CSharp.dll:.ChickAnim
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
