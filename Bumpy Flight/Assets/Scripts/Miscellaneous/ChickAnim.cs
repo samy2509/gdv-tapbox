@@ -5,24 +5,31 @@ using UnityEngine;
 public class ChickAnim : MonoBehaviour {
 
 	public Animator anim;
+	CharacterController controller;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
+		controller      = gameObject.GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
-			anim.Play("Fly", -1, 0f);
-		}
-
 
 		if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
 			anim.Play("Walk", -1, 0f);
 		}
 		if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) {
 			anim.Play("Idle_A", -1, 0f);
+		}
+
+
+		if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
+			anim.Play("Fly", -1, 0f);
+
+			if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+				anim.Play("Walk", -1, 0f);
+			}
 		}
 
 
