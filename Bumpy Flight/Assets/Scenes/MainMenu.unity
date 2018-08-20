@@ -526,12 +526,40 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 47.5, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &288266692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 288266693}
+  m_Layer: 0
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288266693
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 288266692}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &394958134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1234,7 @@ MonoBehaviour:
   restartScore: {fileID: 0}
   ui: {fileID: 0}
   pauseUI: {fileID: 0}
+  particleLauncher: {fileID: 0}
 --- !u!4 &756907790
 Transform:
   m_ObjectHideFlags: 0
@@ -1761,6 +1790,7 @@ GameObject:
   - component: {fileID: 1031562434}
   - component: {fileID: 1031562433}
   - component: {fileID: 1031562437}
+  - component: {fileID: 1031562438}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -1873,6 +1903,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turtle: {fileID: 0}
+--- !u!114 &1031562438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1031562431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53360cd94e7fb4294a7f688f6a7bdb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  backgroundParent: {fileID: 288266692}
+  background1: {fileID: 1398492341443664, guid: 8123e275f64e1446b96e19ccd87ed05e,
+    type: 2}
+  background2: {fileID: 1999403727482398, guid: d4282822696ac49e58508fd9a780f525,
+    type: 2}
+  background3: {fileID: 1837326791628212, guid: 055c46fa743264026bb988df26421ad7,
+    type: 2}
 --- !u!1 &1136598409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,6 +2330,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mSpeed: 10
+  EggPrefab: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  eggSpeed: 500
+  pauseUI: {fileID: 0}
+  particleLauncher: {fileID: 0}
 --- !u!143 &1241669109
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2330,7 +2384,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1241669106}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.8, y: -11.1, z: -4.014637}
+  m_LocalPosition: {x: 83.3, y: -11.1, z: -4.014637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1344437978}

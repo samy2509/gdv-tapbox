@@ -31,13 +31,13 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	private float depth 			= 6f;	// Tiefe, in der die Hintergrundobjekte platziert werden
 	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
 	private float lastPos			= 0f;	// letzte Position eine platzierten Hintergurndobjektes
-	private float  fov				= 30f;	// Field of View der Kamera
+	private float fov				= 30f;	// Field of View der Kamera
 
 	// Abschnitte für Gegnersteigerung
 	public int[] levels = {
 		200,
-		350,
-		500
+		550,
+		800
 	};
 
 	// Use this for initialization
@@ -108,17 +108,23 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			float offsetGegner2 = 4f;
 			float rand = Random.Range(0, 10);
 			int minRange  = 0;
-			int randRange = 2;
+			int maxRange = 2;
 
-			if (pos.x > levels[2] && minRange != 3) {
+			if (pos.x > levels[2]) {
 				minRange = 3;
-			} else if(pos.x > levels[1] && randRange != 7) {
-				randRange = 7;
-			} else if (pos.x > levels[0] && randRange != 4) {
-				randRange = 4;
+				maxRange = 7;
+			} else if(pos.x > levels[1]) {
+				minRange = 0;
+				maxRange = 7;
+			} else if (pos.x > levels[0]) {
+				minRange = 0;
+				maxRange = 4;
+			} else {
+				minRange  = 0;
+				maxRange = 2;
 			}
 
-			int randEnemy = Random.Range(minRange, randRange);
+			int randEnemy = Random.Range(minRange, maxRange);
 
 			if(enemies.Count != 0) {
 				indexE = enemies.Count - 1;
@@ -143,7 +149,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 					pos.z + depth/2 - 4.2f
 				);
 
-			if( ((lastEnemyX + distanceEnemy < pos.x && rand == 1f) || lastEnemyX - pos.x > 30) && barriers.Count > 0 && (barriers[barriers.Count - 1].transform.position.x > pos.x + 8 || barriers[barriers.Count - 1].transform.position.x < pos.x - 8 ) ) {
+			if( ((lastEnemyX + distanceEnemy < pos.x) || lastEnemyX - pos.x > 30 && rand == 1f) && barriers.Count > 0 && (barriers[barriers.Count - 1].transform.position.x > pos.x + 8 || barriers[barriers.Count - 1].transform.position.x < pos.x - 8 ) ) {
 				GameObject gegnerInst = Instantiate( geg, newPos, Quaternion.identity ) as GameObject;
 				if( randEnemy >= 4 ) {
 					gegnerInst.AddComponent<MovementDuck>();

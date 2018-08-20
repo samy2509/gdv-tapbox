@@ -24,7 +24,6 @@ public class FollowCam : MonoBehaviour {
 		if(nowPlayerPosition >= oldPlayerPosition) {
 			if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey("space") || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) ) {
 				moveCam = true;
-				Debug.Log("groesser");
 			}
 		}
 		if(nowPlayerPosition < oldPlayerPosition) {
