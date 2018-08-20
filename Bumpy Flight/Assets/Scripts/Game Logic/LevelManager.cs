@@ -11,8 +11,9 @@ public class LevelManager : MonoBehaviour {
     public GameObject       restartScreen;
     public Text             restartScore;
     private UIController    uicontroller;
-    public  GameObject      ui;
+    public GameObject       ui;
     public GameObject       pauseUI;
+    public ParticleSystem   particleLauncher;       // Particle Launcher für Damage
 
 	// Use this for initialization
 	void Start () {
@@ -41,12 +42,15 @@ public class LevelManager : MonoBehaviour {
         health = health - 1;
         //lebensanzeige aktualisieren
         healthText.text = health.ToString();
+        // emit 25 particles because of damage
+        particleLauncher.Emit (25);
         //überprüfen ob spieler leben hat
         if (health > 0)
         {
             //wenn ja -> zurück zum checkpoint
             player.transform.position = currentCheckpoint.transform.position;
-
+            // emit 25 particles because of respawn
+            particleLauncher.Emit (25);
         }
         else {
             //wenn nein -> spielende

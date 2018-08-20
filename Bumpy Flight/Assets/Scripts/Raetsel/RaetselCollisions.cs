@@ -30,7 +30,7 @@ public class RaetselCollisions : MonoBehaviour {
 				GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = true;
 			}
 
-			check ();
+			checkCorrectness ();
 
 			if (raetselScript.orderList.Count == 1) 
 			{
@@ -52,7 +52,7 @@ public class RaetselCollisions : MonoBehaviour {
 				GameObject.Find("YellowLamp2").GetComponent<MeshRenderer>().enabled = true;
 			}
 	
-			check ();
+			checkCorrectness ();
 
 			if (raetselScript.orderList.Count == 1) 
 			{
@@ -74,7 +74,7 @@ public class RaetselCollisions : MonoBehaviour {
 				GameObject.Find("YellowLamp3").GetComponent<MeshRenderer>().enabled = true;
 			}
 
-			check ();
+			checkCorrectness ();
 
 			if (raetselScript.orderList.Count == 1) 
 			{
@@ -110,43 +110,39 @@ public class RaetselCollisions : MonoBehaviour {
 		raetselScript.sperre = 1;
     }
 
-	void checkCorrectness () 
-	{
-		if (riddle[0] != order[0] || riddle[1] != order[1] || riddle[2] != order[2]) 
-		{
-			for (int i = 2; i >= 0; i--)
-			{
-				raetselScript.orderList.RemoveAt(i);
-			}
+    void checkCorrectness()
+    {
+        if (raetselScript.orderList.Count > 2)
+        {
+            order = raetselScript.orderList.ToArray();
 
-			raetselScript.set1 = 0;
-			raetselScript.set2 = 0;
-			raetselScript.set3 = 0;
+            if (riddle[0] != order[0] || riddle[1] != order[1] || riddle[2] != order[2])
+            {
+                for (int i = 2; i >= 0; i--)
+                {
+                    raetselScript.orderList.RemoveAt(i);
+                }
 
-			GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
-			GameObject.Find("YellowLamp2").GetComponent<MeshRenderer>().enabled = false;
-			GameObject.Find("YellowLamp3").GetComponent<MeshRenderer>().enabled = false;
+                raetselScript.set1 = 0;
+                raetselScript.set2 = 0;
+                raetselScript.set3 = 0;
 
-			GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = false;
-			GameObject.Find("WhiteLamp2").GetComponent<MeshRenderer>().enabled = false;
-			GameObject.Find("WhiteLamp3").GetComponent<MeshRenderer>().enabled = false;
+                GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
+                GameObject.Find("YellowLamp2").GetComponent<MeshRenderer>().enabled = false;
+                GameObject.Find("YellowLamp3").GetComponent<MeshRenderer>().enabled = false;
 
-			GameObject.Find("RedLamp1").GetComponent<MeshRenderer>().enabled = true;
-			GameObject.Find("RedLamp2").GetComponent<MeshRenderer>().enabled = true;
-			GameObject.Find("RedLamp3").GetComponent<MeshRenderer>().enabled = true;
-		}
-		else if (raetselScript.sperre == 0)
-		{	
-			openDoors();
-		}
-	}
+                GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = false;
+                GameObject.Find("WhiteLamp2").GetComponent<MeshRenderer>().enabled = false;
+                GameObject.Find("WhiteLamp3").GetComponent<MeshRenderer>().enabled = false;
 
-	void check () 
-	{
-		if (raetselScript.orderList.Count > 2) 
-		{
-				order = raetselScript.orderList.ToArray();
-				checkCorrectness();
-		}    
-	}
+                GameObject.Find("RedLamp1").GetComponent<MeshRenderer>().enabled = true;
+                GameObject.Find("RedLamp2").GetComponent<MeshRenderer>().enabled = true;
+                GameObject.Find("RedLamp3").GetComponent<MeshRenderer>().enabled = true;
+            }
+            else if (raetselScript.sperre == 0)
+            {
+                openDoors();
+            }
+        }
+    }
 }

@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public                      Transform       SpawnPoint;
     public float                eggSpeed        = 500 ;
     public GameObject           pauseUI;
+    public ParticleSystem       particleLauncher;       // Particle Launcher für Jump
 
     void Start () {
         controller      = gameObject.GetComponent<CharacterController>();
@@ -65,13 +66,12 @@ public class PlayerMovement : MonoBehaviour {
         if (controller.isGrounded) {
             if (inputJump) {
                 moveDirection.y = jumpForce;
+                particleLauncher.Emit (10);     //emit 10 particles
             }
         }
         moveDirection.x = velocity;
         moveDirection.y -= gravity * Time.deltaTime; 
-        controller.Move(moveDirection * Time.deltaTime);       
-
-      
+        controller.Move(moveDirection * Time.deltaTime);
     }
 
 }

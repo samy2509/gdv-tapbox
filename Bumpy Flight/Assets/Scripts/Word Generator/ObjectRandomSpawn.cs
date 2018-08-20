@@ -344,7 +344,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 
 			Vector3 newPos = new Vector3(
 					pos.x,
-					pos.y + 0.8f,
+					pos.y + 1.0f,
 					pos.z
 			);
 

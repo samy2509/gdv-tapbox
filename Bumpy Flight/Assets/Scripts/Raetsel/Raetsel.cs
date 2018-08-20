@@ -8,7 +8,8 @@ public class Raetsel : MonoBehaviour {
 	public GameObject[] rocks;			//Array für Steine-Prefabs
 	public List<int> 	orderList;		//Liste für Berührung von Steinen (TouchRockRiddle)
 
-	public int sperre;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
+	public int rand;					//Zufallsvariable für zufällige Wahl eines Rätsels
+	public int sperre;					//Sperrvariable für RaetlseCollisions
 	public int set1;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
 	public int set2;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
 	public int set3;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
@@ -28,24 +29,24 @@ public class Raetsel : MonoBehaviour {
 		set2 = 0;
 		set3 = 0;
 		riddle = new int[3];
+		rand = Random.Range(0, 1);
 		orderList = new List<int>();
 
-		spawnEntraceExit();
+		spawnEntraceExitFire();
 		spawnLittleRocks();
 		ChooseRiddle();
 	}
 
 	private void ChooseRiddle() 
 	{
-		int rand = Random.Range(0, 1);
-
 		switch(rand) 
 		{
 			case 0:
 				TouchRockRiddle();
+				//TouchBetweenStairs();
 				break;
 			case 1:
-
+				//TouchRockRiddle();
 				break;
 			case 2:
 
@@ -108,7 +109,16 @@ public class Raetsel : MonoBehaviour {
         }
     }
 
-	private void spawnEntraceExit () 
+	private void TouchBetweenStairs()
+	{
+		GameObject stairs =	Instantiate (rocks[21],				//TouchBetweenStairs
+								new Vector3 (laenge/5, 0.0f, 0.0f), 
+								Quaternion.Euler(0, 0, 0)) 
+								as GameObject;
+		stairs.transform.SetParent(GameObject.Find("Rocks").transform);
+	}
+
+	private void spawnEntraceExitFire () 
 	{
 		GameObject entrace =	Instantiate (rocks[16],  		//Höhl_h
 								new Vector3 (2.6f, 1.71f, -16.97f), 
@@ -123,6 +133,13 @@ public class Raetsel : MonoBehaviour {
 							as GameObject;
 		exit.transform.SetParent(GameObject.Find("Rocks").transform);
 		exit.name = "exit";
+
+		GameObject fire =	Instantiate (rocks[22],  			//Fire
+							new Vector3 (laenge/2, 6.0f, -0.5f), 
+							Quaternion.Euler(-45.0f, 0, 0)) 
+							as GameObject;
+		fire.transform.SetParent(GameObject.Find("Rocks").transform);
+		fire.name = "fire";
 	}
 
 	private void spawnLittleRocks () 
