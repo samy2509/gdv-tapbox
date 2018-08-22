@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
     public GameObject       player;
-    private int             powerUp = 1;
+    private int             powerUp = 0;
     public GameObject       currentCheckpoint;
     public int              health = 4;
     public Text             healthText;
@@ -14,12 +14,14 @@ public class LevelManager : MonoBehaviour {
     private UIController    uicontroller;
     public GameObject       ui;
     public GameObject       pauseUI;
+    private ObjectRandomSpawn ors;
     public ParticleSystem   particleLauncher;       // Particle Launcher für Damage
 
 	// Use this for initialization
 	void Start () {
         healthText.text = health.ToString();
         uicontroller	= GameObject.Find("LevelManager").GetComponent<UIController>();
+        ors             = GameObject.Find("LevelGenerator").GetComponent<ObjectRandomSpawn>();
         ui	            = GameObject.Find("UI");
     }
 	
@@ -38,27 +40,30 @@ public class LevelManager : MonoBehaviour {
         }
 	}
 
-   /* void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("leben"))
-        {  
-            if (health < 4)
-            {
+    void OnTriggerEnter(Collider other)
+     {
+         if (other.CompareTag("leben"))
+         {  
+             if (health < 4)
+             {
                 health++;
+                healthText.text = health.ToString();
                 Debug.Log("Leben aufgesammelt!");
+                ors.DeleteCollectables(other.gameObject);
                 Destroy(other.gameObject);
-            }
-        }
-        else if (other.CompareTag("schutzschild"))
-        {
-            if (powerUp == 0)
-            {
-                powerUp++;
-                Debug.Log("Schutzschild aufgesammelt!");
-                Destroy(other.gameObject);
-            }
-        }
-    }*/
+             }
+         }
+         else if (other.CompareTag("schutzschild"))
+         {
+             if (powerUp == 0)
+             {
+                 powerUp++;
+                 Debug.Log("Schutzschild aufgesammelt!");
+                 ors.DeleteCollectables(other.gameObject);
+                 Destroy(other.gameObject);
+             }
+         }
+     }
 
     public void RespawnPlayer() {
         //leben abziehen
