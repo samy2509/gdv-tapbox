@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
     public GameObject       player;
+    private int             powerUp = 1;
     public GameObject       currentCheckpoint;
-    public int              health;
+    public int              health = 4;
     public Text             healthText;
     public GameObject       restartScreen;
     public Text             restartScore;
@@ -20,7 +21,7 @@ public class LevelManager : MonoBehaviour {
         healthText.text = health.ToString();
         uicontroller	= GameObject.Find("LevelManager").GetComponent<UIController>();
         ui	            = GameObject.Find("UI");
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -37,9 +38,34 @@ public class LevelManager : MonoBehaviour {
         }
 	}
 
+   /* void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("leben"))
+        {  
+            if (health < 4)
+            {
+                health++;
+                Debug.Log("Leben aufgesammelt!");
+                Destroy(other.gameObject);
+            }
+        }
+        else if (other.CompareTag("schutzschild"))
+        {
+            if (powerUp == 0)
+            {
+                powerUp++;
+                Debug.Log("Schutzschild aufgesammelt!");
+                Destroy(other.gameObject);
+            }
+        }
+    }*/
+
     public void RespawnPlayer() {
         //leben abziehen
-        health = health - 1;
+        if (powerUp != 1) {
+            health = health - 1;
+        }
+        powerUp = 0;
         //lebensanzeige aktualisieren
         healthText.text = health.ToString();
         //überprüfen ob spieler leben hat
