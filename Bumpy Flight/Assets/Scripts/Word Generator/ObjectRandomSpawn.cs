@@ -97,12 +97,17 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		enemies.Remove(enemy);
 	}
 
-	/*
+    public void DeleteCollectables(GameObject collectable)
+    {
+        collectables.Remove(collectable);
+    }
+
+    /*
 	*	Platziert Gegner an zufälligen Orten
 	*
 	*	@pos:	Die Position, an der der Gegner platziert werden soll
 	*/
-	public void SpawnEnemy( Vector3 pos ) {
+    public void SpawnEnemy( Vector3 pos ) {
 		// Gegner nicht auf anderen Objekten Spawnen
 		if( CheckSpawn( pos, 20 ) == true ) {
 			GameObject geg = gegner;
@@ -308,10 +313,6 @@ public class ObjectRandomSpawn : MonoBehaviour {
                     collectInst = Instantiate(schutzschild, newPos, Quaternion.identity) as GameObject;
 					collectInst.tag = "schutzschild";
                     break;
-                case 2:
-                    collectInst = Instantiate(blitzschlag, newPos, Quaternion.identity) as GameObject;
-					collectInst.tag = "blitzschlag";
-                    break;
             }
             
             BoxCollider bc = collectInst.AddComponent<BoxCollider>();
@@ -324,6 +325,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
             collectInst.transform.SetParent(GameObject.Find("Collectables").transform);
         }
     }
+
 
     /*
 	*	Platziert Höhleneingänge an zufälligen Orten
