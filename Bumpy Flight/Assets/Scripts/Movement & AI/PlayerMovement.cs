@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
         if (isEgging)
         {
             GameObject egg = (GameObject)Instantiate(EggPrefab, SpawnPoint.position, Quaternion.identity);
-            egg.GetComponent<Rigidbody>().AddForce(Vector3.right * eggSpeed);
+            egg.GetComponent<Rigidbody>().AddForce(Vector3.down * eggSpeed);
             isEgging = false;
         }
 
