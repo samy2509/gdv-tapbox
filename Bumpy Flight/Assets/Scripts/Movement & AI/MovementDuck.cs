@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementDuck : MonoBehaviour {
- 	public float mSpeed                     = 8f;           // Geschwindigkeit, in der sich das Objekt bewegt
+ 	public float mSpeed                     = 6f;           // Geschwindigkeit, in der sich das Objekt bewegt
     private float gravity                   = 44.0f;        // Anziehungskraft, die auf das Objekt wirkt
     private float jumpForce                 = 24.0f;        // Stärke mit der das Objekt vom Boden abspringt
     private int bounceSpeed                 = -1;

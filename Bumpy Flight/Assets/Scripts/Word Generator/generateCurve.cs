@@ -198,6 +198,11 @@ public class generateCurve : MonoBehaviour {
 		// Collectables platzieren
 		objectSpawner.SpawnCave( turtle.transform.position );
 
+		// Abgrund spawnen
+		// if (mesh.normals.Length > 0) {
+			objectSpawner.SpawnAbyss( turtle.transform.up, turtle.transform.position );
+		// }
+
 		// Boss platzieren
 		if(turtle.transform.position.x > bossSpawns[0] - 1 && turtle.transform.position.x < bossSpawns[0]) {
 			objectSpawner.SpawnBoss( turtle.transform.position );

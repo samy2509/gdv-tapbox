@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18216,6 +18216,7 @@ MonoBehaviour:
   stein: {fileID: 162106, guid: 58698119dddbaf1429602ed6cd6004e3, type: 2}
   busch: {fileID: 159004, guid: 7d04d2bdc8109d54a9246dc8c9dc4473, type: 2}
   hindernis: {fileID: 149022, guid: 50ff8a60be8b4a54da7e9239eb7f0d78, type: 2}
+  abgrund: {fileID: 1843564018368082, guid: 4166c8f108faf42b8adba892f543eaf5, type: 2}
   gegner: {fileID: 1773965927217320, guid: 22b75230bfdffa94f9efa811f07bfdb5, type: 2}
   gegner2: {fileID: 1666285662329460, guid: 7a009fb3ed36edb4ba88da0f26d4a934, type: 2}
   gegner3: {fileID: 1569470040408700, guid: 0ede982496f7d4b4bb0230a1098c33f9, type: 2}

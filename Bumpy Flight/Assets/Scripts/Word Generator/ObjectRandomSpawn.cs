@@ -10,6 +10,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject stein;			// Stein für Spawn
 	public GameObject busch;			// Busch für Spawn
 	public GameObject hindernis;		// Hindernis für Spawn
+	public GameObject abgrund;			// Abgrund für Spawn
 	public GameObject gegner;			// Gegner für Spawn
 	public GameObject gegner2;			// Schwerer Gegner für Spawn
 	public GameObject gegner3;			// Weiterer Schwerer Gegner für Spawn
@@ -27,6 +28,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	private List<GameObject> enemies;		// Liste mit allen Gegnern
 	private List<GameObject> collectables;	// Liste mit allen Collectables
 	private List<GameObject> caves;			// Liste mit allen Hoehleneingaengen
+	private List<GameObject> abyss;			// Liste mit allen Abgründen
 	
 	private float depth 			= 6f;	// Tiefe, in der die Hintergrundobjekte platziert werden
 	private float distanceEnemy		= 50f;	// Minimaler Abstand der Gegner
@@ -49,6 +51,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		enemies 		= new List<GameObject>();
 		collectables	= new List<GameObject>();
 		caves			= new List<GameObject>();
+		abyss			= new List<GameObject>();
 
 		new GameObject("Gegner");
 		new GameObject("Collectables");
@@ -101,7 +104,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*/
 	public void SpawnEnemy( Vector3 pos ) {
 		// Gegner nicht auf anderen Objekten Spawnen
-		if( CheckSpawn( pos ) ) {
+		if( CheckSpawn( pos, 20 ) == true ) {
 			GameObject geg = gegner;
 			int indexE = 0;
 			float lastEnemyX;
@@ -198,7 +201,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@pos:	Die Position, an der der Gegner platziert werden soll
 	*/
 	public void SpawnBoss( Vector3 pos ) {
-		if( CheckSpawn( pos ) ) {
+		if( CheckSpawn( pos, 20 ) == true ) {
 			GameObject geg = boss;
 			int minRange  = 0;
 			int randRange = 2;
@@ -329,7 +332,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*/
     public void SpawnCave(Vector3 pos)
     {
-		if( CheckSpawn( pos ) )
+		if( CheckSpawn( pos, 20 ) == true )
 		{
 			GameObject cave = eingang;
 
@@ -421,7 +424,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@distance:	Der minimale Abstand der Hindernisse
 	*/
 	private void SpawnBarrier( Vector3 pos, float distance ) {
-		if( CheckSpawn( pos ) ) {
+		if( CheckSpawn( pos, 20 ) == true ) {
 			int rand = Random.Range(0, 5);
 
 			if( (lastPos + distance <= pos.x && rand == 3) || pos.x - lastPos > 50 ) {
@@ -498,6 +501,36 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			stones.Add( buschInst.gameObject );
 
 			buschInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+		}
+	}
+
+	/*
+	*	Spawnt einen Abgrund
+	*
+	*	@normal:	Normale, an der der Abgrund ausgerichtet wird
+	*	@pos:		Position, an der der Abgrund spawnen soll
+	*/
+	public void SpawnAbyss( Vector3 normal, Vector3 pos ) {
+		int rand = Random.Range(0, 10);
+		if( CheckSpawn( pos, 40 ) == true && rand == 5 && pos.x > 100 ) {
+			Vector3 newPos = new Vector3(
+				pos.x,
+				pos.y + 2f,
+				pos.z + depth/2 + 1.2f 
+			);
+
+			Debug.Log("Abgrund");
+
+			GameObject abgrundInst = Instantiate( abgrund, newPos, Quaternion.identity ) as GameObject;
+			abgrundInst.transform.eulerAngles = new Vector3(-150f, 90f, -90f);
+			// abgrundInst.transform.localScale = new Vector3(1f, 1f, 1f);
+			abyss.Add( abgrundInst.gameObject );
+			Rigidbody rb = abgrundInst.AddComponent<Rigidbody>();
+			rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+
+			abgrundInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
+
+			lastPos = pos.x;
 		}
 	}
 
@@ -585,6 +618,15 @@ public class ObjectRandomSpawn : MonoBehaviour {
 				if(!modified)
 					modified = true;
 			}
+
+			if( abyss.Count > 0 && Camera.main.transform.position.x > abyss[0].transform.position.x + fov ) {
+				buffer = abyss[0];
+				abyss.RemoveAt(0);
+				Destroy(buffer);
+
+				if(!modified)
+					modified = true;
+			}
 		}
 	}
 
@@ -593,15 +635,15 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*
 	*	@pos: Zu prüfende Position
 	 */
-	public bool CheckSpawn( Vector3 pos ) {
-		if( caves.Count > 0 && (pos.x < caves[caves.Count - 1].transform.position.x + 20) ) {
+	public bool CheckSpawn( Vector3 pos, float distance ) {
+		if( caves.Count > 0 && (pos.x < (caves[caves.Count - 1].transform.position.x + 60) ) ) {
 			return false;
-		}
-
-		if ( barriers.Count > 0 && (pos.x < barriers[barriers.Count - 1].transform.position.x + 20) ) {
+		} else if ( barriers.Count > 0 && (pos.x < (barriers[barriers.Count - 1].transform.position.x + 50) ) ) {
 			return false;
+		} else if( abyss.Count > 0 && (pos.x < abyss[abyss.Count - 1].transform.position.x + distance + 20) ) {
+			return false;
+		} else {
+			return true;
 		}
-
-		return true;
 	}
 }
