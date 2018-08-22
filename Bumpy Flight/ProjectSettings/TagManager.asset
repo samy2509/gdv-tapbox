@@ -9,6 +9,10 @@ TagManager:
   - Boss
   - player2
   - rock3
+  - Egg
+  - leben
+  - schutzschild
+  - blitzschlag
   layers:
   - Default
   - TransparentFX

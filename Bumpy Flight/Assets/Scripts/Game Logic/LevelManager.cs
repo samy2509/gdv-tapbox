@@ -42,11 +42,11 @@ public class LevelManager : MonoBehaviour {
         health = health - 1;
         //lebensanzeige aktualisieren
         healthText.text = health.ToString();
-        // emit 25 particles because of damage
-        particleLauncher.Emit (25);
         //überprüfen ob spieler leben hat
         if (health > 0)
         {
+            // emit 25 particles because of damage
+            particleLauncher.Emit (25);
             //wenn ja -> zurück zum checkpoint
             player.transform.position = currentCheckpoint.transform.position;
             // emit 25 particles because of respawn

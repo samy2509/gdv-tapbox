@@ -6,35 +6,66 @@ public class Raetsel : MonoBehaviour {
 
 	public int[] 		riddle;			//Array wird zufällig gefüllt für TouchRockRiddle
 	public GameObject[] rocks;			//Array für Steine-Prefabs
+	public GameObject[] other;			//Array für weitere Prefabs (Fackel, Powerups)
 	public List<int> 	orderList;		//Liste für Berührung von Steinen (TouchRockRiddle)
 
-	public int rand;					//Zufallsvariable für zufällige Wahl eines Rätsels
+	public int rand;					//Zufallsvariable für zufällige Wahl eines Rätsels - Nummer des Rätsels zur Identifikation
 	public int sperre;					//Sperrvariable für RaetlseCollisions
 	public int set1;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
 	public int set2;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
 	public int set3;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
 
+	private float pos;							//(y)-Position der beweglichen Platten
 	private int laenge;							//Länge des Zufallsmeshs
+	private LevelManager levelManagerScript;	//Script LevelManager
 	private generiereZufallsmesh meshScript; 	//Script generiereZufallsmesh
 	
 	void Start() 
 	{
 		new GameObject("Rocks");
+		new GameObject("Other");
 		new GameObject("LittleRocks").transform.SetParent(GameObject.Find("Rocks").transform);
 
-		meshScript = GameObject.Find("Zufallshöhle").GetComponent<generiereZufallsmesh>();
-		laenge = meshScript.laenge;
+		meshScript 			= GameObject.Find("Zufallshöhle").GetComponent<generiereZufallsmesh>();
+		levelManagerScript	= GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
-		set1 = 0;
-		set2 = 0;
-		set3 = 0;
-		riddle = new int[3];
-		rand = Random.Range(0, 1);
-		orderList = new List<int>();
+		laenge 	= meshScript.laenge;
+        rand 	= Random.Range(0, 2);
+		
+		if (rand == 0)
+        {
+            set1 = 0;
+            set2 = 0;
+            set3 = 0;
 
-		spawnEntraceExitFire();
+            riddle 		= new int[3];
+            orderList 	= new List<int>();
+        }
+
+		spawnEntraceExitTorch();
 		spawnLittleRocks();
 		ChooseRiddle();
+
+		if (rand == 1)
+        {
+            pos = GameObject.Find("Flagstone1").transform.position.y - 0.5f;
+        }
+	}
+
+	void Update () {
+        if (rand == 1)
+        {
+            //!!!!!Math Ping Pong Code !!!
+			/// !!!!
+			// !!!!
+			// !!!!
+            GameObject.Find("Flagstone1").transform.position = new Vector3(GameObject.Find("Flagstone1").transform.position.x,
+                                                                            Mathf.PingPong(Time.time * 2.7f, 3.0f) + pos,
+                                                                            GameObject.Find("Flagstone1").transform.position.z);
+            GameObject.Find("Flagstone2").transform.position = new Vector3(GameObject.Find("Flagstone2").transform.position.x,
+                                                                            Mathf.PingPong(Time.time * 2.0f, 3.0f) + pos,
+                                                                            GameObject.Find("Flagstone2").transform.position.z);
+        }
 	}
 
 	private void ChooseRiddle() 
@@ -46,7 +77,7 @@ public class Raetsel : MonoBehaviour {
 				//TouchBetweenStairs();
 				break;
 			case 1:
-				//TouchRockRiddle();
+				FireInTheCave();
 				break;
 			case 2:
 
@@ -66,21 +97,24 @@ public class Raetsel : MonoBehaviour {
 		//inst.AddComponent<Script>();
 		GameObject stairs =	Instantiate (rocks[18],				//Stairs
 								new Vector3 (laenge/5, 0.0f, 0.0f), 
-								Quaternion.Euler(0, 0, 0)) 
+								Quaternion.identity) 
 								as GameObject;
 		stairs.transform.SetParent(GameObject.Find("Rocks").transform);
+		stairs.name = "Stairs";
 
 		GameObject touchstones =	Instantiate (rocks[19],		//TouchStones
 									new Vector3 (laenge/3, 0.0f, 0.0f), 
-									Quaternion.Euler(0, 0, 0)) 
+									Quaternion.identity) 
 									as GameObject;
 		touchstones.transform.SetParent(GameObject.Find("Rocks").transform);
+		touchstones.name = "TouchStones";
 
 		GameObject wall =	Instantiate (rocks[20],				//Wall
 							new Vector3 (laenge/2 + 2, 0.0f, 0.0f), 
-							Quaternion.Euler(0, 0, 0)) 
+							Quaternion.identity) 
 							as GameObject;
 		wall.transform.SetParent(GameObject.Find("Rocks").transform);
+		wall.name = "Wall";
 
 		GameObject after =	Instantiate (rocks[14],				//rock o
 							new Vector3 (laenge/2 + 16.0f, 0.0f, -6.7f), 
@@ -90,6 +124,8 @@ public class Raetsel : MonoBehaviour {
 		after.transform.localScale = new Vector3 (Random.Range(3.1f, 4.0f), 2.22f, 1.0f);
 
 		RandomNumberOrder();
+
+		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
 	}
 
     private void RandomNumberOrder()
@@ -109,20 +145,41 @@ public class Raetsel : MonoBehaviour {
         }
     }
 
+	private void FireInTheCave() {
+
+		//laenge/5 + 9.0f
+		GameObject firestairs =	Instantiate (rocks[22],			//FireBetweenStairs
+								new Vector3 (laenge/5, 0.0f, 0.0f), 
+								Quaternion.identity) 
+								as GameObject;
+		firestairs.transform.SetParent(GameObject.Find("Rocks").transform);
+		firestairs.name = "FireBetweenStairs";
+
+		GameObject oneUp =	Instantiate (other[1],				//PowerUpContainerRed
+							new Vector3 (laenge/6, Random.Range(1.0f, 2.0f), -10.8f), 
+							Quaternion.identity) 
+							as GameObject;
+		oneUp.transform.SetParent(GameObject.Find("Other").transform);
+		oneUp.tag = "leben";
+
+		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
+	}
+
 	private void TouchBetweenStairs()
 	{
 		GameObject stairs =	Instantiate (rocks[21],				//TouchBetweenStairs
-								new Vector3 (laenge/5, 0.0f, 0.0f), 
-								Quaternion.Euler(0, 0, 0)) 
-								as GameObject;
+							new Vector3 (laenge/5, 0.0f, 0.0f), 
+							Quaternion.identity) 
+							as GameObject;
 		stairs.transform.SetParent(GameObject.Find("Rocks").transform);
+		stairs.name = "TouchBetweenStairs";
 	}
 
-	private void spawnEntraceExitFire () 
+	private void spawnEntraceExitTorch () 
 	{
 		GameObject entrace =	Instantiate (rocks[16],  		//Höhl_h
 								new Vector3 (2.6f, 1.71f, -16.97f), 
-								Quaternion.Euler(0, 0, 0)) 
+								Quaternion.identity) 
 								as GameObject;
 		entrace.transform.SetParent(GameObject.Find("Rocks").transform);
 		entrace.name = "entrance";
@@ -134,12 +191,12 @@ public class Raetsel : MonoBehaviour {
 		exit.transform.SetParent(GameObject.Find("Rocks").transform);
 		exit.name = "exit";
 
-		GameObject fire =	Instantiate (rocks[22],  			//Fire
+		GameObject torch =	Instantiate (other[0],  			//Fackel
 							new Vector3 (laenge/2, 6.0f, -0.5f), 
 							Quaternion.Euler(-45.0f, 0, 0)) 
 							as GameObject;
-		fire.transform.SetParent(GameObject.Find("Rocks").transform);
-		fire.name = "fire";
+		torch.transform.SetParent(GameObject.Find("Other").transform);
+		torch.name = "torch";
 	}
 
 	private void spawnLittleRocks () 
