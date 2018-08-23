@@ -7,15 +7,25 @@ public class betreteLevel : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
     {
+        LevelManager lm = GameObject.Find("Player").GetComponent<LevelManager>();
+
         //Level1
         if (col.tag == "player")
         {
             Debug.Log("Level betreten");
+
+            PlayerPrefs.SetInt("LastX", 
+                (int)GameObject.Find("Turtle").transform.position.x
+            );
+
+            PlayerPrefs.SetInt("Health", lm.health);
+
             SceneManager.LoadScene("Nebenlevel", LoadSceneMode.Single);
         }
         //Nebenlevel
         else if (col.tag == "player2"){
             Debug.Log("Level betreten");
+            PlayerPrefs.SetInt("Highscore", PlayerPrefs.GetInt("Highscore") + 100);
             SceneManager.LoadScene("Level1", LoadSceneMode.Single);
         }
     }

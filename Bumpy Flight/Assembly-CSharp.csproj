@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Main Menu\AnimateMenu.cs" />
      <Compile Include="Assets\Scripts\Main Menu\startGame.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\ChickAnim.cs" />
+     <Compile Include="Assets\Scripts\Miscellaneous\EiDMG.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\items.cs" />
      <Compile Include="Assets\Scripts\Miscellaneous\ObjectCollision.cs" />
      <Compile Include="Assets\Scripts\Movement &amp; AI\Movement.cs" />

@@ -10,6 +10,9 @@ public class startGame : MonoBehaviour {
 		Debug.Log("Loading Level 1...");
 		Time.timeScale = 1f;
 		Cursor.visible = false;
+		PlayerPrefs.SetInt("Highscore", 0);
+		PlayerPrefs.SetInt("Health", 4);
+		PlayerPrefs.SetInt("LastX", 0);
 		SceneManager.LoadScene("Level1");
 	}
 

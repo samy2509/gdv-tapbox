@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43846694, g: 0.48655242, b: 0.56682485, a: 1}
+  m_IndirectSpecularColor: {r: 0.43846706, g: 0.48655272, b: 0.5668254, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13405,6 +13405,7 @@ GameObject:
   - component: {fileID: 1809567586}
   - component: {fileID: 1809567587}
   - component: {fileID: 1809567588}
+  - component: {fileID: 1809567589}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -13507,6 +13508,33 @@ MonoBehaviour:
   ui: {fileID: 1577965433}
   pauseUI: {fileID: 1002627760}
   particleLauncher: {fileID: 345734953}
+--- !u!114 &1809567589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1809567584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d845ab0efd04d268de34f8d429bf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baum: {fileID: 0}
+  baum2: {fileID: 0}
+  baum3: {fileID: 0}
+  stein: {fileID: 0}
+  busch: {fileID: 0}
+  hindernis: {fileID: 0}
+  abgrund: {fileID: 0}
+  gegner: {fileID: 0}
+  gegner2: {fileID: 0}
+  gegner3: {fileID: 0}
+  boss: {fileID: 0}
+  leben: {fileID: 0}
+  schutzschild: {fileID: 0}
+  blitzschlag: {fileID: 0}
+  eingang: {fileID: 0}
+  levels: c80000002602000020030000
 --- !u!1 &1849228658
 GameObject:
   m_ObjectHideFlags: 0

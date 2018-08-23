@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
 	public Text 		scoreText;		// Der Text, in dem der Score angezeigt werden soll
-    public Text highscoreText;
 
 	public int 			score;			// Der aktuelle Score
 	public GameObject	menuScreen;		// Das Empty des Menüs
@@ -14,7 +13,9 @@ public class UIController : MonoBehaviour {
 	void Start () {
 		scoreText.text 	= "0";
 		score 			= -12;
-        highscoreText.text = PlayerPrefs.GetInt("Highscore").ToString();
+
+		ReadScore();
+        //highscoreText.text = PlayerPrefs.GetInt("Highscore").ToString();
 	}
 
 	/*
@@ -26,9 +27,15 @@ public class UIController : MonoBehaviour {
 		score += val;
 		scoreText.text = score.ToString();
         if (score > PlayerPrefs.GetInt("Highscore")) {      
-            PlayerPrefs.SetInt("Highscore", score);         //highscore üpberschreiben
-            highscoreText.text = PlayerPrefs.GetInt("Highscore").ToString();
+            PlayerPrefs.SetInt("Highscore", score);
         }
+	}
+
+	public void ReadScore() {
+		if( PlayerPrefs.GetInt("Highscore") != 0 ) {
+			score = PlayerPrefs.GetInt("Highscore");
+			scoreText.text = score.ToString();
+		}
 	}
 
 	public void GameOn() {

@@ -19,10 +19,14 @@ public class LevelManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        health = PlayerPrefs.GetInt("Health");
         healthText.text = health.ToString();
+        
         uicontroller	= GameObject.Find("LevelManager").GetComponent<UIController>();
         ors             = GameObject.Find("LevelGenerator").GetComponent<ObjectRandomSpawn>();
         ui	            = GameObject.Find("UI");
+
+        uicontroller.ReadScore();
     }
 	
 	// Update is called once per frame

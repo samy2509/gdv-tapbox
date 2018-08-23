@@ -114,7 +114,6 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			int indexE = 0;
 			float lastEnemyX;
 			float offsetGegner2 = 4f;
-			float rand = Random.Range(0, 10);
 			int minRange  = 0;
 			int maxRange = 2;
 
@@ -157,7 +156,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 					pos.z + depth/2 - 4.2f
 				);
 
-			if( ((lastEnemyX + distanceEnemy < pos.x) || lastEnemyX - pos.x > 30 && rand == 1f) && barriers.Count > 0 && (barriers[barriers.Count - 1].transform.position.x > pos.x + 8 || barriers[barriers.Count - 1].transform.position.x < pos.x - 8 ) ) {
+			if( ((lastEnemyX + distanceEnemy < pos.x) || lastEnemyX - pos.x > 30) ) {
 				GameObject gegnerInst = Instantiate( geg, newPos, Quaternion.identity ) as GameObject;
 				if( randEnemy >= 4 ) {
 					gegnerInst.AddComponent<MovementDuck>();
@@ -206,7 +205,6 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@pos:	Die Position, an der der Gegner platziert werden soll
 	*/
 	public void SpawnBoss( Vector3 pos ) {
-		if( CheckSpawn( pos, 20 ) == true ) {
 			GameObject geg = boss;
 			int minRange  = 0;
 			int randRange = 2;
@@ -268,7 +266,6 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			enemies.Add( gegnerInst.gameObject );
 
 			gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform, false);
-		}
 	}
 
     /*
@@ -332,39 +329,38 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*
 	*	@pos:	Die Position, an der Höhleneingang platziert werden soll
 	*/
-    public void SpawnCave(Vector3 pos)
+    public void SpawnCave(Vector3 pos, bool force)
     {
-		if( CheckSpawn( pos, 20 ) == true )
+		GameObject cave = eingang;
+
+		float lastCaveX;
+		int indexC 			= 0;
+		int randC			= Random.Range(0, 20);
+		float distanceCave 	= 400f;
+
+		if (caves.Count != 0)
 		{
-			GameObject cave = eingang;
+			indexC = caves.Count - 1;
+			lastCaveX = caves[indexC].transform.position.x;
+		}
+		else
+		{
+			lastCaveX = 0;
+		}
 
-			float lastCaveX;
-			int indexC 			= 0;
-			float rand 			= Random.Range(0, 20);
-			float distanceCave 	= 200f;
+		Vector3 newPos = new Vector3(
+				pos.x,
+				pos.y + 1.0f,
+				pos.z
+		);
 
-			if (caves.Count != 0)
-			{
-				indexC = caves.Count - 1;
-				lastCaveX = caves[indexC].transform.position.x;
-			}
-			else
-			{
-				lastCaveX = 0;
-			}
-
-			Vector3 newPos = new Vector3(
-					pos.x,
-					pos.y + 1.0f,
-					pos.z
-			);
-
-			if (lastCaveX + distanceCave < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x)
-			{
-				GameObject caveInst = Instantiate(cave, newPos, Quaternion.identity) as GameObject;
-				caves.Add(caveInst.gameObject);
-				caveInst.transform.SetParent(GameObject.Find("Caves").transform);
-			}
+		if ( (lastCaveX + distanceCave < pos.x && randC == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) || force == true)
+		{
+			GameObject caveInst = Instantiate(cave, newPos, Quaternion.identity) as GameObject;
+			caves.Add(caveInst.gameObject);
+			caveInst.transform.SetParent(GameObject.Find("Caves").transform);
+		} else if(randC == 3) {
+			SpawnAbyss(pos, Vector3.up);
 		}
     }
 
@@ -513,7 +509,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@pos:		Position, an der der Abgrund spawnen soll
 	*/
 	public void SpawnAbyss( Vector3 normal, Vector3 pos ) {
-		int rand = Random.Range(0, 10);
+		int rand = Random.Range(0, 20);
 		if( CheckSpawn( pos, 40 ) == true && rand == 5 && pos.x > 100 ) {
 			Vector3 newPos = new Vector3(
 				pos.x,
@@ -643,6 +639,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		} else if ( barriers.Count > 0 && (pos.x < (barriers[barriers.Count - 1].transform.position.x + 50) ) ) {
 			return false;
 		} else if( abyss.Count > 0 && (pos.x < abyss[abyss.Count - 1].transform.position.x + distance + 20) ) {
+			return false;
+		} else if( enemies.Count > 0 && (pos.x < enemies[enemies.Count - 1].transform.position.x + distance + 5) ) {
 			return false;
 		} else {
 			return true;

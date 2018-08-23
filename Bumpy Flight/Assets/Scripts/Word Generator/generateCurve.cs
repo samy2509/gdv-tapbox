@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class generateCurve : MonoBehaviour {
-	private float 	length 			= 1.0f;				// Länge eines Elements
-	private int 	totalDepth 		= 26;				// Vertikale Tiefe des gesamten Bands
-	private int 	moves			= 0;				// Anzahl der aktuellen Bewegungen
-	private int		rounding		= 5;				// Grad der Abrundung in Kurven
-	private float	deviation		= 5f;				// Maximale Abweichung bei der Berechnung des neuen Winkels
-	private float	levelBound		= 2f;				// Levelbegrenzung im oberen Bereich
-	private float	randomnes		= .5f;				// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
-	private int		fovCamera		= 26;				// Bereich, den die Kamera "sieht"
-	private int		pathWidth		= 8;				// Breite des Weges
-	private int[]   bossSpawns 		= { 300, 500 };		// Bereiche, an denen Bosse spawnen sollen
+	private float 	length 			= 1.0f;						// Länge eines Elements
+	private int 	totalDepth 		= 26;						// Vertikale Tiefe des gesamten Bands
+	private int 	moves			= 0;						// Anzahl der aktuellen Bewegungen
+	private int		rounding		= 5;						// Grad der Abrundung in Kurven
+	private float	deviation		= 1f;						// Maximale Abweichung bei der Berechnung des neuen Winkels
+	private float	levelBound		= 1f;						// Levelbegrenzung im oberen Bereich
+	private float	randomnes		= .5f;						// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
+	private int		fovCamera		= 30;						// Bereich, den die Kamera "sieht"
+	private int		pathWidth		= 8;						// Breite des Weges
+	private int[]   bossSpawns 		= { 300, 500, 800 };		// Bereiche, an denen Bosse spawnen sollen
 
 	private MeshFilter 			meshFilter;
 	private Mesh 				mesh;
@@ -50,8 +50,36 @@ public class generateCurve : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if( moves == 0 ) {
-			for( int i = 0; i < fovCamera ; i++ ) {
-				Move( length );
+			if( PlayerPrefs.GetInt("LastX") != 0 ) {
+				objectSpawner.SpawnCave(new Vector3(
+						PlayerPrefs.GetInt("LastX") - 13,
+						0,
+						0
+					),
+					true
+				);
+
+				turtle.transform.position = new Vector3(
+					PlayerPrefs.GetInt("LastX") - 20,
+					0,
+					0
+				);
+
+				for( int i = 0; i < fovCamera ; i++ ) {
+					Move( length );
+				}
+
+				GameObject.Find("Player").transform.position = new Vector3(
+					PlayerPrefs.GetInt("LastX"),
+					2,
+					GameObject.Find("Player").transform.position.z
+				);
+
+			} else {
+
+				for( int i = 0; i < fovCamera ; i++ ) {
+					Move( length );
+				}
 			}
 
 			mesh.vertices 	= vertList.ToArray();
@@ -196,16 +224,16 @@ public class generateCurve : MonoBehaviour {
 		objectSpawner.SpawnCollectable( turtle.transform.position );
 
 		// Collectables platzieren
-		objectSpawner.SpawnCave( turtle.transform.position );
+		objectSpawner.SpawnCave( turtle.transform.position, false );
 
 		// Abgrund spawnen
-		// if (mesh.normals.Length > 0) {
-			objectSpawner.SpawnAbyss( turtle.transform.up, turtle.transform.position );
-		// }
+		objectSpawner.SpawnAbyss( turtle.transform.up, turtle.transform.position );
 
 		// Boss platzieren
-		if(turtle.transform.position.x > bossSpawns[0] - 1 && turtle.transform.position.x < bossSpawns[0]) {
-			objectSpawner.SpawnBoss( turtle.transform.position );
+		for( int i = 0; i < bossSpawns.Length; i++) {
+			if(turtle.transform.position.x > bossSpawns[i] - 1  && turtle.transform.position.x < bossSpawns[i]) {
+				objectSpawner.SpawnBoss( turtle.transform.position );
+			}
 		}
 	}
 
@@ -241,7 +269,7 @@ public class generateCurve : MonoBehaviour {
 			|| (turtle.transform.position.y > levelBound && newAngle > 0)
 			|| (turtle.transform.position.y < 2 && newAngle < 0) ) {
 				
-			newAngle = 0;
+			newAngle = -newAngle;
 		}
 
 		return newAngle;
