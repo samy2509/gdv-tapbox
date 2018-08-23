@@ -335,7 +335,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 
 		float lastCaveX;
 		int indexC 			= 0;
-		int randC			= Random.Range(0, 20);
+		int randC			= Random.Range(0, 10);
 		float distanceCave 	= 400f;
 
 		if (caves.Count != 0)
@@ -354,13 +354,13 @@ public class ObjectRandomSpawn : MonoBehaviour {
 				pos.z
 		);
 
-		if ( (lastCaveX + distanceCave < pos.x && randC == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) || force == true)
+		if ( (lastCaveX + distanceCave < pos.x && randC == 1 && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) || force == true)
 		{
 			GameObject caveInst = Instantiate(cave, newPos, Quaternion.identity) as GameObject;
 			caves.Add(caveInst.gameObject);
 			caveInst.transform.SetParent(GameObject.Find("Caves").transform);
-		} else if(randC == 3) {
-			SpawnAbyss(pos, Vector3.up);
+		} else if(randC >= 3) {
+			SpawnAbyss(pos);
 		}
     }
 
@@ -508,24 +508,27 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@normal:	Normale, an der der Abgrund ausgerichtet wird
 	*	@pos:		Position, an der der Abgrund spawnen soll
 	*/
-	public void SpawnAbyss( Vector3 normal, Vector3 pos ) {
-		int rand = Random.Range(0, 20);
-		if( CheckSpawn( pos, 40 ) == true && rand == 5 && pos.x > 100 ) {
+	public void SpawnAbyss( Vector3 pos ) {
+		int rand = Random.Range(0, 15);
+		if( CheckSpawn( pos, 20 ) == true && rand <= 2 && pos.x > 100 ) {
 			Vector3 newPos = new Vector3(
 				pos.x,
-				pos.y + 2f,
-				pos.z + depth/2 + 1.2f 
+				pos.y - 0.5f,
+				pos.z + depth/2 - 2.2f 
 			);
 
-			Debug.Log("Abgrund");
+			Ray ray = new Ray(newPos, -(transform.up));
+        	RaycastHit hit;
+
+			Physics.Raycast(ray, out hit, 10, LayerMask.GetMask("Floor"));
 
 			GameObject abgrundInst = Instantiate( abgrund, newPos, Quaternion.identity ) as GameObject;
-			abgrundInst.transform.eulerAngles = new Vector3(-150f, 90f, -90f);
-			// abgrundInst.transform.localScale = new Vector3(1f, 1f, 1f);
+			abgrundInst.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+			abgrundInst.transform.localScale = new Vector3(3f, 2.5f, 2f);
 			abyss.Add( abgrundInst.gameObject );
 			Rigidbody rb = abgrundInst.AddComponent<Rigidbody>();
 			rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
-
+			rb.isKinematic = true;
 			abgrundInst.transform.SetParent(GameObject.Find("LevelGenerator").transform);
 
 			lastPos = pos.x;

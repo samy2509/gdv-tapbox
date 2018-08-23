@@ -227,7 +227,7 @@ public class generateCurve : MonoBehaviour {
 		objectSpawner.SpawnCave( turtle.transform.position, false );
 
 		// Abgrund spawnen
-		objectSpawner.SpawnAbyss( turtle.transform.up, turtle.transform.position );
+		objectSpawner.SpawnAbyss( turtle.transform.position );
 
 		// Boss platzieren
 		for( int i = 0; i < bossSpawns.Length; i++) {
