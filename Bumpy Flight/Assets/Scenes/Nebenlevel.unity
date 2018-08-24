@@ -13509,6 +13509,9 @@ MonoBehaviour:
   - {fileID: 1284219362055662, guid: 5d698cb170ee34066b36e329fabbf880, type: 2}
   - {fileID: 1642954302882334, guid: 0fe5a577f824646c083b5e3fbbd8e59c, type: 2}
   - {fileID: 1195291603917318, guid: f057a6c16b16c4df6bdc6cd4acd71ad5, type: 2}
+  - {fileID: 1091298960569036, guid: f9f8b7aa8cb35434cbfcdf86f553bd5f, type: 2}
+  - {fileID: 1369643794996446, guid: 1d68fd23b97734603bd9cbfb8d9a0a53, type: 2}
+  - {fileID: 1465463524767512, guid: 2dfdf225da3fb46df9eb56e54dd62364, type: 2}
   other:
   - {fileID: 1383653207967314, guid: 7ed4376b594734eee8b435a604fab51a, type: 2}
   - {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 2}
@@ -13518,6 +13521,7 @@ MonoBehaviour:
   set1: 0
   set2: 0
   set3: 0
+  isHitting: 0
 --- !u!114 &1809567587
 MonoBehaviour:
   m_ObjectHideFlags: 0

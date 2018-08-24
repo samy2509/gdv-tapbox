@@ -14,6 +14,7 @@ public class Raetsel : MonoBehaviour
 	public int set1;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
 	public int set2;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
 	public int set3;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
+	public int isHitting;				//Sperrvariable für RaetlseCollisions (FallingStones)
 
 	private float pos;							//(y)-Position der beweglichen Platten
 	private int laenge;							//Länge des Zufallsmeshs
@@ -30,7 +31,7 @@ public class Raetsel : MonoBehaviour
 		levelManagerScript	= GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
 		laenge 	= meshScript.laenge;
-        rand 	= Random.Range(0, 3);
+        rand 	= Random.Range(0, 5);
 		
 		if (rand == 0)
         {
@@ -50,6 +51,11 @@ public class Raetsel : MonoBehaviour
         {
             pos = GameObject.Find("Flagstone1").transform.position.y - 0.5f;
         }
+
+		else if (rand == 3) 
+		{
+			isHitting = 0;
+		}
 	}
 
 	void Update () 
@@ -64,6 +70,29 @@ public class Raetsel : MonoBehaviour
                                                                             Mathf.PingPong(Time.time * 2.0f, 3.0f) + pos,
                                                                             GameObject.Find("Flagstone2").transform.position.z);
         }
+		else if (rand == 4) 
+		{
+			if (GameObject.Find("UpDownRock1").transform.position.y <= -9.0f)
+			{
+				StartCoroutine(WaitAndTransform("UpDownRock1"));
+			} 
+			else if (GameObject.Find("UpDownRock2").transform.position.y <= -9.0f)
+			{
+				StartCoroutine(WaitAndTransform("UpDownRock2"));
+			} 
+			else if (GameObject.Find("UpDownRock3").transform.position.y <= -9.0f)
+			{
+				StartCoroutine(WaitAndTransform("UpDownRock3"));
+			} 
+			else if (GameObject.Find("UpDownRock4").transform.position.y <= -9.0f)
+			{
+				StartCoroutine(WaitAndTransform("UpDownRock4"));
+			} 
+			else if (GameObject.Find("UpDownRock5").transform.position.y <= -9.0f)
+			{
+				StartCoroutine(WaitAndTransform("UpDownRock5"));
+			} 
+		}
 	}
 
 	private void ChooseRiddle() 
@@ -80,10 +109,10 @@ public class Raetsel : MonoBehaviour
 				BetterRunFast();
 				break;
 			case 3:
-				//TouchBetweenStairs();
+				FallingStones();
 				break;
 			case 4:
-				//nothing
+				UpDownRock();
 				break;
 		}
 	}
@@ -178,28 +207,98 @@ public class Raetsel : MonoBehaviour
 		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
 	}
 
-	public void spawnStonesAgain () {
-		Destroy(GameObject.Find("flagstones"));
-
-		GameObject flagstones =	Instantiate (rocks[24],			//Flagstones
-										new Vector3 (laenge/5, 0.0f, 0.0f), 
-										Quaternion.identity) 
-										as GameObject;
-		flagstones.transform.SetParent(GameObject.Find("Rocks").transform);
-		flagstones.name = "flagstones";
-	}
-
-	private void TouchBetweenStairs()
+	public void spawnStonesAgain () 
 	{
-		GameObject stairs =	Instantiate (rocks[21],				//TouchBetweenStairs
-							new Vector3 (laenge/5, 0.0f, 0.0f), 
+		if (rand == 2)
+        {
+            Destroy(GameObject.Find("flagstones"));
+
+            GameObject flagstones = Instantiate(rocks[24],          //Flagstones
+                                    new Vector3(laenge / 5, 0.0f, 0.0f),
+                                    Quaternion.identity)
+                                    as GameObject;
+            flagstones.transform.SetParent(GameObject.Find("Rocks").transform);
+            flagstones.name = "flagstones";
+        }
+        else if (rand == 3)
+        {
+            Destroy(GameObject.Find("fallingstones"));
+
+            GameObject fallingStones = 	Instantiate(rocks[26],               //FallingStones
+                                    	new Vector3(laenge / 8 + 10.0f, 14.0f, 0.0f),
+                                    	Quaternion.identity)
+                                    	as GameObject;
+            fallingStones.transform.SetParent(GameObject.Find("Rocks").transform);
+            fallingStones.name = "fallingstones";
+
+			GameObject.Find("GreenLamp1").GetComponent<MeshRenderer>().enabled = false;
+        	GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = true;
+
+			Destroy(GameObject.Find("Wall"));
+
+            GameObject wall = 	Instantiate(rocks[20],                //Wall
+                            	new Vector3(laenge / 2 - 3.0f, 0.0f, 0.0f),
+                            	Quaternion.identity)
+                            	as GameObject;
+            wall.transform.SetParent(GameObject.Find("Rocks").transform);
+            wall.name = "Wall";
+        }
+    }
+
+	private void FallingStones () 
+	{
+		GameObject trafficRock =	Instantiate (rocks[25],				//TrafficRock
+									new Vector3 (laenge/8, 0.0f, 0.0f), 
+									Quaternion.identity) 
+									as GameObject;
+		trafficRock.transform.SetParent(GameObject.Find("Rocks").transform);
+		trafficRock.name = "TrafficRock";
+
+		GameObject fallingStones =	Instantiate (rocks[26],				//FallingStones
+									new Vector3 (laenge/8 + 10.0f, 14.0f, 0.0f), 
+									Quaternion.identity) 
+									as GameObject;
+		fallingStones.transform.SetParent(GameObject.Find("Rocks").transform);
+		fallingStones.name = "fallingstones";
+
+		GameObject wall =	Instantiate (rocks[20],				//Wall
+							new Vector3 (laenge/2 - 3.0f, 0.0f, 0.0f), 
 							Quaternion.identity) 
 							as GameObject;
-		stairs.transform.SetParent(GameObject.Find("Rocks").transform);
-		stairs.name = "TouchBetweenStairs";
+		wall.transform.SetParent(GameObject.Find("Rocks").transform);
+		wall.name = "Wall";
+
+		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
 	}
 
-	private void spawnEntraceExitTorch () 
+	private void UpDownRock()
+	{
+		GameObject upDownRocks =	Instantiate (rocks[27],				//UpDownRocks
+									new Vector3 (laenge/8, 0.0f, 0.0f), 
+									Quaternion.identity) 
+									as GameObject;
+		upDownRocks.transform.SetParent(GameObject.Find("Rocks").transform);
+		upDownRocks.name = "UpDownRocks";
+
+		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
+	}
+
+	IEnumerator WaitAndTransform(string name)
+    {
+        GameObject.Find(name).GetComponent<Rigidbody>().isKinematic = true;
+
+        Vector3 newpos = GameObject.Find(name).transform.position;
+        for (int i = 0; i < 10; i++)
+        {
+            newpos.y += 0.9f;
+            GameObject.Find(name).transform.position = newpos;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        GameObject.Find(name).GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    private void spawnEntraceExitTorch () 
 	{
 		GameObject entrace =	Instantiate (rocks[16],  		//Höhl_h
 								new Vector3 (2.6f, 1.71f, -16.97f), 

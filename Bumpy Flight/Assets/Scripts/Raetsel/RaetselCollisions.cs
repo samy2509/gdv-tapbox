@@ -22,7 +22,7 @@ public class RaetselCollisions : MonoBehaviour
             riddle = raetselScript.riddle;
         }
         
-        else if (raetselScript.rand == 0 || raetselScript.rand == 2) 
+        else if (raetselScript.rand == 0 || raetselScript.rand == 2 || raetselScript.rand == 3) 
         {
             raetselScript.sperre = 0;
         }
@@ -130,12 +130,76 @@ public class RaetselCollisions : MonoBehaviour
                 }   
             }
 		}
+
+        //Rätsel/Hindernis 3 - Traffic Lights
+        else if (raetselScript.rand == 3) 
+		{            
+            if (col.gameObject.tag == "player2" && gameObject.name == "detect1" && raetselScript.sperre == 0)
+            {
+                raetselScript.sperre = 1;
+                StartCoroutine(LightsAndFall());
+            }
+
+            else if (col.gameObject.tag == "player2" && gameObject.tag == "rock3" && raetselScript.isHitting == 0)
+            {
+                raetselScript.isHitting = 1;
+                if (levelManagerScript.health > 1) 
+                {
+                    levelManagerScript.RespawnPlayer();
+                    StartCoroutine(WaitAndSpawn());
+                }
+                else if (levelManagerScript.health == 1) {
+                    levelManagerScript.RespawnPlayer();
+                } 
+                raetselScript.isHitting = 0;
+            }
+        }
+
+        //Rätsel/Hindernis 4 - UpDownRock
+        else if (raetselScript.rand == 4) 
+		{    
+            if (col.gameObject.tag == "player2" && gameObject.name == "Trigger")
+            {
+                levelManagerScript.RespawnPlayer();
+            }
+        }
     }
 
     IEnumerator WaitAndSpawn()
     {
         yield return new WaitForSeconds(0.1f);
         raetselScript.spawnStonesAgain();
+    }
+
+    IEnumerator LightsAndFall()
+    {
+        GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("RedLamp1").GetComponent<MeshRenderer>().enabled = true;
+        //GameObject.Find("Player").GetComponent<AudioFX>().bling.Play();
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject.Find("RedLamp1").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = true;
+        //GameObject.Find("Player").GetComponent<AudioFX>().bling.Play();
+
+        GameObject.Find("FallingStone1").GetComponent<Rigidbody>().isKinematic = false;
+        GameObject.Find("FallingStone2").GetComponent<Rigidbody>().isKinematic = false;
+        GameObject.Find("FallingStone3").GetComponent<Rigidbody>().isKinematic = false;
+        GameObject.Find("FallingStone4").GetComponent<Rigidbody>().isKinematic = false;
+        GameObject.Find("FallingStone5").GetComponent<Rigidbody>().isKinematic = false;
+        GameObject.Find("FallingStone6").GetComponent<Rigidbody>().isKinematic = false;
+        GameObject.Find("FallingStone7").GetComponent<Rigidbody>().isKinematic = false;
+        GameObject.Find("FallingStone8").GetComponent<Rigidbody>().isKinematic = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("GreenLamp1").GetComponent<MeshRenderer>().enabled = true;
+        //GameObject.Find("Player").GetComponent<AudioFX>().bling.Play();
+        //GameObject.Find("Player").GetComponent<AudioFX>().stones.Play();
+
+        openDoors();
     }
 
     void openDoors()
@@ -151,24 +215,28 @@ public class RaetselCollisions : MonoBehaviour
         newpos2.y -= 5.0f;
         saeule2.transform.position = newpos2;
 
-        GameObject.Find("Player").GetComponent<AudioFX>().solved.Play();
+        if (raetselScript.rand == 0)
+        {
+            GameObject.Find("Player").GetComponent<AudioFX>().solved.Play();
 
-        pointsText  = Instantiate(Resources.Load("Punkte-Text"),
-                                    GameObject.FindGameObjectWithTag("player2").transform.position,
-                                    Quaternion.identity) as GameObject;
-        pointsText.AddComponent<UIPoints>();
-        GameObject.Find("LevelManager").GetComponent<UIController>().AddToScore(10);
-        pointsText.GetComponent<UIPoints>().Points(100, GameObject.FindGameObjectWithTag("player2").transform.position);
+            pointsText = Instantiate(Resources.Load("Punkte-Text"),
+                                        GameObject.FindGameObjectWithTag("player2").transform.position,
+                                        Quaternion.identity) as GameObject;
+            pointsText.AddComponent<UIPoints>();
+            GameObject.Find("LevelManager").GetComponent<UIController>().AddToScore(10);
+            pointsText.GetComponent<UIPoints>().Points(100, GameObject.FindGameObjectWithTag("player2").transform.position);
 
-		GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
-		GameObject.Find("YellowLamp2").GetComponent<MeshRenderer>().enabled = false;
-		GameObject.Find("YellowLamp3").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("YellowLamp2").GetComponent<MeshRenderer>().enabled = false;
+            GameObject.Find("YellowLamp3").GetComponent<MeshRenderer>().enabled = false;
 
-		GameObject.Find("GreenLamp1").GetComponent<MeshRenderer>().enabled = true;
-		GameObject.Find("GreenLamp2").GetComponent<MeshRenderer>().enabled = true;
-		GameObject.Find("GreenLamp3").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("GreenLamp1").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("GreenLamp2").GetComponent<MeshRenderer>().enabled = true;
+            GameObject.Find("GreenLamp3").GetComponent<MeshRenderer>().enabled = true;
 
-		raetselScript.sperre = 1;
+            raetselScript.sperre = 1;
+        }
+		
     }
 
     void checkCorrectness()
@@ -212,80 +280,81 @@ public class RaetselCollisions : MonoBehaviour
     IEnumerator WorkAndWait(string name)
     {
         if (name == "detect1")
-        {
+        {   
+            //0.025?
             GameObject.Find("Flagstone1").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone2").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone3").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone4").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone5").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone6").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone7").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone8").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone9").GetComponent<Rigidbody>().isKinematic = false;
         }
 
         else if (name == "detect2")
         {
             GameObject.Find("Flagstone2").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone1").GetComponent<Rigidbody>().isKinematic = false;
             GameObject.Find("Flagstone3").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone4").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone5").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone6").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone7").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone8").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone9").GetComponent<Rigidbody>().isKinematic = false;
         }
 
         else if (name == "detect3")
         {
             GameObject.Find("Flagstone3").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone2").GetComponent<Rigidbody>().isKinematic = false;
             GameObject.Find("Flagstone4").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone1").GetComponent<Rigidbody>().isKinematic = false;
             GameObject.Find("Flagstone5").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone6").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone7").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone8").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone9").GetComponent<Rigidbody>().isKinematic = false;
         }
 
         else if (name == "detect4")
         {
             GameObject.Find("Flagstone4").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone3").GetComponent<Rigidbody>().isKinematic = false;
             GameObject.Find("Flagstone5").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone2").GetComponent<Rigidbody>().isKinematic = false;
             GameObject.Find("Flagstone6").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone1").GetComponent<Rigidbody>().isKinematic = false;
             GameObject.Find("Flagstone7").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone8").GetComponent<Rigidbody>().isKinematic = false;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone9").GetComponent<Rigidbody>().isKinematic = false;
         }
     }
