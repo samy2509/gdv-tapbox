@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -16,18 +17,35 @@ public class PlayerMovement : MonoBehaviour {
     public                      Transform       SpawnPoint;
     public float                eggSpeed        = 500 ;
     public GameObject           pauseUI;
-    public ParticleSystem       particleLauncher;       // Particle Launcher für Jump
+
+    public  ParticleSystem      particleLauncher;       // Particle Launcher fürs Fliegen
+    private Scene               scene;                  // Um aktuelle Scene zu prüfen
 
     void Start () {
-        controller      = gameObject.GetComponent<CharacterController>();
-        mSpeed          = 7.0f;
+        scene       = SceneManager.GetActiveScene();
+        controller  = gameObject.GetComponent<CharacterController>();
+        mSpeed      = 7.0f;
 	}
 
-	void Update () {
-        if(!pauseUI.activeSelf) {
-            InputCheck();
-            Move();
+    void Update()
+    {
+        if (scene.name == "Level1")
+        {
+            if (!pauseUI.activeSelf)
+            {
+                InputCheck();
+                Move();
+            }
         }
+        else if (scene.name == "Nebenlevel")
+        {
+            if (!pauseUI.activeSelf && GameObject.Find("LevelManager").GetComponent<LevelManager>().isWaiting == 0)
+            {
+                InputCheck();
+                Move();
+            }
+        }
+
         //SetAnimation();
 
         // Rotation an Boden anpassen
@@ -37,8 +55,9 @@ public class PlayerMovement : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, 10, LayerMask.GetMask("Floor"))) {
             transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
         }
-        
+
     }
+
     void InputCheck() {
         velocity = Input.GetAxis("Horizontal") * mSpeed;
         if (Input.GetKeyDown(KeyCode.Space))
@@ -56,6 +75,8 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (isEgging)
         {
+            GameObject.Find("Player").GetComponent<AudioFX>().shootEgg.Play();
+
             GameObject egg = (GameObject)Instantiate(EggPrefab, SpawnPoint.position, Quaternion.identity);
             egg.GetComponent<Rigidbody>().AddForce(Vector3.down * eggSpeed);
             isEgging = false;
@@ -66,7 +87,9 @@ public class PlayerMovement : MonoBehaviour {
         if (controller.isGrounded) {
             if (inputJump) {
                 moveDirection.y = jumpForce;
-                particleLauncher.Emit (10);     //emit 10 particles
+
+                GameObject.Find("Player").GetComponent<AudioFX>().flattern.Play();
+                particleLauncher.Emit (10);     
             }
         }
         moveDirection.x = velocity;

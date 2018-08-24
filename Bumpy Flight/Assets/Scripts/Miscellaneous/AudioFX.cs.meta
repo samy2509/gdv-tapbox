@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 0faf3cb8dc45f44229a5b016f2e1506b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - clipLevel1: {fileID: 8300000, guid: 34aa3e8de4d6a497eae4b9082e64089b, type: 3}
+  - clipNebenlevel: {fileID: 8300000, guid: 5ad550c6f680f46edb7749cb2a7c4c84, type: 3}
+  - clipFlattern: {fileID: 8300000, guid: 1486fb8b921214222912286171bf2594, type: 3}
+  - clipDamage: {fileID: 8300000, guid: 4b898cc98c75743139a23ad2ee06f5bb, type: 3}
+  - clipShootEgg: {fileID: 8300000, guid: 68972a02d12d84e81af47a65e13fb036, type: 3}
+  - clipGameover: {fileID: 8300000, guid: 91a07225c113741e68f1e9e7453702e4, type: 3}
+  - clipCollected: {fileID: 8300000, guid: 6582f3301ff834ff485efb6be34dc1d4, type: 3}
+  - clipSolved: {fileID: 8300000, guid: ac05121e3f0eb448d902fcb7cf7c3596, type: 3}
+  - clipError: {fileID: 8300000, guid: 14e9a481c80f94f7ab89aa1be02820a7, type: 3}
+  - clipScore: {fileID: 8300000, guid: 636119806f0554fb58578240f0e7705a, type: 3}
+  - clipSpawn: {fileID: 8300000, guid: fb9e390629a9c4ab989b322478ac83c8, type: 3}
+  - clipDuck: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  - clipSheep: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  - clipCow: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  - clipMegaCow: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  - level1Background: {instanceID: 0}
+  - nebenlevelBackground: {instanceID: 0}
+  - flattern: {instanceID: 0}
+  - damage: {instanceID: 0}
+  - shootEgg: {instanceID: 0}
+  - gameover: {instanceID: 0}
+  - collected: {instanceID: 0}
+  - solved: {instanceID: 0}
+  - error: {instanceID: 0}
+  - score: {instanceID: 0}
+  - spawn: {instanceID: 0}
+  - duck: {instanceID: 0}
+  - sheep: {instanceID: 0}
+  - cow: {instanceID: 0}
+  - megaCow: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

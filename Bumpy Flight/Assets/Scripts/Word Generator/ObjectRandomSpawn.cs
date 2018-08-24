@@ -196,6 +196,9 @@ public class ObjectRandomSpawn : MonoBehaviour {
 
 				gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform);
 			}
+			//GameObject.Find("Player").GetComponent<AudioFX>().sheep.Play();
+			//GameObject.Find("Player").GetComponent<AudioFX>().duck.Play();
+			GameObject.Find("Player").GetComponent<AudioFX>().cow.Play();
 		}
 	}
 
@@ -266,6 +269,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			enemies.Add( gegnerInst.gameObject );
 
 			gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform, false);
+
+			GameObject.Find("Player").GetComponent<AudioFX>().megaCow.Play();
 	}
 
     /*

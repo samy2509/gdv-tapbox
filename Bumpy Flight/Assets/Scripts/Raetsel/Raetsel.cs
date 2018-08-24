@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Raetsel : MonoBehaviour {
-
+public class Raetsel : MonoBehaviour 
+{
 	public int[] 		riddle;			//Array wird zufällig gefüllt für TouchRockRiddle
 	public GameObject[] rocks;			//Array für Steine-Prefabs
 	public GameObject[] other;			//Array für weitere Prefabs (Fackel, Powerups)
@@ -23,14 +23,14 @@ public class Raetsel : MonoBehaviour {
 	void Start() 
 	{
 		new GameObject("Rocks");
-		new GameObject("Other");
 		new GameObject("LittleRocks").transform.SetParent(GameObject.Find("Rocks").transform);
+		new GameObject("Other");
 
 		meshScript 			= GameObject.Find("Zufallshöhle").GetComponent<generiereZufallsmesh>();
 		levelManagerScript	= GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
 		laenge 	= meshScript.laenge;
-        rand 	= Random.Range(0, 2);
+        rand 	= Random.Range(0, 3);
 		
 		if (rand == 0)
         {
@@ -52,13 +52,11 @@ public class Raetsel : MonoBehaviour {
         }
 	}
 
-	void Update () {
+	void Update () 
+	{
         if (rand == 1)
         {
-            //!!!!!Math Ping Pong Code !!!
-			/// !!!!
-			// !!!!
-			// !!!!
+            // !!! Math Ping Pong Code !!!
             GameObject.Find("Flagstone1").transform.position = new Vector3(GameObject.Find("Flagstone1").transform.position.x,
                                                                             Mathf.PingPong(Time.time * 2.7f, 3.0f) + pos,
                                                                             GameObject.Find("Flagstone1").transform.position.z);
@@ -74,16 +72,15 @@ public class Raetsel : MonoBehaviour {
 		{
 			case 0:
 				TouchRockRiddle();
-				//TouchBetweenStairs();
 				break;
 			case 1:
 				FireInTheCave();
 				break;
 			case 2:
-
+				BetterRunFast();
 				break;
 			case 3:
-
+				//TouchBetweenStairs();
 				break;
 			case 4:
 				//nothing
@@ -93,8 +90,6 @@ public class Raetsel : MonoBehaviour {
 
 	private void TouchRockRiddle() 
 	{
-		//Instantiate (rocks[(Random.Range(0, rocks.Length))], 
-		//inst.AddComponent<Script>();
 		GameObject stairs =	Instantiate (rocks[18],				//Stairs
 								new Vector3 (laenge/5, 0.0f, 0.0f), 
 								Quaternion.identity) 
@@ -145,9 +140,8 @@ public class Raetsel : MonoBehaviour {
         }
     }
 
-	private void FireInTheCave() {
-
-		//laenge/5 + 9.0f
+	private void FireInTheCave() 
+	{
 		GameObject firestairs =	Instantiate (rocks[22],			//FireBetweenStairs
 								new Vector3 (laenge/5, 0.0f, 0.0f), 
 								Quaternion.identity) 
@@ -163,6 +157,36 @@ public class Raetsel : MonoBehaviour {
 		oneUp.tag = "leben";
 
 		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
+	}
+
+	private void BetterRunFast () 
+	{
+		GameObject flagstonestairs =	Instantiate (rocks[23],			//FlagstonesBetweenStairs
+										new Vector3 (laenge/5, 0.0f, 0.0f), 
+										Quaternion.identity) 
+										as GameObject;
+		flagstonestairs.transform.SetParent(GameObject.Find("Rocks").transform);
+		flagstonestairs.name = "FlagstonesBetweenStairs";
+
+		GameObject flagstones =	Instantiate (rocks[24],			//Flagstones
+										new Vector3 (laenge/5, 0.0f, 0.0f), 
+										Quaternion.identity) 
+										as GameObject;
+		flagstones.transform.SetParent(GameObject.Find("Rocks").transform);
+		flagstones.name = "flagstones";
+
+		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
+	}
+
+	public void spawnStonesAgain () {
+		Destroy(GameObject.Find("flagstones"));
+
+		GameObject flagstones =	Instantiate (rocks[24],			//Flagstones
+										new Vector3 (laenge/5, 0.0f, 0.0f), 
+										Quaternion.identity) 
+										as GameObject;
+		flagstones.transform.SetParent(GameObject.Find("Rocks").transform);
+		flagstones.name = "flagstones";
 	}
 
 	private void TouchBetweenStairs()

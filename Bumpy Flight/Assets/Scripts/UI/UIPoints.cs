@@ -10,7 +10,7 @@ public class UIPoints : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pText = gameObject.GetComponent<TextMesh>();
+		pText 		= gameObject.GetComponent<TextMesh>();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +36,7 @@ public class UIPoints : MonoBehaviour {
 	*	@position:	Position des Textes
 	 */
 	public void Points( int amount, Vector3 position ) {
+		GameObject.Find("Player").GetComponent<AudioFX>().score.Play();
 		pText	= gameObject.GetComponent<TextMesh>();
 		pText.text = "+" + amount.ToString();
 		pText.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;

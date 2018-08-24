@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43846706, g: 0.48655272, b: 0.5668254, a: 1}
+  m_IndirectSpecularColor: {r: 0.43846694, g: 0.48655242, b: 0.56682485, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6921,6 +6921,7 @@ GameObject:
   - component: {fileID: 990480603}
   - component: {fileID: 990480602}
   - component: {fileID: 990480601}
+  - component: {fileID: 990480606}
   m_Layer: 0
   m_Name: Player
   m_TagString: player2
@@ -7012,6 +7013,47 @@ Transform:
   m_Father: {fileID: 1809567585}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &990480606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 990480600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0faf3cb8dc45f44229a5b016f2e1506b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipLevel1: {fileID: 8300000, guid: 34aa3e8de4d6a497eae4b9082e64089b, type: 3}
+  clipNebenlevel: {fileID: 8300000, guid: 5ad550c6f680f46edb7749cb2a7c4c84, type: 3}
+  clipFlattern: {fileID: 8300000, guid: 1486fb8b921214222912286171bf2594, type: 3}
+  clipDamage: {fileID: 8300000, guid: 4b898cc98c75743139a23ad2ee06f5bb, type: 3}
+  clipShootEgg: {fileID: 8300000, guid: 68972a02d12d84e81af47a65e13fb036, type: 3}
+  clipGameover: {fileID: 8300000, guid: 91a07225c113741e68f1e9e7453702e4, type: 3}
+  clipCollected: {fileID: 8300000, guid: 6582f3301ff834ff485efb6be34dc1d4, type: 3}
+  clipSolved: {fileID: 8300000, guid: ac05121e3f0eb448d902fcb7cf7c3596, type: 3}
+  clipError: {fileID: 8300000, guid: 14e9a481c80f94f7ab89aa1be02820a7, type: 3}
+  clipScore: {fileID: 8300000, guid: 636119806f0554fb58578240f0e7705a, type: 3}
+  clipSpawn: {fileID: 8300000, guid: fb9e390629a9c4ab989b322478ac83c8, type: 3}
+  clipDuck: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  clipSheep: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  clipCow: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  clipMegaCow: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  level1Background: {fileID: 0}
+  nebenlevelBackground: {fileID: 0}
+  flattern: {fileID: 0}
+  damage: {fileID: 0}
+  shootEgg: {fileID: 0}
+  gameover: {fileID: 0}
+  collected: {fileID: 0}
+  solved: {fileID: 0}
+  error: {fileID: 0}
+  score: {fileID: 0}
+  spawn: {fileID: 0}
+  duck: {fileID: 0}
+  sheep: {fileID: 0}
+  cow: {fileID: 0}
+  megaCow: {fileID: 0}
 --- !u!1 &1002627760
 GameObject:
   m_ObjectHideFlags: 0
@@ -13465,6 +13507,8 @@ MonoBehaviour:
   - {fileID: 1076929741229944, guid: 702b817848e2e4cf4b26e3293cc6d93c, type: 2}
   - {fileID: 1303130717092066, guid: d7e97e57fe6fd4985aa9787441b7fb2d, type: 2}
   - {fileID: 1284219362055662, guid: 5d698cb170ee34066b36e329fabbf880, type: 2}
+  - {fileID: 1642954302882334, guid: 0fe5a577f824646c083b5e3fbbd8e59c, type: 2}
+  - {fileID: 1195291603917318, guid: f057a6c16b16c4df6bdc6cd4acd71ad5, type: 2}
   other:
   - {fileID: 1383653207967314, guid: 7ed4376b594734eee8b435a604fab51a, type: 2}
   - {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 2}
@@ -13507,6 +13551,7 @@ MonoBehaviour:
   restartScore: {fileID: 749441531}
   ui: {fileID: 1577965433}
   pauseUI: {fileID: 1002627760}
+  isWaiting: 0
   particleLauncher: {fileID: 345734953}
 --- !u!114 &1809567589
 MonoBehaviour:
