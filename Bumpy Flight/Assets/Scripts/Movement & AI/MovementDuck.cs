@@ -73,6 +73,10 @@ public class MovementDuck : MonoBehaviour {
     }
 
     void OnTriggerEnter( Collider col ){
+        if (col.gameObject.tag == "Barrier" && gameObject.tag != "Boss") {
+            TurnAround();
+        }
+
         if (col.gameObject.tag == "Egg" && gameObject.tag != "Boss") {
             health = 0;
             DestroyEnemy();
@@ -90,13 +94,8 @@ public class MovementDuck : MonoBehaviour {
             Quaternion.identity) as GameObject;
             pointsText.AddComponent<UIPoints>();
 
-            if( gameObject.tag != "Boss") {
-                uicontroller.AddToScore(10);
-                pointsText.GetComponent<UIPoints>().Points(10, gameObject.transform.position);
-            } else {
-                uicontroller.AddToScore(100);
-                pointsText.GetComponent<UIPoints>().Points(100, gameObject.transform.position);
-            }
+            uicontroller.AddToScore(30);
+            pointsText.GetComponent<UIPoints>().Points(30, gameObject.transform.position);
 
             ors.DeleteEnemy(gameObject);
             Destroy(gameObject);
@@ -106,9 +105,7 @@ public class MovementDuck : MonoBehaviour {
     // Lässt den Gegner eine 180-Grad-Wende durchführen
     public void TurnAround() {
         if( (transform.rotation.y != -90f || transform.rotation.y != 90f) ) {
-            for(int i = 0; i < 45; i++) {
-                transform.Rotate(0, 4, 0);
-            }
+            transform.Rotate(0, 180, 0);
 
             lastTurn = transform.position.x;
             bounceSpeed = -bounceSpeed;

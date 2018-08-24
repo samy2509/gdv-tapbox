@@ -10,9 +10,9 @@ public class generateCurve : MonoBehaviour {
 	private float	deviation		= 1f;						// Maximale Abweichung bei der Berechnung des neuen Winkels
 	private float	levelBound		= 1f;						// Levelbegrenzung im oberen Bereich
 	private float	randomnes		= .5f;						// Zufällige Abweichung von der Höhe in y-Richtung pro Punkt
-	private int		fovCamera		= 30;						// Bereich, den die Kamera "sieht"
+	private int		fovCamera		= 35;						// Bereich, den die Kamera "sieht"
 	private int		pathWidth		= 8;						// Breite des Weges
-	private int[]   bossSpawns 		= { 300, 500, 800 };		// Bereiche, an denen Bosse spawnen sollen
+	private int   	bossSpawns 		= 220;						// Bereiche, an denen Bosse spawnen sollen
 
 	private MeshFilter 			meshFilter;
 	private Mesh 				mesh;
@@ -230,11 +230,13 @@ public class generateCurve : MonoBehaviour {
 		objectSpawner.SpawnAbyss( turtle.transform.position );
 
 		// Boss platzieren
-		for( int i = 0; i < bossSpawns.Length; i++) {
-			if(turtle.transform.position.x > bossSpawns[i] - 1  && turtle.transform.position.x < bossSpawns[i]) {
-				objectSpawner.SpawnBoss( turtle.transform.position );
-			}
+		if(turtle.transform.position.x % bossSpawns < 1) {
+			objectSpawner.SpawnBoss( turtle.transform.position );
 		}
+
+		// if(turtle.transform.position.x > bossSpawns[i] - 1  && turtle.transform.position.x < bossSpawns[i]) {
+		// 	objectSpawner.SpawnBoss( turtle.transform.position );
+		// }
 	}
 
 	/*
@@ -282,7 +284,7 @@ public class generateCurve : MonoBehaviour {
 	*/
 	public void RemoveOldVerts( float currentXPos ) {
 		while ( true ) {
-			if( vertList[0].x < currentXPos - fovCamera - 25f ) {
+			if( vertList[0].x < currentXPos - fovCamera - 35f ) {
 				triList.RemoveRange(0, 6);
 
 				for ( int j = 0; j < triList.Count; j++ ) {

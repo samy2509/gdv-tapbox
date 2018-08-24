@@ -187,7 +187,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 					bc.isTrigger = true;
 					cc.radius = 0.7f;
 					cc.height = 1.03f;
-					cc.center = new Vector3(0f, 0.71f, -0.07f);
+					cc.center = new Vector3(0f, 0.78f, -0.07f);
 				} else {
 					gegnerInst.transform.Rotate( 0f, -90f, 0f );
 				}
@@ -208,24 +208,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@pos:	Die Position, an der der Gegner platziert werden soll
 	*/
 	public void SpawnBoss( Vector3 pos ) {
+		if(CheckSpawn(pos, 0) == true) {
 			GameObject geg = boss;
-			int minRange  = 0;
-			int randRange = 2;
-
-			if (pos.x > levels[2] && minRange != 3) {
-				minRange = 3;
-			} else if(pos.x > levels[1] && randRange != 7) {
-				randRange = 7;
-			} else if (pos.x > levels[0] && randRange != 4) {
-				randRange = 4;
-			}
-
-			int randEnemy = Random.Range(0, 2);
-
-
-			if ( randEnemy == 2 ) {
-				geg = boss;
-			}
 
 			Vector3 newPos = new Vector3(
 					pos.x,
@@ -238,31 +222,16 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			gegnerInst.AddComponent<Movement>();
 			gegnerInst.AddComponent<eenemy>();
 
-			if( randEnemy <= 1 ) {
-				CharacterController cc = gegnerInst.AddComponent<CharacterController>();
-				BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
+			CharacterController cc = gegnerInst.AddComponent<CharacterController>();
+			BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
 
-				gegnerInst.transform.Rotate( 0f, -90f, 0f );
-				bc.size = new Vector3(1.73f, 2.23f, 3.3f);
-				bc.center = new Vector3(0f, 1.15f, 0.1f);
-				bc.isTrigger = true;
-				cc.radius = 1.04f;
-				cc.height = 1.91f;
-				cc.center = new Vector3(0f, 1.04f, 0f);
-			} else if ( randEnemy >= 2) {
-				CharacterController cc = gegnerInst.AddComponent<CharacterController>();
-				BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
-
-				gegnerInst.transform.Rotate( 0f, -90f, 0f );
-				bc.size = new Vector3(1.73f, 1.65f, 1.47f);
-				bc.center = new Vector3(-1.31f, 0.83f, -0.07f);
-				bc.isTrigger = true;
-				cc.radius = 0.7f;
-				cc.height = 1.03f;
-				cc.center = new Vector3(0f, 0.71f, -0.07f);
-			} else {
-				gegnerInst.transform.Rotate( 0f, -90f, 0f );
-			}
+			gegnerInst.transform.Rotate( 0f, -90f, 0f );
+			bc.size = new Vector3(1.73f, 2.23f, 3.3f);
+			bc.center = new Vector3(0f, 1.15f, 0.1f);
+			bc.isTrigger = true;
+			cc.radius = 1.04f;
+			cc.height = 1.91f;
+			cc.center = new Vector3(0f, 1.04f, 0f);
 
 			gegnerInst.tag = "Boss";
 
@@ -271,6 +240,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform, false);
 
 			GameObject.Find("Player").GetComponent<AudioFX>().megaCow.Play();
+		}
 	}
 
     /*
@@ -340,7 +310,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 
 		float lastCaveX;
 		int indexC 			= 0;
-		int randC			= Random.Range(0, 10);
+		int randC			= Random.Range(0, 5);
 		float distanceCave 	= 400f;
 
 		if (caves.Count != 0)
@@ -364,8 +334,6 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			GameObject caveInst = Instantiate(cave, newPos, Quaternion.identity) as GameObject;
 			caves.Add(caveInst.gameObject);
 			caveInst.transform.SetParent(GameObject.Find("Caves").transform);
-		} else if(randC >= 3) {
-			SpawnAbyss(pos);
 		}
     }
 
@@ -514,7 +482,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	*	@pos:		Position, an der der Abgrund spawnen soll
 	*/
 	public void SpawnAbyss( Vector3 pos ) {
-		int rand = Random.Range(0, 15);
+		int rand = Random.Range(0, 20);
 		if( CheckSpawn( pos, 20 ) == true && rand <= 2 && pos.x > 100 ) {
 			Vector3 newPos = new Vector3(
 				pos.x,
@@ -649,6 +617,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		} else if( abyss.Count > 0 && (pos.x < abyss[abyss.Count - 1].transform.position.x + distance + 20) ) {
 			return false;
 		} else if( enemies.Count > 0 && (pos.x < enemies[enemies.Count - 1].transform.position.x + distance + 5) ) {
+			return false;
+		} else if(pos.x > GameObject.Find("Player").transform.position.x - 5 && pos.x < GameObject.Find("Player").transform.position.x + 5 ) {
 			return false;
 		} else {
 			return true;
