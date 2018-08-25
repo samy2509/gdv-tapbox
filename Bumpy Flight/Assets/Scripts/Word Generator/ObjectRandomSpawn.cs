@@ -236,12 +236,12 @@ public class ObjectRandomSpawn : MonoBehaviour {
 			BoxCollider bc = gegnerInst.AddComponent<BoxCollider>();
 
 			gegnerInst.transform.Rotate( 0f, -90f, 0f );
-			bc.size = new Vector3(1.73f, 2.23f, 3.3f);
-			bc.center = new Vector3(0f, 1.15f, 0.1f);
+			bc.size = new Vector3(1.703202f, 2.172003f, 3.500275f);
+			bc.center = new Vector3(-0.004340874f, 1.089528f, 0.00868294f);
 			bc.isTrigger = true;
 			cc.radius = 1.04f;
-			cc.height = 1.91f;
-			cc.center = new Vector3(0f, 1.04f, 0f);
+			cc.height = 2f;
+			cc.center = new Vector3(0f, 1.07f, 0f);
 
 			gegnerInst.tag = "Boss";
 
@@ -296,15 +296,17 @@ public class ObjectRandomSpawn : MonoBehaviour {
 					collectInst.tag = "schutzschild";
                     break;
             }
-            
-            BoxCollider bc = collectInst.AddComponent<BoxCollider>();
-            bc.isTrigger = true;
-            bc.size = new Vector3(1.0f, 1.0f, 1.0f);
-            bc.center = new Vector3(-1.22f, 5.22f, 2.14f);
 
-            collectables.Add(collectInst.gameObject);
+			if(randCollect == 0 || randCollect == 1) {
+				BoxCollider bc = collectInst.AddComponent<BoxCollider>();
+				bc.isTrigger = true;
+				bc.size = new Vector3(1.0f, 1.0f, 1.0f);
+				bc.center = new Vector3(-1.22f, 5.22f, 2.14f);
 
-            collectInst.transform.SetParent(GameObject.Find("Collectables").transform);
+				collectables.Add(collectInst.gameObject);
+
+				collectInst.transform.SetParent(GameObject.Find("Collectables").transform);
+			}
         }
     }
 

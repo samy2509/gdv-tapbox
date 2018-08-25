@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
-    public float currentHealth = 5;
+    public float currentHealth = 4;
 	// Use this for initialization
 	void Start () {
 		

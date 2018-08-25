@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour {
             GameObject.Find("Player").GetComponent<AudioFX>().shootEgg.Play();
 
             GameObject egg = (GameObject)Instantiate(EggPrefab, SpawnPoint.position, Quaternion.identity);
+            egg.transform.Rotate(0, 0, 90);
             egg.GetComponent<Rigidbody>().AddForce(Vector3.down * eggSpeed);
             isEgging = false;
         }

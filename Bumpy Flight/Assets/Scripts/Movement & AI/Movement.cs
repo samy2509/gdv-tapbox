@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
-    public float mSpeed                     = 10f;           // Geschwindigkeit, in der sich das Objekt bewegt
-    private float gravity                   = 44.0f;        // Anziehungskraft, die auf das Objekt wirkt
+    public float mSpeed                     = 6f;           // Geschwindigkeit, in der sich das Objekt bewegt
+    private float gravity                   = 54.0f;        // Anziehungskraft, die auf das Objekt wirkt
     private float bounceSpeed               = -.1f;         // Geschwindigkeit zum Hüpfen
     private Vector3 moveDi                  = Vector3.zero;
 
