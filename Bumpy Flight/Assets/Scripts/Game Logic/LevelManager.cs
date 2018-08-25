@@ -32,9 +32,12 @@ public class LevelManager : MonoBehaviour {
         health = PlayerPrefs.GetInt("Health");
         healthText.text = health.ToString();
         
-        uicontroller	= GameObject.Find("LevelManager").GetComponent<UIController>();
-        ors             = GameObject.Find("LevelGenerator").GetComponent<ObjectRandomSpawn>();
-        ui	            = GameObject.Find("UI");
+        uicontroller    = GameObject.Find("LevelManager").GetComponent<UIController>();
+        if (scene.name == "Level1") 
+        {
+            ors = GameObject.Find("LevelGenerator").GetComponent<ObjectRandomSpawn>();
+        }
+        ui = GameObject.Find("UI");
 
         uicontroller.ReadScore();
     }

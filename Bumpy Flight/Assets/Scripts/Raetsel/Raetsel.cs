@@ -10,11 +10,11 @@ public class Raetsel : MonoBehaviour
 	public List<int> 	orderList;		//Liste für Berührung von Steinen (TouchRockRiddle)
 
 	public int rand;					//Zufallsvariable für zufällige Wahl eines Rätsels - Nummer des Rätsels zur Identifikation
-	public int sperre;					//Sperrvariable für RaetlseCollisions
-	public int set1;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
-	public int set2;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
-	public int set3;					//Sperrvariable für RaetlseCollisions (TouchRockRiddle)
-	public int isHitting;				//Sperrvariable für RaetlseCollisions (FallingStones)
+	public int sperre;					//Sperrvariable für RaetselCollisions
+	public int set1;					//Sperrvariable für RaetselCollisions (TouchRockRiddle)
+	public int set2;					//Sperrvariable für RaetselCollisions (TouchRockRiddle)
+	public int set3;					//Sperrvariable für RaetselCollisions (TouchRockRiddle)
+	public int isHitting;				//Sperrvariable für RaetselCollisions (FallingStones)
 
 	private float pos;							//(y)-Position der beweglichen Platten
 	private int laenge;							//Länge des Zufallsmeshs
@@ -185,6 +185,13 @@ public class Raetsel : MonoBehaviour
 		oneUp.transform.SetParent(GameObject.Find("Other").transform);
 		oneUp.tag = "leben";
 
+		GameObject after =	Instantiate (rocks[14],				//rock o
+							new Vector3 (laenge/2 + 17.5f, 0.0f, -6.7f), 
+							Quaternion.Euler(-90, 0, 0)) 
+							as GameObject;
+		after.transform.SetParent(GameObject.Find("Rocks").transform);
+		after.transform.localScale = new Vector3 (Random.Range(3.1f, 4.0f), 2.22f, 1.0f);
+
 		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
 	}
 
@@ -203,6 +210,13 @@ public class Raetsel : MonoBehaviour
 										as GameObject;
 		flagstones.transform.SetParent(GameObject.Find("Rocks").transform);
 		flagstones.name = "flagstones";
+
+		GameObject after =	Instantiate (rocks[14],				//rock o
+							new Vector3 (laenge/2 + 17.5f, 0.0f, -6.7f), 
+							Quaternion.Euler(-90, 0, 0)) 
+							as GameObject;
+		after.transform.SetParent(GameObject.Find("Rocks").transform);
+		after.transform.localScale = new Vector3 (Random.Range(3.1f, 4.0f), 2.22f, 1.0f);
 
 		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
 	}
@@ -268,19 +282,40 @@ public class Raetsel : MonoBehaviour
 		wall.transform.SetParent(GameObject.Find("Rocks").transform);
 		wall.name = "Wall";
 
+		GameObject stoneStairs =	Instantiate (rocks[28],				//StonesBetweenStairs
+									new Vector3 (laenge/2, 0.0f, 0.0f), 
+									Quaternion.identity) 
+									as GameObject;
+		stoneStairs.transform.SetParent(GameObject.Find("Rocks").transform);
+		stoneStairs.name = "StonesBetweenStairs";
+
 		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
 	}
 
 	private void UpDownRock()
 	{
 		GameObject upDownRocks =	Instantiate (rocks[27],				//UpDownRocks
-									new Vector3 (laenge/8, 0.0f, 0.0f), 
+									new Vector3 (laenge/6, 0.0f, 0.0f), 
 									Quaternion.identity) 
 									as GameObject;
 		upDownRocks.transform.SetParent(GameObject.Find("Rocks").transform);
 		upDownRocks.name = "UpDownRocks";
 
-		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");
+		GameObject after =	Instantiate (rocks[14],				//rock o
+							new Vector3 (laenge/2 + 16.0f, 0.0f, -6.7f), 
+							Quaternion.Euler(-90, 0, 0)) 
+							as GameObject;
+		after.transform.SetParent(GameObject.Find("Rocks").transform);
+		after.transform.localScale = new Vector3 (Random.Range(3.1f, 4.0f), 2.22f, 1.0f);
+
+		GameObject before =	Instantiate (rocks[14],				//rock o
+							new Vector3 (laenge/7, 0.0f, -6.7f), 
+							Quaternion.Euler(-90, 0, 0)) 
+							as GameObject;
+		before.transform.SetParent(GameObject.Find("Rocks").transform);
+		before.transform.localScale = new Vector3 (Random.Range(3.1f, 4.0f), 2.22f, 1.0f);
+
+		levelManagerScript.currentCheckpoint = GameObject.Find("Spawner");        
 	}
 
 	IEnumerator WaitAndTransform(string name)

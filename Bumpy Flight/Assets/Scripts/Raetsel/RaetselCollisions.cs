@@ -8,23 +8,21 @@ public class RaetselCollisions : MonoBehaviour
 	private GameObject 		saeule2;			//Säule2, die den Weg versperrt
 	private int[] 			riddle;				//Zufällig gefülltes Array für TouchRockRiddle aus Raetsel
 	private int[] 			order;				//orderList aus Raetsel als Array
+    private int             didScore;           //Sperrvariable für Score
     private Raetsel 		raetselScript;		//Script Raetsel
 	private LevelManager 	levelManagerScript;	//Script LevelManager
     private GameObject      pointsText;         //Text, der bei Erfolg angezeigt werden soll
 	
     void Awake()
     {
-        raetselScript 		= GameObject.Find("LevelManager").GetComponent<Raetsel>();
-		levelManagerScript 	= GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        raetselScript 		    = GameObject.Find("LevelManager").GetComponent<Raetsel>();
+		levelManagerScript 	    = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        raetselScript.sperre    = 0;
+        didScore                = 0;
 
         if (raetselScript.rand == 0) 
         {
             riddle = raetselScript.riddle;
-        }
-        
-        else if (raetselScript.rand == 0 || raetselScript.rand == 2 || raetselScript.rand == 3) 
-        {
-            raetselScript.sperre = 0;
         }
     }
 
@@ -107,6 +105,11 @@ public class RaetselCollisions : MonoBehaviour
             {
 					levelManagerScript.RespawnPlayer();				
             }
+            else if (col.gameObject.tag == "player2" && gameObject.name == "ScorePlane" && didScore == 0)
+            {
+                didScore = 1;
+                score();
+            }
 		}
 
         //Hindernis 2 - BetterRunFast
@@ -129,6 +132,11 @@ public class RaetselCollisions : MonoBehaviour
                     levelManagerScript.RespawnPlayer();
                 }   
             }
+            else if (col.gameObject.tag == "player2" && gameObject.name == "ScorePlane" && didScore == 0)
+            {
+                didScore = 1;
+                score();
+            }
 		}
 
         //Rätsel/Hindernis 3 - Traffic Lights
@@ -139,7 +147,6 @@ public class RaetselCollisions : MonoBehaviour
                 raetselScript.sperre = 1;
                 StartCoroutine(LightsAndFall());
             }
-
             else if (col.gameObject.tag == "player2" && gameObject.tag == "rock3" && raetselScript.isHitting == 0)
             {
                 raetselScript.isHitting = 1;
@@ -153,6 +160,11 @@ public class RaetselCollisions : MonoBehaviour
                 } 
                 raetselScript.isHitting = 0;
             }
+            else if (col.gameObject.tag == "player2" && gameObject.name == "ScorePlane" && didScore == 0)
+            {
+                didScore = 1;
+                score();
+            }
         }
 
         //Rätsel/Hindernis 4 - UpDownRock
@@ -162,6 +174,11 @@ public class RaetselCollisions : MonoBehaviour
             {
                 levelManagerScript.RespawnPlayer();
             }
+            else if (col.gameObject.tag == "player2" && gameObject.name == "ScorePlane" && didScore == 0)
+            {
+                didScore = 1;
+                score();
+            }
         }
     }
 
@@ -169,6 +186,16 @@ public class RaetselCollisions : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         raetselScript.spawnStonesAgain();
+    }
+
+    private void score ()
+    {
+        pointsText = Instantiate(Resources.Load("Punkte-Text"),
+                                    GameObject.FindGameObjectWithTag("player2").transform.position,
+                                    Quaternion.identity) as GameObject;
+        pointsText.AddComponent<UIPoints>();
+        GameObject.Find("LevelManager").GetComponent<UIController>().AddToScore(100);
+        pointsText.GetComponent<UIPoints>().Points(100, GameObject.FindGameObjectWithTag("player2").transform.position);
     }
 
     IEnumerator LightsAndFall()
@@ -223,7 +250,7 @@ public class RaetselCollisions : MonoBehaviour
                                         GameObject.FindGameObjectWithTag("player2").transform.position,
                                         Quaternion.identity) as GameObject;
             pointsText.AddComponent<UIPoints>();
-            GameObject.Find("LevelManager").GetComponent<UIController>().AddToScore(10);
+            GameObject.Find("LevelManager").GetComponent<UIController>().AddToScore(100);
             pointsText.GetComponent<UIPoints>().Points(100, GameObject.FindGameObjectWithTag("player2").transform.position);
 
             GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
