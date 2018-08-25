@@ -1143,6 +1143,7 @@ MonoBehaviour:
   restartScore: {fileID: 0}
   ui: {fileID: 0}
   pauseUI: {fileID: 0}
+  shieldPrefab: {fileID: 0}
   isWaiting: 0
   particleLauncher: {fileID: 0}
 --- !u!4 &756907790
@@ -3548,7 +3549,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 954621545}
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
