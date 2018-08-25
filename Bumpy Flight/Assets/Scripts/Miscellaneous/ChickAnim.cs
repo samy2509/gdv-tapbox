@@ -37,7 +37,7 @@ public class ChickAnim : MonoBehaviour {
 
 
 		// Zurück laufen
-		if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A)) {
+		if((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A))  && controller.isGrounded == true ) {
 			anim.Play("Walk");
 		}
 		// Zurück laufen Ende

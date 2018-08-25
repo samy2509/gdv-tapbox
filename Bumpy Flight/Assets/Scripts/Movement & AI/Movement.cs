@@ -34,7 +34,8 @@ public class Movement : MonoBehaviour {
         }
 
         foreach (Transform child in caves.transform) {
-            if (gameObject.name != "Sheep(Clone)" && gameObject.transform.position.x > child.transform.position.x - 10 && gameObject.transform.position.x < child.transform.position.x + 10 ) {
+            //if (gameObject.name != "Sheep(Clone)" && gameObject.transform.position.x > child.transform.position.x - 10 && gameObject.transform.position.x < child.transform.position.x + 10 ) {
+            if (gameObject.transform.position.x > child.transform.position.x - 10 && gameObject.transform.position.x < child.transform.position.x + 10 ) {
                 if(gameObject.transform.position.x > child.transform.position.x && gameObject.transform.position.x < child.transform.position.x + 10 && gameObject.transform.forward.x < 0) {
                     TurnAround();
                 } else if( gameObject.transform.position.x < child.transform.position.x && gameObject.transform.position.x > child.transform.position.x - 10 && gameObject.transform.forward.x > 0 ) {

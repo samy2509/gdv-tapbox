@@ -13625,7 +13625,8 @@ MonoBehaviour:
   restartScore: {fileID: 749441531}
   ui: {fileID: 1577965433}
   pauseUI: {fileID: 1002627760}
-  shieldPrefab: {fileID: 0}
+  shieldPrefab: {fileID: 1827760211796626, guid: 1e53ba9d341764d8f83178cc1c0d7628,
+    type: 2}
   isWaiting: 0
   particleLauncher: {fileID: 345734953}
 --- !u!114 &1809567589
@@ -13650,7 +13651,7 @@ MonoBehaviour:
   gegner2: {fileID: 0}
   gegner3: {fileID: 0}
   boss: {fileID: 0}
-  leben: {fileID: 0}
+  leben: {fileID: 100008, guid: 879451a5e2214f143a7edf5dd3e32020, type: 2}
   schutzschild: {fileID: 0}
   blitzschlag: {fileID: 0}
   eingang: {fileID: 0}
