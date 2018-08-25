@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChickAnim : MonoBehaviour {
 
 	public Animator anim;
-	CharacterController controller;
+	public CharacterController controller;
 
 	void Start () {
 		anim 			= 			GetComponent<Animator>();
@@ -29,7 +29,11 @@ public class ChickAnim : MonoBehaviour {
 		}
 		// Ei abwerfen Ende
 		if(Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) {
-			anim.Play("Idle_A", -1, 0f);
+			if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+				anim.Play("Walk", -1, 0f);
+			} else {
+				anim.Play("Idle_A", -1, 0f);
+			}
 		}
 
 
@@ -44,15 +48,12 @@ public class ChickAnim : MonoBehaviour {
 
 
 		// Springen
-		if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
+		if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W)) {
 			anim.Play("Fly", -1, 0f);
 		}
-		// Springen Ende
-		/*if(Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)) {
-			anim.Play("Idle_A", -1, 0f);
-		}*/
-
-		if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)) {
+		//Springen Ende & am Boden
+		if(Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W) && controller.isGrounded) {
+			print("grounded.");
 			anim.Play("Walk", -1, 0f);
 		}
 	}
