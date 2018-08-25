@@ -67,7 +67,7 @@ public class AudioFX : MonoBehaviour
         spawn       = AddAudio(clipSpawn, false, false, 0.5f);
         duck        = AddAudio(clipDuck, false, false, 0.15f);
         sheep       = AddAudio(clipSheep, false, false, 0.15f);
-        cow         = AddAudio(clipCow, false, false, 0.15f);
+        cow         = AddAudio(clipCow, false, false, 0.10f);
         megaCow     = AddAudio(clipMegaCow, false, false, 0.15f);
         stones      = AddAudio(clipStones, false, false, 1.0f);
         bing        = AddAudio(clipBing, false, false, 0.25f);

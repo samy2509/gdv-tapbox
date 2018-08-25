@@ -20,6 +20,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	public GameObject schutzschild;		// Collectable für Spawn
 	public GameObject blitzschlag;		// Collectable für Spawn
 	public GameObject eingang;			// Hoehleneingang für Spawn
+	public GameObject ausgang;			// Hoehleneausgang für Spawn
 
 	private List<GameObject> trees;			// Liste mit allen Bäumen
 	private List<GameObject> stones;		// Liste mit allen Steinen
@@ -52,6 +53,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		collectables	= new List<GameObject>();
 		caves			= new List<GameObject>();
 		abyss			= new List<GameObject>();
+
+		InvokeRepeating("DestroyEggs", 5.0f, 3.0f);
 
 		new GameObject("Gegner");
 		new GameObject("Collectables");
@@ -341,9 +344,15 @@ public class ObjectRandomSpawn : MonoBehaviour {
 				pos.z
 		);
 
-		if ( (lastCaveX + distanceCave < pos.x && randC == 1 && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x) || force == true)
+		if ( (lastCaveX + distanceCave < pos.x && randC == 1 && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x))
 		{
 			GameObject caveInst = Instantiate(cave, newPos, Quaternion.identity) as GameObject;
+			caves.Add(caveInst.gameObject);
+			caveInst.transform.SetParent(GameObject.Find("Caves").transform);
+		}
+		else if (force == true)
+		{
+			GameObject caveInst = Instantiate(ausgang, newPos, Quaternion.identity) as GameObject;
 			caves.Add(caveInst.gameObject);
 			caveInst.transform.SetParent(GameObject.Find("Caves").transform);
 		}
@@ -533,6 +542,22 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		}
 
 		return max;
+	}
+
+	private void DestroyEggs ()
+	{
+		GameObject[] all = GameObject.FindGameObjectsWithTag("Egg");
+
+		if (all.Length != 0) 
+		{
+			for (int i = 0; i < all.Length; i++)
+			{
+				if (all[i].transform.position.y <= -5.0f)
+				{
+					Destroy(all[i]);
+				}
+			}
+		}
 	}
 
 	// Entfernt alle Hindernisse, die nicht mehr innerhalb des FOV sind
