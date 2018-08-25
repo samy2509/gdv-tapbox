@@ -40,6 +40,7 @@ public class RaetselCollisions : MonoBehaviour
                     GameObject.Find("RedLamp1").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = true;
+                    GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
                 }
 
                 checkCorrectness();
@@ -50,6 +51,7 @@ public class RaetselCollisions : MonoBehaviour
                     GameObject.Find("RedLamp3").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("WhiteLamp2").GetComponent<MeshRenderer>().enabled = true;
                     GameObject.Find("WhiteLamp3").GetComponent<MeshRenderer>().enabled = true;
+                    GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
                 }
             }
 
@@ -62,6 +64,7 @@ public class RaetselCollisions : MonoBehaviour
                     GameObject.Find("RedLamp2").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("WhiteLamp2").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("YellowLamp2").GetComponent<MeshRenderer>().enabled = true;
+                    GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
                 }
 
                 checkCorrectness();
@@ -72,6 +75,7 @@ public class RaetselCollisions : MonoBehaviour
                     GameObject.Find("RedLamp3").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = true;
                     GameObject.Find("WhiteLamp3").GetComponent<MeshRenderer>().enabled = true;
+                    GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
                 }
             }
 
@@ -84,6 +88,7 @@ public class RaetselCollisions : MonoBehaviour
                     GameObject.Find("RedLamp3").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("WhiteLamp3").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("YellowLamp3").GetComponent<MeshRenderer>().enabled = true;
+                    GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
                 }
 
                 checkCorrectness();
@@ -94,6 +99,7 @@ public class RaetselCollisions : MonoBehaviour
                     GameObject.Find("RedLamp2").GetComponent<MeshRenderer>().enabled = false;
                     GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = true;
                     GameObject.Find("WhiteLamp2").GetComponent<MeshRenderer>().enabled = true;
+                    GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
                 }
             }
         }
@@ -117,7 +123,6 @@ public class RaetselCollisions : MonoBehaviour
 		{
             if (col.gameObject.tag == "player2" && raetselScript.sperre == 0)
             {
-                //GameObject.Find("Player").GetComponent<AudioFX>().stones.Play();
                 StartCoroutine(WorkAndWait(gameObject.name));
                 raetselScript.sperre = 1;
 		    }
@@ -202,13 +207,13 @@ public class RaetselCollisions : MonoBehaviour
     {
         GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("RedLamp1").GetComponent<MeshRenderer>().enabled = true;
-        //GameObject.Find("Player").GetComponent<AudioFX>().bling.Play();
+        GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
 
         yield return new WaitForSeconds(0.5f);
 
         GameObject.Find("RedLamp1").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = true;
-        //GameObject.Find("Player").GetComponent<AudioFX>().bling.Play();
+        GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
 
         GameObject.Find("FallingStone1").GetComponent<Rigidbody>().isKinematic = false;
         GameObject.Find("FallingStone2").GetComponent<Rigidbody>().isKinematic = false;
@@ -223,8 +228,8 @@ public class RaetselCollisions : MonoBehaviour
 
         GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("GreenLamp1").GetComponent<MeshRenderer>().enabled = true;
-        //GameObject.Find("Player").GetComponent<AudioFX>().bling.Play();
-        //GameObject.Find("Player").GetComponent<AudioFX>().stones.Play();
+        GameObject.Find("Player").GetComponent<AudioFX>().bing.Play();
+        GameObject.Find("Player").GetComponent<AudioFX>().stones.Play();
 
         openDoors();
     }
@@ -263,7 +268,6 @@ public class RaetselCollisions : MonoBehaviour
 
             raetselScript.sperre = 1;
         }
-		
     }
 
     void checkCorrectness()
@@ -306,6 +310,8 @@ public class RaetselCollisions : MonoBehaviour
 
     IEnumerator WorkAndWait(string name)
     {
+        GameObject.Find("Player").GetComponent<AudioFX>().stones.Play();
+        yield return new WaitForSeconds(0.05f);
         if (name == "detect1")
         {   
             //0.025?

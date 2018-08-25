@@ -101,6 +101,19 @@ public class Movement : MonoBehaviour {
                 pointsText.GetComponent<UIPoints>().Points(100, gameObject.transform.position);
             }
 
+            if (gameObject.name == "Cow(Clone)")
+            {
+                GameObject.Find("Player").GetComponent<AudioFX>().cow.Play();
+            }
+            else if (gameObject.name == "Sheep(Clone)")
+            {
+                GameObject.Find("Player").GetComponent<AudioFX>().sheep.Play();
+            }
+            else if (gameObject.name == "Cow large(Clone)")
+            {
+                GameObject.Find("Player").GetComponent<AudioFX>().megaCow.Play();
+            }
+
             ors.DeleteEnemy(gameObject);
             Destroy(gameObject);
         }

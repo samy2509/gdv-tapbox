@@ -97,6 +97,8 @@ public class MovementDuck : MonoBehaviour {
             uicontroller.AddToScore(30);
             pointsText.GetComponent<UIPoints>().Points(30, gameObject.transform.position);
 
+            GameObject.Find("Player").GetComponent<AudioFX>().duck.Play();
+
             ors.DeleteEnemy(gameObject);
             Destroy(gameObject);
         }

@@ -192,13 +192,23 @@ public class ObjectRandomSpawn : MonoBehaviour {
 					gegnerInst.transform.Rotate( 0f, -90f, 0f );
 				}
 
+				if (geg == gegner) 
+				{
+					GameObject.Find("Player").GetComponent<AudioFX>().cow.Play();
+				}
+				else if (geg == gegner2)
+				{
+					GameObject.Find("Player").GetComponent<AudioFX>().sheep.Play();
+				}
+				else if (geg == gegner3)
+				{
+					GameObject.Find("Player").GetComponent<AudioFX>().duck.Play();
+				}
+
 				enemies.Add( gegnerInst.gameObject );
 
 				gegnerInst.transform.SetParent(GameObject.Find("Gegner").transform);
 			}
-			//GameObject.Find("Player").GetComponent<AudioFX>().sheep.Play();
-			//GameObject.Find("Player").GetComponent<AudioFX>().duck.Play();
-			GameObject.Find("Player").GetComponent<AudioFX>().cow.Play();
 		}
 	}
 

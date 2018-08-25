@@ -7024,8 +7024,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0faf3cb8dc45f44229a5b016f2e1506b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipLevel1: {fileID: 8300000, guid: 34aa3e8de4d6a497eae4b9082e64089b, type: 3}
-  clipNebenlevel: {fileID: 8300000, guid: 5ad550c6f680f46edb7749cb2a7c4c84, type: 3}
+  clipBirds: {fileID: 8300000, guid: 5b1b1fca78d044659afe9aab5bf3e1e4, type: 3}
+  clipLevel1: {fileID: 8300000, guid: eb64f32e3d5ff4e2e9971370a5916600, type: 3}
+  clipNebenlevel: {fileID: 8300000, guid: 90527985794d143ada0d382faf9593ba, type: 3}
   clipFlattern: {fileID: 8300000, guid: 1486fb8b921214222912286171bf2594, type: 3}
   clipDamage: {fileID: 8300000, guid: 4b898cc98c75743139a23ad2ee06f5bb, type: 3}
   clipShootEgg: {fileID: 8300000, guid: 68972a02d12d84e81af47a65e13fb036, type: 3}
@@ -7035,10 +7036,13 @@ MonoBehaviour:
   clipError: {fileID: 8300000, guid: 14e9a481c80f94f7ab89aa1be02820a7, type: 3}
   clipScore: {fileID: 8300000, guid: 636119806f0554fb58578240f0e7705a, type: 3}
   clipSpawn: {fileID: 8300000, guid: fb9e390629a9c4ab989b322478ac83c8, type: 3}
-  clipDuck: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
-  clipSheep: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  clipDuck: {fileID: 8300000, guid: 2639e8fa3a152492395c895cc17a8530, type: 3}
+  clipSheep: {fileID: 8300000, guid: 5f0cff4e8ddbb41a3bb54eb754ec9002, type: 3}
   clipCow: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
-  clipMegaCow: {fileID: 8300000, guid: 8f353ef36e02147709a501f85e65b832, type: 3}
+  clipMegaCow: {fileID: 8300000, guid: 7ad3e49bb46a74be8ba6dd42c2b7bf10, type: 3}
+  clipStones: {fileID: 8300000, guid: c96a34f770faa4f339ecea36d3015a8a, type: 3}
+  clipBing: {fileID: 8300000, guid: 3e5cfd801e87340c59280217ec47be2e, type: 3}
+  birds: {fileID: 0}
   level1Background: {fileID: 0}
   nebenlevelBackground: {fileID: 0}
   flattern: {fileID: 0}
@@ -7054,6 +7058,8 @@ MonoBehaviour:
   sheep: {fileID: 0}
   cow: {fileID: 0}
   megaCow: {fileID: 0}
+  stones: {fileID: 0}
+  bing: {fileID: 0}
 --- !u!1 &1002627760
 GameObject:
   m_ObjectHideFlags: 0
