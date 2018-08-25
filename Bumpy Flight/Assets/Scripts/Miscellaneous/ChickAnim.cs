@@ -42,7 +42,7 @@ public class ChickAnim : MonoBehaviour {
 			anim.Play("Walk", -1, 0f);
 		}
 		// Zurück laufen Ende
-		if(Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
+		if(Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) {
 			anim.Play("Idle_A", -1, 0f);
 		}
 
@@ -51,10 +51,13 @@ public class ChickAnim : MonoBehaviour {
 		if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W)) {
 			anim.Play("Fly", -1, 0f);
 		}
-		//Springen Ende & am Boden
-		if(Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W) && controller.isGrounded) {
-			print("grounded.");
-			anim.Play("Walk", -1, 0f);
+		// Springen Ende
+		if(Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W)) {
+			if(controller.isGrounded && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+				anim.Play("Walk", -1, 0f);
+			} else {
+				anim.Play("Idle_A", -1, 0f);
+			}
 		}
 	}
 }
