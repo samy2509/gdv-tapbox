@@ -122,9 +122,7 @@ public class Movement : MonoBehaviour {
     // Lässt den Gegner eine 180-Grad-Wende durchführen
     public void TurnAround() {
         if( (transform.rotation.y != -90f || transform.rotation.y != 90f) ) {
-            // for(int i = 0; i < 45; i++) {
-                transform.Rotate(0, 180, 0);
-            // }
+            transform.Rotate(0, 180, 0);
 
             lastTurn = transform.position.x;
         }

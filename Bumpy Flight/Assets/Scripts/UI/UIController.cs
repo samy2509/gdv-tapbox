@@ -31,6 +31,7 @@ public class UIController : MonoBehaviour {
         }
 	}
 
+	// Liest den Score aus der Variable aus und schreibt ihn ins UI
 	public void ReadScore() {
 		if( PlayerPrefs.GetInt("Highscore") != 0 ) {
 			score = PlayerPrefs.GetInt("Highscore");
@@ -38,6 +39,7 @@ public class UIController : MonoBehaviour {
 		}
 	}
 
+	// Setzt das Spiel fort
 	public void GameOn() {
 		Time.timeScale = 1f;
 		Cursor.visible = false;

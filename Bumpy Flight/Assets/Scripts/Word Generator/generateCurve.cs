@@ -233,10 +233,6 @@ public class generateCurve : MonoBehaviour {
 		if(turtle.transform.position.x % bossSpawns < 1) {
 			objectSpawner.SpawnBoss( turtle.transform.position );
 		}
-
-		// if(turtle.transform.position.x > bossSpawns[i] - 1  && turtle.transform.position.x < bossSpawns[i]) {
-		// 	objectSpawner.SpawnBoss( turtle.transform.position );
-		// }
 	}
 
 	/*
