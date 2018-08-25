@@ -9,13 +9,12 @@ public class ChickAnim : MonoBehaviour {
 
 	void Start () {
 		anim 			= 			GetComponent<Animator>();
-		controller      = 			gameObject.GetComponent<CharacterController>();
 	}
 	
 	void Update () {
 		// Vorwärts laufen
-		if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
-			anim.Play("Walk", -1, 0f);
+		if((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.D)) && controller.isGrounded == true) {
+			anim.Play("Walk");
 		}
 		// Vorwärts laufen Ende
 		if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) {
@@ -38,8 +37,8 @@ public class ChickAnim : MonoBehaviour {
 
 
 		// Zurück laufen
-		if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
-			anim.Play("Walk", -1, 0f);
+		if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A)) {
+			anim.Play("Walk");
 		}
 		// Zurück laufen Ende
 		if(Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) {
@@ -48,16 +47,20 @@ public class ChickAnim : MonoBehaviour {
 
 
 		// Springen
-		if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W)) {
-			anim.Play("Fly", -1, 0f);
-		}
+		// if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W)) {
+		// 	anim.Play("Fly");
+		// }
 		// Springen Ende
-		if(Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W)) {
-			if(controller.isGrounded && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-				anim.Play("Walk", -1, 0f);
-			} else {
-				anim.Play("Idle_A", -1, 0f);
-			}
+		// if(Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W)) {
+		// 	if(controller.isGrounded && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+		// 		anim.Play("Walk", -1, 0f);
+		// 	} else {
+		// 		anim.Play("Idle_A", -1, 0f);
+		// 	}
+		// }
+
+		if(controller.isGrounded == false && !anim.GetCurrentAnimatorStateInfo(0).IsName("Roll")) {
+			anim.Play("Fly");
 		}
 	}
 }

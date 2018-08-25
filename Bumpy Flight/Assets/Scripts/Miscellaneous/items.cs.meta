@@ -3,7 +3,13 @@ guid: c7a4d8259de2fb846ba8681c2db30c2f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - itemText: {instanceID: 0}
+  - healthText: {instanceID: 0}
+  - player: {instanceID: 0}
+  - currentCheckpoint: {instanceID: 0}
+  - shieldPrefab: {fileID: 1827760211796626, guid: 1e53ba9d341764d8f83178cc1c0d7628,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

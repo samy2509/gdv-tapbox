@@ -52,7 +52,7 @@ public class Movement : MonoBehaviour {
                 moveDi.y -= gravity * Time.deltaTime;
                 controller.Move(moveDi * Time.deltaTime);
             } else {
-                transform.Translate(0f, 0f, bounceSpeed);
+                transform.Translate(0f, 0f, moveDi.x/3 * bounceSpeed);
             }
         }
 
@@ -76,10 +76,10 @@ public class Movement : MonoBehaviour {
             TurnAround();
         }
 
-        if (col.gameObject.tag == "Egg" && gameObject.tag != "Boss") {
+        if (col.gameObject.tag == "Egg" && gameObject.tag != "Boss" || col.name == "Collider") {
             health = 0;
             DestroyEnemy();
-        } else if (col.gameObject.tag == "Egg") {
+        } else if (col.gameObject.tag == "Egg" || col.name == "Collider") {
             health -= 25;
             DestroyEnemy();
         }

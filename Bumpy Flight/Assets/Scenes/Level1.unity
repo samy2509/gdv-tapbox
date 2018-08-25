@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44659364, g: 0.4964301, b: 0.5748256, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -358,55 +358,55 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1355842258669200, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1358654601700696, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1733101036388192, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1345035277150928, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1525748977822148, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1803509913354296, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1967332176871484, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1038868783031724, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1118751545330278, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1088113125919646, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1358498356870486, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1772277773706126, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1172366923805630, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc116d7714fa50d409c15c555a9e8cc4, type: 2}
@@ -851,7 +851,7 @@ GameObject:
   - component: {fileID: 204650112}
   - component: {fileID: 204650114}
   - component: {fileID: 204650113}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +994,7 @@ GameObject:
   - component: {fileID: 215397632}
   - component: {fileID: 215397634}
   - component: {fileID: 215397633}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WorldParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5960,7 +5960,7 @@ GameObject:
   - component: {fileID: 342074126}
   - component: {fileID: 342074128}
   - component: {fileID: 342074127}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: scoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6034,7 +6034,7 @@ GameObject:
   - component: {fileID: 364559561}
   - component: {fileID: 364559563}
   - component: {fileID: 364559562}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: scoreImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6175,7 +6175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576934329}
   - component: {fileID: 576934330}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: GameObject
   m_TagString: eiStop
   m_Icon: {fileID: 0}
@@ -6535,7 +6535,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 768402355}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6565,7 +6565,7 @@ GameObject:
   - component: {fileID: 770252743}
   - component: {fileID: 770252745}
   - component: {fileID: 770252744}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ParticlesDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11314,7 +11314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 827820924}
   - component: {fileID: 827820925}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: leftBorder
   m_TagString: Barrier
   m_Icon: {fileID: 0}
@@ -12081,7 +12081,7 @@ GameObject:
   - component: {fileID: 1106277617}
   - component: {fileID: 1106277619}
   - component: {fileID: 1106277618}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12135,7 +12135,7 @@ GameObject:
   - component: {fileID: 1107993459}
   - component: {fileID: 1107993461}
   - component: {fileID: 1107993460}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: healthImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12281,7 +12281,7 @@ GameObject:
   - component: {fileID: 1146340615}
   - component: {fileID: 1146340616}
   - component: {fileID: 1146340618}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: Player
   m_TagString: player
   m_Icon: {fileID: 0}
@@ -12394,6 +12394,8 @@ MonoBehaviour:
   restartScore: {fileID: 15398606}
   ui: {fileID: 1362213549}
   pauseUI: {fileID: 1860231437}
+  shieldPrefab: {fileID: 1827760211796626, guid: 1e53ba9d341764d8f83178cc1c0d7628,
+    type: 2}
   isWaiting: 0
   particleLauncher: {fileID: 770252745}
 --- !u!114 &1146340618
@@ -12780,7 +12782,7 @@ GameObject:
   - component: {fileID: 1362213552}
   - component: {fileID: 1362213551}
   - component: {fileID: 1362213550}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12952,7 +12954,7 @@ GameObject:
   - component: {fileID: 1448420738}
   - component: {fileID: 1448420740}
   - component: {fileID: 1448420739}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ParticlesFly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17758,7 +17760,7 @@ GameObject:
   - component: {fileID: 1623342160}
   - component: {fileID: 1623342162}
   - component: {fileID: 1623342161}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18173,7 +18175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  controller: {fileID: 1760267272}
+  controller: {fileID: 1146340614}
 --- !u!143 &1760267272
 CharacterController:
   m_ObjectHideFlags: 0
@@ -18184,13 +18186,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.65
+  m_Radius: 0.75
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.01, y: 0.83, z: -0.07}
 --- !u!1 &1795804056
 GameObject:
   m_ObjectHideFlags: 0
@@ -18275,7 +18277,7 @@ GameObject:
   - component: {fileID: 1799334558}
   - component: {fileID: 1799334560}
   - component: {fileID: 1799334559}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18676,7 +18678,7 @@ GameObject:
   - component: {fileID: 1869159426}
   - component: {fileID: 1869159428}
   - component: {fileID: 1869159427}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: healthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

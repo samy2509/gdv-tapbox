@@ -13,6 +13,7 @@ TagManager:
   - leben
   - schutzschild
   - blitzschlag
+  - eiStop
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - 
   - PostProcessing
   - Floor
-  - 
-  - 
+  - Player
+  - PlayerBarrier
   - 
   - 
   - 

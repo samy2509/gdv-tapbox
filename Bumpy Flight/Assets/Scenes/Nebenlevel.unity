@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43847904, g: 0.4865644, b: 0.56683224, a: 1}
+  m_IndirectSpecularColor: {r: 0.43846706, g: 0.48655272, b: 0.5668254, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6738,7 +6738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  controller: {fileID: 0}
+  controller: {fileID: 990480603}
 --- !u!143 &721815198
 CharacterController:
   m_ObjectHideFlags: 0
@@ -13625,6 +13625,7 @@ MonoBehaviour:
   restartScore: {fileID: 749441531}
   ui: {fileID: 1577965433}
   pauseUI: {fileID: 1002627760}
+  shieldPrefab: {fileID: 0}
   isWaiting: 0
   particleLauncher: {fileID: 345734953}
 --- !u!114 &1809567589

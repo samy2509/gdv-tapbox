@@ -17,6 +17,7 @@ public class MovementDuck : MonoBehaviour {
     private int                 health;                     // Die Leben des Gegners
     private GameObject          pointsText;                 // Text, der beim Tod angezeigt werden soll
     private GameObject          caves;                      // Gruppierungsobjekt der Höhlen im Level
+    public Animator animDuck;
 
     void Start () {
         controller      = gameObject.GetComponent<CharacterController>();
@@ -27,6 +28,7 @@ public class MovementDuck : MonoBehaviour {
         mSpeed          = 10.0f;
         lastTurn        = 0;
         health          = 100;
+        animDuck 		= 			GetComponent<Animator>();
 	}
 
 	void Update () {
@@ -34,12 +36,15 @@ public class MovementDuck : MonoBehaviour {
 			moveDi = new Vector3(0, 0, mSpeed/gravity*4);
             moveDi = transform.TransformDirection(moveDi);
 			moveDi *= mSpeed;
+
+            animDuck.Play("Walk");
 		}
 
         if(Random.Range(0, 100) == 5 && (transform.position.x > lastTurn + 20f || transform.position.x < lastTurn - 20f)) {
             TurnAround();
         } else if ( Random.Range(0, 100) == 5 && controller.isGrounded ) {
 			moveDi.y = jumpForce;
+            animDuck.Play("Fly");
 		}
 
         foreach (Transform child in caves.transform) {
@@ -77,10 +82,10 @@ public class MovementDuck : MonoBehaviour {
             TurnAround();
         }
 
-        if (col.gameObject.tag == "Egg" && gameObject.tag != "Boss") {
+        if (col.gameObject.tag == "Egg" && gameObject.tag != "Boss" || col.name == "Collider") {
             health = 0;
             DestroyEnemy();
-        } else if (col.gameObject.tag == "Egg") {
+        } else if (col.gameObject.tag == "Egg" || col.name == "Collider") {
             health -= 25;
             DestroyEnemy();
         }

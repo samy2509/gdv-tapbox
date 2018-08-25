@@ -11,6 +11,7 @@ public class items : MonoBehaviour {
     private int powerUp;
     public GameObject player;
     public GameObject currentCheckpoint;
+
     // Use this for initialization
     void Start () {
         healthText.text = health.ToString();
@@ -39,7 +40,7 @@ public class items : MonoBehaviour {
             Destroy(other.gameObject);
             if (health < 4) {
                 health++;
-                Debug.Log("Schutzschild aufgesammelt!");
+                Debug.Log("Leben aufgesammelt!");
             }
         }
         else if (other.gameObject.tag == "schutzschild") {

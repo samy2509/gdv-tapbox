@@ -111,6 +111,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
+d10ee87c716e4e59897fe53730be0ff0 Assembly-CSharp.dll:.DuckAnim
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 b6c4f8667848c032948f9d1d8aceccb9 Assembly-CSharp.dll:.generateCurve
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
@@ -125,8 +126,8 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 17047acd40dec53ff38ff4570c76575c Assembly-CSharp.dll:.items
 cf4ae8689468d2d7c1c4f3265e84b4fa Assembly-CSharp.dll:.Raetsel
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RaetselCollisions
-ec813fd954df33230fef1a9d142909c2 Assembly-CSharp.dll:.LevelManager
-0ea7e3a1b65cd933d7a007e6774c4eaa Assembly-CSharp.dll:.FollowCamCave
+0daf11bd0abbbdd83d77acfc474e473a Assembly-CSharp.dll:.LevelManager
+d4416db3de760443e6de809f563e5ce0 Assembly-CSharp.dll:.FollowCamCave
 6c072b39b3c68413bc432aaada417754 Assembly-CSharp.dll:.checkpoint
 bda34f6f00ea154dec832486e3ecf10b Assembly-CSharp.dll:.AudioFX
 f13ffc6a6b4a98224ea0f655cc49d7d9 Assembly-CSharp.dll:.ChickAnim
@@ -172,5 +173,5 @@ d4416db3de760443e6de809f563e5ce0 Assembly-CSharp.dll:.FollowCam
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.startGame
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.betreteLevel
 fefa11f34bac0ad929b90aa36b4480ac Assembly-CSharp.dll:.Health
-88eaeebfd80f63f2b41953d496ac7359 Assembly-CSharp.dll:.MovementDuck
+6fa4bb7cf762ae085eab565df801d00d Assembly-CSharp.dll:.MovementDuck
 6c072b39b3c68413bc432aaada417754 Assembly-CSharp.dll:.respawn

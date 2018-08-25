@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour {
                 moveDirection.y = jumpForce;
 
                 GameObject.Find("Player").GetComponent<AudioFX>().flattern.Play();
-                particleLauncher.Emit (10);     
+                particleLauncher.Emit (10);   
             }
         }
         moveDirection.x = velocity;

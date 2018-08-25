@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour {
     private UIController    uicontroller;
     public GameObject       ui;
     public GameObject       pauseUI;
+    public GameObject       shieldPrefab;
     private ObjectRandomSpawn ors;
 
     public  int                 isWaiting;          // Sperrvariable Für Respawn in Höhle
@@ -80,6 +81,17 @@ public class LevelManager : MonoBehaviour {
                  audioScript.collected.Play();
                  ors.DeleteCollectables(other.gameObject);
                  Destroy(other.gameObject);
+
+                 // Schild anzeigen
+                Vector3 playerPos = GameObject.Find("Player").transform.position;
+                playerPos = new Vector3(
+                    playerPos.x,
+                    playerPos.y + 2,
+                    playerPos.z
+                );
+
+                GameObject gegnerInst = Instantiate( shieldPrefab, playerPos, Quaternion.identity ) as GameObject;
+                gegnerInst.transform.SetParent(GameObject.Find("Player").transform);
              }
          }
      }
@@ -89,6 +101,11 @@ public class LevelManager : MonoBehaviour {
         if (powerUp != 1) {
             health = health - 1;
         }
+
+        if(powerUp == 1) {
+            Destroy(GameObject.Find("shield(Clone)"));
+        }
+
         powerUp = 0;
         //lebensanzeige aktualisieren
         healthText.text = health.ToString();
