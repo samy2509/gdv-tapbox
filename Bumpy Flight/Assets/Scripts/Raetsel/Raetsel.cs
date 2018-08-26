@@ -232,13 +232,14 @@ public class Raetsel : MonoBehaviour
 		firestairs.transform.SetParent(GameObject.Find("Rocks").transform);
 		firestairs.name = "FireBetweenStairs";
 
+		// *PowerUps aufsammeln wurde für Höhle nicht umgesetzt*
 		// Prefab PowerUpContainerRed
-		GameObject oneUp =	Instantiate (other[1],				
-							new Vector3 (laenge/6, Random.Range(1.0f, 2.0f), -10.8f), 
-							Quaternion.identity) 
-							as GameObject;
-		oneUp.transform.SetParent(GameObject.Find("Other").transform);
-		oneUp.tag = "leben";
+		// GameObject oneUp =	Instantiate (other[1],				
+		// 					new Vector3 (laenge/6, Random.Range(1.0f, 2.0f), -10.8f), 
+		// 					Quaternion.identity) 
+		// 					as GameObject;
+		// oneUp.transform.SetParent(GameObject.Find("Other").transform);
+		// oneUp.tag = "leben";
 
 		// Prefab rock o
 		GameObject after =	Instantiate (rocks[14],				
