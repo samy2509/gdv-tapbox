@@ -1,4 +1,75 @@
-﻿using UnityEngine;
+﻿/* using UnityEngine;
+
+public class FollowCam : MonoBehaviour {
+
+	public Transform target;
+	public bool moveCam;
+	public bool enemyBoss;
+	public float nowPlayerPosition; 
+	public float oldPlayerPosition;
+	Vector3 offset = new Vector3(0f, 4f, -16f);
+
+	void Start () {
+		moveCam = true;
+		oldPlayerPosition = 1.0f;
+	}
+
+	void Update () {
+		Camera.main.fieldOfView = 45;
+
+		nowPlayerPosition = GameObject.Find("Chick").transform.position.x;
+
+		if(nowPlayerPosition > oldPlayerPosition) {
+			oldPlayerPosition = GameObject.Find("Chick").transform.position.x;
+		}
+
+		if(nowPlayerPosition >= oldPlayerPosition) {
+			if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey("space") || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) ) {
+				moveCam = true;
+			}
+		}
+		if(nowPlayerPosition < oldPlayerPosition) {
+			if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
+				moveCam = false;
+			}
+		}
+
+		// Gegner spawned?
+		if(Camera.main.transform.position.x % 220 < 1) {
+			if(GameObject.Find("Cow large(Clone)") && !enemyBoss) {
+				moveCam = false;
+				enemyBoss = true;
+				Debug.Log("Gegner erkannt");
+				offset = new Vector3(0f, 4f, -25f);
+				Vector3 softCam = Vector3.Lerp(transform.position, target.position + offset, 0.25f);
+				transform.position = softCam;
+			}
+		}
+		
+		if(!GameObject.Find("Cow large(Clone)") && enemyBoss) {
+			moveCam = true;
+			enemyBoss = false;
+			Debug.Log("Gegner ausgelöscht");	
+			offset = new Vector3(0f, 4f, -16f);		
+			Vector3 softCam = Vector3.Lerp(transform.position, target.position + offset, 0.25f);
+			transform.position = softCam;
+			transform.LookAt(target);
+		}
+	}
+
+	void LateUpdate () {
+		if(moveCam && !enemyBoss) {	
+			Vector3 softCam = Vector3.Lerp(transform.position, target.position + offset, 0.25f);
+			transform.position = softCam;
+
+			transform.LookAt(target);
+		}
+	}
+}
+ */
+
+
+ using UnityEngine;
 
 public class FollowCam : MonoBehaviour {
 
@@ -42,8 +113,6 @@ public class FollowCam : MonoBehaviour {
 				moveCam = false;
 			}
 		}
-
-		/*in die totale fahren lassen. in generateCurve in dem Array bossSpawns (int[]) , eine Instanz von generateCurve erstellst un dann mit dem punkt-Operator */
 	}
 
 	void LateUpdate () {

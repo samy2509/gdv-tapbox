@@ -45,20 +45,8 @@ public class ChickAnim : MonoBehaviour {
 			anim.Play("Idle_A", -1, 0f);
 		}
 
-
-		// Springen
-		// if(Input.GetKeyDown("space") || Input.GetKeyDown(KeyCode.W)) {
-		// 	anim.Play("Fly");
-		// }
-		// Springen Ende
-		// if(Input.GetKeyUp("space") || Input.GetKeyUp(KeyCode.W)) {
-		// 	if(controller.isGrounded && Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-		// 		anim.Play("Walk", -1, 0f);
-		// 	} else {
-		// 		anim.Play("Idle_A", -1, 0f);
-		// 	}
-		// }
-
+		
+		// Springen und Fliegen
 		if(controller.isGrounded == false && !anim.GetCurrentAnimatorStateInfo(0).IsName("Roll")) {
 			anim.Play("Fly");
 		}

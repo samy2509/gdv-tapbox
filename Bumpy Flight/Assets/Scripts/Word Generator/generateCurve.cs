@@ -240,21 +240,7 @@ public class generateCurve : MonoBehaviour {
 	*
 	*	@mesh:	Mesh für welches die Normalen berechnet werden sollen
 	*/
-	public void CalcFlatNormals( Mesh mesh ) {
-		Vector3[] vertArray = mesh.vertices;
-		Vector3[] normals = new Vector3[vertArray.Length];
-
-		for(int i = 0; i < vertList.Count; i++) {
-			Vector3 u = vertList[triList[i+1]] - vertList[triList[i]];
-			Vector3 v = vertList[triList[i+2]] - vertList[triList[i]];
-
-			Vector3 normal = Vector3.Cross( u, v ).normalized;
-
-			normals[i] = normal;
-		}
-
-		mesh.normals = normals;
-	}
+	
 
 	// Generiert einen zufälligen Winkel und gibt diesen zurück
 	public float GenerateAngle() {

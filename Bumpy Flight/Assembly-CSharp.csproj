@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Movement &amp; AI\MovementDuck.cs" />
      <Compile Include="Assets\Scripts\Movement &amp; AI\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Raetsel\betreteLevel.cs" />
+     <Compile Include="Assets\Scripts\Raetsel\lightFlicker.cs" />
      <Compile Include="Assets\Scripts\Raetsel\Raetsel.cs" />
      <Compile Include="Assets\Scripts\Raetsel\RaetselCollisions.cs" />
      <Compile Include="Assets\Scripts\UI\UIController.cs" />
@@ -81,10 +82,10 @@
      <Compile Include="Assets\Scripts\Word Generator\ObjectRandomSpawn.cs" />
      <Compile Include="Assets\Scripts\Word Generator\ParallaxBackground.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>/Users/kevinschipper/Desktop/Graph-Dat/Projekt/Bumpy Flight/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>/Users/lucasmehler/Desktop/Bumpy Flight/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/Users/kevinschipper/Desktop/Graph-Dat/Projekt/Bumpy Flight/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/Users/lucasmehler/Desktop/Bumpy Flight/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -260,17 +261,17 @@
  <Reference Include="Unity.Locator">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/Unity.Locator.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <Reference Include="UnityEngine.UIAutomation">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Timeline">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UIAutomation">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.GoogleAudioSpatializer">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
@@ -282,13 +283,13 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>/Users/kevinschipper/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>/Users/lucasmehler/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
- <HintPath>/Users/kevinschipper/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>/Users/lucasmehler/Library/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
- <HintPath>/Users/kevinschipper/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+ <HintPath>/Users/lucasmehler/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
