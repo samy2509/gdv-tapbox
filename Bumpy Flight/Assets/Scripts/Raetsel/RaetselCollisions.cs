@@ -1,17 +1,29 @@
-﻿using System.Collections;
+﻿/* 
+ * RaetselCollisions.cs
+ *
+ * Script für die Umsetzung der Rätsel und Hindernissen im Nebenlevel "Höhle".
+ * Das Script ist Triggern der entsprechenden Rätsel / Hindernisse im Nebenlevel zugewiesen.
+ *
+ * Funktionen:
+ *  	OnTriggerEnter(Collider col)    IEnumerator WaitAndSpawn()      score ()
+ *      IEnumerator LightsAndFall()     openDoors()                     checkCorrectness()
+ *      IEnumerator WorkAndWait(string name)
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RaetselCollisions : MonoBehaviour 
 {
-	private GameObject 		saeule1;			//Säule1, die den Weg versperrt
-	private GameObject 		saeule2;			//Säule2, die den Weg versperrt
-	private int[] 			riddle;				//Zufällig gefülltes Array für TouchRockRiddle aus Raetsel
-	private int[] 			order;				//orderList aus Raetsel als Array
-    private int             didScore;           //Sperrvariable für Score
-    private Raetsel 		raetselScript;		//Script Raetsel
-	private LevelManager 	levelManagerScript;	//Script LevelManager
-    private GameObject      pointsText;         //Text, der bei Erfolg angezeigt werden soll
+	private GameObject 		saeule1;			// Säule1, die Weg versperrt (falls Wall vorhanden)
+	private GameObject 		saeule2;			// Säule2, die Weg versperrt (falls Wall vorhanden)
+	private int[] 			riddle;				// Zufällig gefülltes Array für TouchRockRiddle
+	private int[] 			order;				// orderList aus Raetsel.cs als Array
+    private int             didScore;           // Sperrvariable für Score
+    private Raetsel 		raetselScript;		// Script Raetsel
+	private LevelManager 	levelManagerScript;	// Script LevelManager
+    private GameObject      pointsText;         // Text, der bei Erfolg angezeigt wird
 	
     void Awake()
     {
@@ -28,7 +40,19 @@ public class RaetselCollisions : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-		//Rätsel 0 - TouchRockRiddle
+        /*
+	     *	Rätsel 0 TouchRockRiddle
+	     *  
+         *  Player muss drei Steinplatten in richtiger Reihenfolge berühren, damit sich die nachfolgende Wand öffnet.
+         *  Die Reihenfolge, in der die Berührung der Steine stattfinden muss, wird zuvor zufällig in Raetsel.cs festgelegt.
+	     *	Berührt der Player eine Steinplatte, ändert sich die Lampe des Steins von weiß zu gelb. Hat der Spieler alle drei Steinplatten berührt, wird geprüft ob die Reihenfolge korrekt ist.
+         *  Ist die Reihenfolge inkorrekt ändern sich die Lampen von gelb zu rot und der Player muss es erneut versuchen (siehe checkCorrectness()).
+         *  Bei korrekter Reihenfolge werden alle Lampen grün und es wird ein Weg durch die Wand geöffnet sowie Punkte für das erfolgreiche Absolvieren vergeben (siehe openDoors()).
+ 	     *	
+	     *	Zugehörige Funktionen: 
+         *      checkCorrectness()
+         *      openDoors()
+	     */
         if (raetselScript.rand == 0)
         {
             if (col.gameObject.tag == "player2" && gameObject.name == "detect1")
@@ -104,7 +128,13 @@ public class RaetselCollisions : MonoBehaviour
             }
         }
 
-		//Hindernis 1 - FireInTheCave
+        /*
+	     *	Rätsel / Hindernis 1 FireInTheCave
+	     *  
+	     *	Player muss einen Abgrund, aus dem Flammen nach oben schlagen, über zwei nach oben und unten fahrende Steinplatten (siehe Raetsel.cs) überwinden.
+	     *	Bei Berührung der Flammen (bzw. der Collision Plane) verliert der Player ein Leben und wird erneut vor dem Hindernis gespawnt (oder Game Over).
+         *  Für das erfolgreiche Absolvieren werden Punkte vergeben.
+	     */
 		else if (raetselScript.rand == 1) 
 		{
 			if (col.gameObject.tag == "player2" && gameObject.name == "ColFirePlane")
@@ -118,7 +148,17 @@ public class RaetselCollisions : MonoBehaviour
             }
 		}
 
-        //Hindernis 2 - BetterRunFast
+        /*
+	     *	Rätsel / Hindernis 2 BetterRunFast
+	     *  
+	     *	Player muss einen Abgrund, aus dem Steinspitzen herausragen, über eine lange Steinplatte überwinden.
+	     *	Bei Berührung der langen Steinplatte bricht diese (von der entsprechenden Stelle der Berührung aus) in ihre Einzelteile herunter in den Abgrund (siehe WorkAndWait(string name)).
+         *  Bei Berührung der Steinspitzen (bzw. der Collision Plane) verliert der Player ein Leben und wird erneut vor dem Hindernis gespawnt (oder Game Over).
+         *  Für das erfolgreiche Absolvieren werden Punkte vergeben.
+ 	     *	
+	     *	Zugehörige Funktionen: 
+	     *      WorkAndWait(string name)
+	     */
 		else if (raetselScript.rand == 2) 
 		{
             if (col.gameObject.tag == "player2" && raetselScript.sperre == 0)
@@ -144,7 +184,19 @@ public class RaetselCollisions : MonoBehaviour
             }
 		}
 
-        //Rätsel/Hindernis 3 - Traffic Lights
+        /*
+	     *	Rätsel / Hindernis 3 FallingStones
+	     *  
+	     *	Der Player muss einen Stein in einem Abgrund berühren, damit sich die nachfolgende Wand öffnet.
+	     *	Bei Berührung der Steinplatte schaltet die Lampe des Steins wie eine Ampel von grün über gelb auf rot (siehe LightsAndFall()). 
+         *  Der Player muss sich nun vor von der Decke fallenden gefährlichen Steinen in Acht nehmen, während sich der Weg durch die Wand öffnet (siehe openDoors()).
+         *  Bei Berührung der herunterfallenden (bzw. -gefallenen) Steinen verliert der Player ein Leben und wird erneut vor dem Hindernis gespawnt (oder Game Over).
+         *  Für das erfolgreiche Absolvieren werden Punkte vergeben.
+ 	     *	
+	     *	Zugehörige Funktionen: 
+         *      LightsAndFall()
+         *      openDoors()
+	     */
         else if (raetselScript.rand == 3) 
 		{            
             if (col.gameObject.tag == "player2" && gameObject.name == "detect1" && raetselScript.sperre == 0)
@@ -172,7 +224,13 @@ public class RaetselCollisions : MonoBehaviour
             }
         }
 
-        //Rätsel/Hindernis 4 - UpDownRock
+        /*
+	     *	Rätsel / Hindernis 4 UpDownRock
+	     *  
+	     *	Der Player muss Steine mit gefährlichen Spitzen, die sich hoch und runter bewegen (siehe Raetsel.cs), nacheinander überwinden.
+         *  Bei Berührung der Spitze eines solchen Steins verliert der Player ein Leben und wird erneut vor dem Hindernis gespawnt (oder Game Over).
+         *  Für das erfolgreiche Absolvieren werden Punkte vergeben.
+	     */
         else if (raetselScript.rand == 4) 
 		{    
             if (col.gameObject.tag == "player2" && gameObject.name == "Trigger")
@@ -187,12 +245,14 @@ public class RaetselCollisions : MonoBehaviour
         }
     }
 
+    // Coroutine sorgt für eine kurze Verzögerung bevor das Rätsel / Hindernis zurückgesetzt wird
     IEnumerator WaitAndSpawn()
     {
         yield return new WaitForSeconds(0.1f);
         raetselScript.spawnStonesAgain();
     }
 
+    // Vergibt Punkte
     private void score ()
     {
         pointsText = Instantiate(Resources.Load("Punkte-Text"),
@@ -203,6 +263,15 @@ public class RaetselCollisions : MonoBehaviour
         pointsText.GetComponent<UIPoints>().Points(100, GameObject.FindGameObjectWithTag("player2").transform.position);
     }
 
+    /*
+     *  Gehört zu Rätsel / Hindernis 3 FallingStones
+     *	
+     *	Coroutine schaltet die Lampe des Steins wie eine Ampel von grün über gelb auf rot. 
+     *  Lässt zudem gefährliche Steine von der Decke fallen.
+     *
+     *	Zugehörige Funktionen: 
+     *      openDoors()
+	 */
     IEnumerator LightsAndFall()
     {
         GameObject.Find("WhiteLamp1").GetComponent<MeshRenderer>().enabled = false;
@@ -234,6 +303,11 @@ public class RaetselCollisions : MonoBehaviour
         openDoors();
     }
 
+    /*
+     *  Gehört zu Rätsel / Hindernis 3 FallingStones (LightsAndFall()) und Rätsel 0 TouchRockRiddle
+     *	
+     *	Öffnet einen Weg durch die Wand. Setzt bei Rätsel 0 die Lampen auf grün.
+	 */
     void openDoors()
     {
         saeule1 = GameObject.Find("Säule1");
@@ -250,13 +324,7 @@ public class RaetselCollisions : MonoBehaviour
         if (raetselScript.rand == 0)
         {
             GameObject.Find("Player").GetComponent<AudioFX>().solved.Play();
-
-            pointsText = Instantiate(Resources.Load("Punkte-Text"),
-                                        GameObject.FindGameObjectWithTag("player2").transform.position,
-                                        Quaternion.identity) as GameObject;
-            pointsText.AddComponent<UIPoints>();
-            GameObject.Find("LevelManager").GetComponent<UIController>().AddToScore(100);
-            pointsText.GetComponent<UIPoints>().Points(100, GameObject.FindGameObjectWithTag("player2").transform.position);
+            score();
 
             GameObject.Find("YellowLamp1").GetComponent<MeshRenderer>().enabled = false;
             GameObject.Find("YellowLamp2").GetComponent<MeshRenderer>().enabled = false;
@@ -270,6 +338,16 @@ public class RaetselCollisions : MonoBehaviour
         }
     }
 
+    /*
+     *  Gehört zu Rätsel 0 TouchRockRiddle
+     *	
+     *	Prüft ob die Reihenfolge, in der die Berührung der Steine stattfinden muss, mit der zuvor zufällig in Raetsel.cs festgelegten Reihenfolge übereinstimmt.
+     *  Ist die Reihenfolge inkorrekt ändern sich die Lampen von gelb zu rot und der Player muss es erneut versuchen. 
+     *  Bei korrekter Reihenfolge werden alle Lampen grün und es wird ein Weg durch die Wand geöffnet sowie Punkte für das erfolgreiche Absolvieren vergeben (siehe openDoors()).
+     *	
+     *  Zugehörige Funktionen: 
+     *      openDoors()
+	 */
     void checkCorrectness()
     {
         if (raetselScript.orderList.Count > 2)
@@ -308,13 +386,17 @@ public class RaetselCollisions : MonoBehaviour
         }
     }
 
+    /*
+     *  Gehört zu Rätsel / Hindernis 2 BetterRunFast
+     *	
+     *	Die lange Steinplatte bricht von der Stelle der Berührung aus in ihre Einzelteile herunter in den Abgrund.
+	 */
     IEnumerator WorkAndWait(string name)
     {
         GameObject.Find("Player").GetComponent<AudioFX>().stones.Play();
         yield return new WaitForSeconds(0.05f);
         if (name == "detect1")
         {   
-            //0.025?
             GameObject.Find("Flagstone1").GetComponent<Rigidbody>().isKinematic = false;
             yield return new WaitForSeconds(0.1f);
             GameObject.Find("Flagstone2").GetComponent<Rigidbody>().isKinematic = false;

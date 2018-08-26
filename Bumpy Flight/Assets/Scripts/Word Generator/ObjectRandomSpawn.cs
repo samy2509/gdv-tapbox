@@ -95,7 +95,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		}
 	}
 
-	// Entfern einen Gegner von der Liste
+	// Entfernt einen Gegner von der Liste
 	public void DeleteEnemy( GameObject enemy ) {
 		enemies.Remove(enemy);
 	}
@@ -257,21 +257,26 @@ public class ObjectRandomSpawn : MonoBehaviour {
 	}
 
     /*
-	*	Platziert Collectables an zufälligen Orten
-	*
-	*	@pos:	Die Position, an der Collectable platziert werden soll
-	*/
+	 *	Platziert Collectables an zufälligen Orten
+	 *  
+	 *   Quellen:
+	 *		Für die selbst erstellten Prefabs wurden Modelle aus folgendem Asset verwendet:
+ 	 *		"PowerUp particles" von MHLAB https://assetstore.unity.com/packages/vfx/particles/powerup-particles-16458
+	 *		Das Prefab "PowerUpContainerRed" verwendet das Script PowerUpRotation.cs, das aus dem Asset stammt.
+	 *
+	 *  @pos:	Die Position, an der Collectable platziert werden soll
+	 */
     public void SpawnCollectable(Vector3 pos)
     {
-		float lastCollectX;
-		int indexC 				= 0;
-		float rand 				= Random.Range(0, 20);
-		float distanceCollect 	= Random.Range(200f, 350f);     // Minimaler Abstand der Collectables
+		float 	lastCollectX;
+		int 	indexC 				= 0;
+		float 	rand 				= Random.Range(0, 20);
+		float 	distanceCollect 	= Random.Range(200f, 350f);     // Minimaler Abstand der Collectables
 
         if (collectables.Count != 0)
         {
-            indexC = collectables.Count - 1;
-            lastCollectX = collectables[indexC].transform.position.x;
+            indexC 			= collectables.Count - 1;
+            lastCollectX 	= collectables[indexC].transform.position.x;
         }
         else
         {
@@ -286,25 +291,27 @@ public class ObjectRandomSpawn : MonoBehaviour {
 
         if (lastCollectX + distanceCollect < pos.x && rand == 1f && barriers.Count > 0 && pos.x != barriers[barriers.Count - 1].transform.position.x)
         {
-            GameObject collectInst = null;
-			int randCollect = Random.Range(0, 3);
+            GameObject collectInst 	= null;
+			int randCollect 		= Random.Range(0, 3);
+
             switch (randCollect)
             {
                 case 0:
-                    collectInst = Instantiate(leben, newPos, Quaternion.identity) as GameObject;
+                    collectInst 	= Instantiate(leben, newPos, Quaternion.identity) as GameObject;
 					collectInst.tag = "leben";
                     break;
                 case 1:
-                    collectInst = Instantiate(schutzschild, newPos, Quaternion.identity) as GameObject;
+                    collectInst 	= Instantiate(schutzschild, newPos, Quaternion.identity) as GameObject;
 					collectInst.tag = "schutzschild";
                     break;
             }
 
-			if(randCollect == 0 || randCollect == 1) {
-				BoxCollider bc = collectInst.AddComponent<BoxCollider>();
-				bc.isTrigger = true;
-				bc.size = new Vector3(1.0f, 1.0f, 1.0f);
-				bc.center = new Vector3(-1.22f, 5.22f, 2.14f);
+			if(randCollect == 0 || randCollect == 1) 
+			{
+				BoxCollider bc 	= collectInst.AddComponent<BoxCollider>();
+				bc.isTrigger 	= true;
+				bc.size 		= new Vector3(1.0f, 1.0f, 1.0f);
+				bc.center 		= new Vector3(-1.22f, 5.22f, 2.14f);
 
 				collectables.Add(collectInst.gameObject);
 
@@ -313,12 +320,16 @@ public class ObjectRandomSpawn : MonoBehaviour {
         }
     }
 
-
     /*
-	*	Platziert Höhleneingänge an zufälligen Orten
-	*
-	*	@pos:	Die Position, an der Höhleneingang platziert werden soll
-	*/
+	 *	Platziert Höhleneingänge an zufälligen Orten sowie Höhlenausgang
+	 *  
+	 *   Quellen:
+ 	 *		Für die selbst erstellten Prefabs wurden Modelle aus folgendem Asset verwendet:
+ 	 *		"Low poly styled rocks" von DANIEL ROBNIK https://assetstore.unity.com/packages/3d/props/exterior/low-poly-styled-rocks-43486
+	 *
+	 *	@pos:	Die Position, an der Höhleneingang platziert werden soll
+	 * 	@force:	Wenn Höhlenausgang gespawnt werden soll
+	 */
     public void SpawnCave(Vector3 pos, bool force)
     {
 		GameObject cave = eingang;
@@ -330,8 +341,8 @@ public class ObjectRandomSpawn : MonoBehaviour {
 
 		if (caves.Count != 0)
 		{
-			indexC = caves.Count - 1;
-			lastCaveX = caves[indexC].transform.position.x;
+			indexC 		= caves.Count - 1;
+			lastCaveX 	= caves[indexC].transform.position.x;
 		}
 		else
 		{
@@ -544,6 +555,7 @@ public class ObjectRandomSpawn : MonoBehaviour {
 		return max;
 	}
 
+	//Zerstört nicht kollidierte Eier
 	private void DestroyEggs ()
 	{
 		GameObject[] all = GameObject.FindGameObjectsWithTag("Egg");

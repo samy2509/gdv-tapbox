@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour {
     public  int                 isWaiting;          // Sperrvariable Für Respawn in Höhle
     public  ParticleSystem      particleLauncher;   // Particle Launcher für Damage
     private Scene               scene;              // Um aktuelle Scene zu prüfen
-    private AudioFX             audioScript;        // Für Audio-FX
+    private AudioFX             audioScript;        // Script für Audio-FX
     private CharacterController cc;                 // cc zum Blockieren der Stuerung bei Respawn in Höhle
 
 	// Use this for initialization
@@ -116,14 +116,14 @@ public class LevelManager : MonoBehaviour {
             // emit 25 particles because of damage
             particleLauncher.Emit (25);
 
-            //wenn ja -> zurück zum checkpoint (Nebenlevel kurze Sperre)
+            // wenn ja -> zurück zum checkpoint (In Nebenlevel kurze Sperre)
             if (scene.name == "Level1") 
             {
                 player.transform.position = currentCheckpoint.transform.position;
             }
             else if (scene.name == "Nebenlevel")  
             {
-                StartCoroutine(WaitBeforeSpawn());
+                StartCoroutine(SpawnAndWait());
             }
 
             // emit 25 particles because of respawn
@@ -152,7 +152,11 @@ public class LevelManager : MonoBehaviour {
 
     }
 
-    IEnumerator WaitBeforeSpawn()
+    /*
+     * Coroutine, die beim Spawnen im Nebenlevel (Höhle) dafür sorgt, dass Steuerung des Players für kurze Zeit blockiert wird, 
+     * sodass ungewollte Bewegungen verhindert werden.
+     */
+    IEnumerator SpawnAndWait()
     {
         isWaiting = 1;
         cc = GameObject.FindGameObjectWithTag("player2").GetComponent<CharacterController>();
@@ -161,7 +165,7 @@ public class LevelManager : MonoBehaviour {
 
         yield return new WaitForSeconds(0.25f);
 
-        cc.enabled = true;
-        isWaiting = 0;
+        cc.enabled  = true;
+        isWaiting   = 0;
     }
 }

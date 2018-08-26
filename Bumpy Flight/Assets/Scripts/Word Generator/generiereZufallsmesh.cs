@@ -1,22 +1,30 @@
-﻿using System.Collections;
+﻿/* 
+ * generiereZufallsmesh.cs
+ *
+ * Script für die zufällige Generierung der Höhle als Mesh im Nebenlevel.
+ * Das Script ist dem Empty "Zufallshöhle" im Nebenlevel zugewiesen.
+ *
+ * Funktionen:
+ *  	Generiere()
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// The RequireComponent attribute automatically adds required components as dependencies
+// The RequireComponent attribute automatically adds required components as dependencies (docs.unity3d.com)
 [RequireComponent(typeof(MeshRenderer), typeof(MeshFilter))]
 
 
 public class generiereZufallsmesh : MonoBehaviour
 {
-    public  int             laenge, breite  = 0;            // Laenge und Breite des Zufallsmeshes
-    private Mesh            mesh;                           // Mesh
-    private int             meshGroesse     = 0;            // Meshgroesse
-    private Vector3[]       verts;                          // Vertices
-    private Vector2[]       uvCoords;                       // UV Koordinaten
-    private int[]           tris;                           // Dreiecke (Triangles)
+    public  int             laenge, breite  = 0;        // Laenge und Breite des Zufallsmeshes
+    private Mesh            mesh;                       // Mesh
+    private int             meshGroesse     = 0;        // Meshgroesse
+    private Vector3[]       verts;                      // Vertices
+    private Vector2[]       uvCoords;                   // UV Koordinaten
+    private int[]           tris;                       // Dreiecke (Triangles)
     private MeshCollider    meshc;
     
-    // Awake is called when the script instance is being loaded
     private void Awake()
     {
         laenge  = Random.Range(70, 90);
@@ -30,7 +38,8 @@ public class generiereZufallsmesh : MonoBehaviour
     }
 
     /*
-     *  Generiert Zufallsmesh
+     *  Generiert die Höhle als zufälliges Mesh im Nebenlevel. Boden, Wände und Decke werden in Abhänigkeit der zufälligen Länge
+     *  und vordefinierten Breite zufällig generiert.
      */
     private void Generiere()
     {
@@ -141,7 +150,7 @@ public class generiereZufallsmesh : MonoBehaviour
 
 
         tris    = new int[5 * laenge * breite * 6]; 
-        // Rechteck Test
+        // Rechteck !Test!
         // tris[0]              = 0;
         // tris[1] = tris[4]    = laenge + 1;
         // tris[2] = tris[3]    = 1;
@@ -173,6 +182,5 @@ public class generiereZufallsmesh : MonoBehaviour
 
         mesh.triangles = tris;
         mesh.RecalculateNormals();
-
     }
 }
