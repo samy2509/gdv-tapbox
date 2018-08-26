@@ -77,7 +77,7 @@ public class Raetsel : MonoBehaviour
 		}
 	}
 
-	void Update () 
+	void FixedUpdate () 
 	{
         if (rand == 1)
         {
